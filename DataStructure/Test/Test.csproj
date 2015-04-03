@@ -41,7 +41,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vector">
+    <Reference Include="Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Vector\bin\Debug\Vector.dll</HintPath>
     </Reference>
   </ItemGroup>

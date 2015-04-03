@@ -13,7 +13,7 @@ namespace Vector
 
         int Find(T e, int lo, int hi);
         int Search(T e);
-        int Serach(T e, int lo, int hi);
+        int Search(T e, int lo, int hi);
         T Remove(int r);
         int Remove(int lo, int hi);
         int Insert(int r, T e);

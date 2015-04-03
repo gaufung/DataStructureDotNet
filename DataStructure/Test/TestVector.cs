@@ -12,10 +12,14 @@ namespace Test
             Vector.Vector<int> vector=new Vector<int>();
             vector.Insert(1);
             vector.Insert(2);
+            vector.Insert(2);
             vector.Insert(3);
+            //Console.WriteLine(vector.Size);
+            //Console.WriteLine(vector[10]);
             vector.Traverse(new Action<int>(i => Console.WriteLine(i)));
-         //   Console.WriteLine(vector.Find(1));
-            
+            vector.Uniquify();
+            vector.Traverse(new Action<int>(i=>Console.WriteLine(i)));
+
         }
     }
 }
