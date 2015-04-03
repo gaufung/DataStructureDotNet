@@ -13,7 +13,8 @@ namespace Test
             vector.Insert(1);
             vector.Insert(2);
             vector.Insert(3);
-            vector.Traverse(new Action<int>(i=>Console.WriteLine(i)));
+            vector.Traverse(new Action<int>(i => Console.WriteLine(i)));
+         //   Console.WriteLine(vector.Find(1));
             
         }
     }

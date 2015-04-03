@@ -1,6 +1,8 @@
-﻿namespace Vector
+﻿using System;
+
+namespace Vector
 {
-    public class Vector<T>:IVector<T>
+    public class Vector<T> :IVector<T> 
     {
         private T[] _elem;
         private const int DefaultCapactiry = 4;
@@ -78,14 +80,14 @@
         } 
         #endregion
 
+        
+
+        #region 属性
         /// <summary>
         /// 索引器
         /// </summary>
         /// <param name="index">序号</param>
         /// <returns>返回值</returns>
-
-        #region 属性
-
         public T this[int index]
         {
 
@@ -111,21 +113,85 @@
 
         #endregion
 
+        #region 比较操作符
+        /// <summary>
+        /// Greater Than
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public bool Gt(T a, T b)
+        {
+            if (a is IComparable)
+            {
+                return (a as IComparable).CompareTo(b) == 1;
+            }
+            throw new InvalidCastException("T is not IComparable");
+        }
+        /// <summary>
+        /// Equal to
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public bool Eq(T a, T b)
+        {
+            if (a is IComparable)
+            {
+                return (a as IComparable).CompareTo(b) == 0;
+            }
+            throw new InvalidCastException("T is not IComparable");
+        }
+        /// <summary>
+        /// Litter than
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public bool Lt(T a, T b)
+        {
+            if (a is IComparable)
+            {
+                return (a as IComparable).CompareTo(b) == -1;
+            }
+            throw new InvalidCastException("T is not IComparable");
+        }
+        #endregion
+        
 
         public int DisOrdered()
         {
             throw new System.NotImplementedException();
         }
 
+        #region 无序查找
+        /// <summary>
+        /// Find  a　elemt  int the whole vector. If Failed return -1. the vector is not sorted.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public int Find(T e)
         {
-            throw new System.NotImplementedException();
+            return Find(e, 0, _size);
         }
 
+        /// <summary>
+        /// Find  a　elemt  int part vector. If Failed return lo-1. the vector is not sorted.
+        /// </summary>
+        /// <param name="e">to find elem</param>
+        /// <param name="lo">lo</param>
+        /// <param name="hi">hi</param>
+        /// <returns>found index</returns>
         public int Find(T e, int lo, int hi)
         {
-            throw new System.NotImplementedException();
+            while (lo < hi-- && !Eq(_elem[hi], e))
+            {
+            }
+            return hi;
         }
+        #endregion
+
+        
 
         public int Search(T e)
         {
@@ -137,15 +203,40 @@
             throw new System.NotImplementedException();
         }
 
+        #region 删除元素
+
+        /// <summary>
+        /// remove a elem in r index;
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
         public T Remove(int r)
         {
-            throw new System.NotImplementedException();
+            T e = _elem[r];
+            Remove(r, r + 1);
+            return e;
         }
 
+        /// <summary>
+        /// remove elemes index range [lo,hi)
+        /// </summary>
+        /// <param name="lo"></param>
+        /// <param name="hi"></param>
+        /// <returns>the length to remove</returns>
         public int Remove(int lo, int hi)
         {
-            throw new System.NotImplementedException();
+            while (hi < _size)
+            {
+                _elem[lo] = _elem[hi];
+                lo++;
+                hi++;
+            }
+            _size -= hi - lo;
+            Shrink();
+            return hi - lo;
         }
+
+        #endregion
 
         #region 插入元素
 
@@ -201,5 +292,9 @@
                 action(_elem[i]);
             }
         }
+
+
+
+      
     }
 }
