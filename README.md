@@ -3,7 +3,7 @@ Data Structure via CSharp（数据结构 via C#）
 
 # 前言
 + 通过C#语言完成数据结构（主要包含：向量、链表、树、图）
-+ 参考数据《数据结构 C++版》清华大学邓俊辉老师编写 [封面](http://img36.ddimg.cn/39/12/22526796-1_u_1.jpg)
++ 参考书《数据结构 C++版》清华大学邓俊辉老师编写 [封面](http://img36.ddimg.cn/39/12/22526796-1_u_1.jpg)
 + 网络公开课地址:[MOOC](https://www.xuetangx.com/)
 
 # 说明
