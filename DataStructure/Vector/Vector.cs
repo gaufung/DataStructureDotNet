@@ -2,7 +2,11 @@
 
 namespace Vector
 {
-    public class Vector<T> :IVector<T> 
+    /// <summary>
+    /// 向量数组
+    /// </summary>
+    /// <typeparam name="T">泛型</typeparam>
+    public class Vector<T> :IVector<T> where T:IComparable
     {
         private T[] _elem;
         private const int DefaultCapactiry = 4;
@@ -120,11 +124,9 @@ namespace Vector
         /// <returns></returns>
         private static  bool Gt(T a, T b)
         {
-            if (a is IComparable)
-            {
-                return (a as IComparable).CompareTo(b) == 1;
-            }
-            throw new InvalidCastException("T is not IComparable");
+
+            return (a as IComparable).CompareTo(b) == 1;
+           
         }
         /// <summary>
         /// Equal to
@@ -134,11 +136,7 @@ namespace Vector
         /// <returns></returns>
         private static bool Eq(T a, T b)
         {
-            if (a is IComparable)
-            {
-                return (a as IComparable).CompareTo(b) == 0;
-            }
-            throw new InvalidCastException("T is not IComparable");
+            return (a as IComparable).CompareTo(b) == 0;           
         }
         /// <summary>
         /// Litter than
@@ -148,11 +146,7 @@ namespace Vector
         /// <returns></returns>
         private static bool Lt(T a, T b)
         {
-            if (a is IComparable)
-            {
-                return (a as IComparable).CompareTo(b) == -1;
-            }
-            throw new InvalidCastException("T is not IComparable");
+           return (a as IComparable).CompareTo(b) == -1;
         }
         #endregion
                 

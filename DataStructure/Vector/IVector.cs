@@ -20,10 +20,7 @@ namespace Vector
         int Insert(T e);
         int Deduplicate();
         int Uniquify();
-        /// <summary>
-        /// 遍历
-        /// </summary>
-        /// <param name="action">操作委托</param>
+
         void Traverse(Action<T> action);
 
 
