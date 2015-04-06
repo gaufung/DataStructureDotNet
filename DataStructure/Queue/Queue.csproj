@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FCDC68F1-D639-4B92-A63B-552718235BBA}</ProjectGuid>
+    <ProjectGuid>{B45D2BB1-313A-40D7-96EB-E791A42FBCE0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test</RootNamespace>
-    <AssemblyName>Test</AssemblyName>
+    <RootNamespace>Queue</RootNamespace>
+    <AssemblyName>Queue</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,16 +33,6 @@
     <Reference Include="List">
       <HintPath>..\List\bin\Debug\List.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.2.9.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\TestDriven.NET 3\NUnit\2.5\framework\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Queue">
-      <HintPath>..\Queue\bin\Debug\Queue.dll</HintPath>
-    </Reference>
-    <Reference Include="Stack">
-      <HintPath>..\Stack\bin\Debug\Stack.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,16 +40,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Vector\bin\Debug\Vector.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestList.cs" />
-    <Compile Include="TestQueue.cs" />
-    <Compile Include="TestStack.cs" />
-    <Compile Include="TestVector.cs" />
+    <Compile Include="IQueue.cs" />
+    <Compile Include="Queue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
