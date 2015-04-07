@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "Stack\Stack.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queue", "Queue\Queue.csproj", "{B45D2BB1-313A-40D7-96EB-E791A42FBCE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinTree", "Tree\BinTree.csproj", "{20260DA5-0E6A-4B83-8714-DE4519C8F16F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B45D2BB1-313A-40D7-96EB-E791A42FBCE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B45D2BB1-313A-40D7-96EB-E791A42FBCE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B45D2BB1-313A-40D7-96EB-E791A42FBCE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20260DA5-0E6A-4B83-8714-DE4519C8F16F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20260DA5-0E6A-4B83-8714-DE4519C8F16F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20260DA5-0E6A-4B83-8714-DE4519C8F16F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20260DA5-0E6A-4B83-8714-DE4519C8F16F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
