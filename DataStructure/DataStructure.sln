@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queue", "Queue\Queue.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinTree", "Tree\BinTree.csproj", "{20260DA5-0E6A-4B83-8714-DE4519C8F16F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj", "{FD8FF400-7255-4A83-B2BC-B66E3F363704}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{20260DA5-0E6A-4B83-8714-DE4519C8F16F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20260DA5-0E6A-4B83-8714-DE4519C8F16F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20260DA5-0E6A-4B83-8714-DE4519C8F16F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD8FF400-7255-4A83-B2BC-B66E3F363704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD8FF400-7255-4A83-B2BC-B66E3F363704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD8FF400-7255-4A83-B2BC-B66E3F363704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD8FF400-7255-4A83-B2BC-B66E3F363704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
