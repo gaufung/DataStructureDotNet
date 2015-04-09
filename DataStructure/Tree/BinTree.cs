@@ -4,7 +4,11 @@ using System.Collections.Generic;
 
 namespace Tree
 {
-    class BinTree<T> where T:IComparable<T>
+    /// <summary>
+    /// 二叉树类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class BinTree<T> where T:IComparable<T>
     {
         #region 属性
         public int Size { get;  private set; }
@@ -128,6 +132,10 @@ namespace Tree
             return s;
         }
 
+        /// <summary>
+        /// 层次遍历
+        /// </summary>
+        /// <param name="action"></param>
         public void TravLevel(Action<T> action)
         {
             if (!Empty)
@@ -136,79 +144,61 @@ namespace Tree
             }
         }
 
+        #region 递归遍历
+
+        /// <summary>
+        /// 调用递归先序
+        /// </summary>
+        /// <param name="action"></param>
         public void TravPre(Action<T> action)
         {
-           
+            if (!Empty)
+            {
+                Root.TravPre(action);
+            }
         }
 
+        /// <summary>
+        /// 递归中序
+        /// </summary>
+        /// <param name="action"></param>
         public void TravIn(Action<T> action)
         {
-            //if (!Empty)
-            //{
-            //    Root.TravIn(action);
-            //}
+            if (!Empty)
+            {
+                Root.TravIn(action);
+            }
         }
 
+        /// <summary>
+        /// 递归后序
+        /// </summary>
+        /// <param name="action"></param>
         public void TravePost(Action<T> action)
         {
-            //if (!Empty)
-            //{
-            //    Root.TravPost(action);
-            //}
+            if (!Empty)
+            {
+                Root.TravPost(action);
+            }
         }
 
-        #region 递归遍历
-        /// <summary>
-        /// 递归先序遍历
-        /// </summary>
-        /// <param name="x">开始节点</param>
-        /// <param name="action">操作</param>
-        public void TravPre_R(BinNode<T> x, Action<T> action)
-        {
-            if (x==null)
-            {
-                return;
-            }
-            action(x.Data);
-            TravPre_R(x.LChild,action);
-            TravPre_R(x.RChild,action);
-        }
-
-        /// <summary>
-        /// 递归后续遍历
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="action"></param>
-        public void TravPost_R(BinNode<T> x, Action<T> action)
-        {
-            if (x == null) return;
-            TravPost_R(x.LChild,action);
-            TravPost_R(x.RChild, action);
-            action(x.Data);
-        }
-        /// <summary>
-        /// 递归中序遍历
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="action"></param>
-        public void TravIn_R(BinNode<T> x, Action<T> action)
-        {
-            if (x==null)
-            {
-                return;
-            }
-            TravIn_R(x.LChild,action);
-            action(x.Data);
-            TravIn_R(x.RChild,action);
-        }
         #endregion
+
+
+        
 
         #region 迭代遍历
 
         #region 先序遍历
-
+        /// <summary>
+        /// 先遍历所有左子树
+        /// </summary>
+        /// <param name="x">当前子树的根节点</param>
+        /// <param name="action">操作</param>
+        /// <param name="s">栈</param>
         private static void VisitAlongLeftBranch(BinNode<T> x, Action<T> action, Stack<BinNode<T>> s)
         {
+            
             while (x != null)
             {
                 action(x.Data);
@@ -216,7 +206,11 @@ namespace Tree
                 x = x.LChild;
             }
         }
-
+        /// <summary>
+        /// 迭代先序遍历
+        /// </summary>
+        /// <param name="x">开始根节点</param>
+        /// <param name="action">操作</param>
         public void TravPre_I2(BinNode<T> x, Action<T> action)
         {
             var s = new Stack<BinNode<T>>();
@@ -231,9 +225,14 @@ namespace Tree
             }
         }
 
+        /// <summary>
+        /// 迭代版先序遍历
+        /// </summary>
+        /// <param name="x">开始节点</param>
+        /// <param name="action">遍历操作，委托</param>
         public void TravePre_I1(BinNode<T> x, Action<T> action)
         {
-            Stack<BinNode<T>> s=new Stack<BinNode<T>>();
+            var s=new Stack<BinNode<T>>();
             if (x!=null)
             {
                 s.Push(x);
@@ -291,7 +290,7 @@ namespace Tree
             Stack<BinNode<T>> s=new Stack<BinNode<T>>();
             while (true)
             {
-                if (x != null)
+                if(x != null)
                 {
                     s.Push(x);
                     x = x.LChild;
@@ -329,7 +328,6 @@ namespace Tree
                         if (x.HasRChild)
                         {
                             x = x.RChild;
-                            backTrack = false;
                         }
                         else
                         {
@@ -363,9 +361,9 @@ namespace Tree
                 else
                 {
                     s.Push(x.RChild);
-                }
-                s.Pop();
+                }               
             }
+            s.Pop();
             
         }
 

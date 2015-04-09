@@ -1,5 +1,4 @@
 D:\DS\DataStructure\Tree\bin\Debug\Tree.dll
 D:\DS\DataStructure\Tree\bin\Debug\Tree.pdb
-D:\DS\DataStructure\Tree\obj\Debug\BinTree.csprojResolveAssemblyReference.cache
 D:\DS\DataStructure\Tree\obj\Debug\Tree.dll
 D:\DS\DataStructure\Tree\obj\Debug\Tree.pdb

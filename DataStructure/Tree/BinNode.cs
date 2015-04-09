@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace Tree
 {
-
+    /// <summary>
+    /// 二叉树的节点类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BinNode<T> where T : IComparable<T>
     {
         #region 属性
@@ -20,7 +23,6 @@ namespace Tree
         #endregion
 
         #region 构造函数
-
         public BinNode()
         {
             Data = default(T);
@@ -47,27 +49,43 @@ namespace Tree
         #endregion
 
         #region 公共方法
+        /// <summary>
+        /// 获取以当前节点为根节点的子树所有节点的个数
+        /// </summary>
+        /// <returns></returns>
         public int Size()
         {
             return Size(this);
         }
 
-        private int Size(BinNode<T> x)
+        /// <summary>
+        /// 递归调用
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        private static int Size(BinNode<T> x)
         {
-            if (x==null)
-            {
-                return 0;
-            }
+            if (x == null) return 0;
             return 1 + Size(x.LChild) + Size(x.RChild);
         }
-
+        /// <summary>
+        /// 插入左孩子
+        /// </summary>
+        /// <param name="e">节点的值</param>
+        /// <returns>返回插入的节点</returns>
         public BinNode<T> InsertAsLc(T e)
         {
+         
            return LChild=new BinNode<T>(e,this);
         }
-
+        /// <summary>
+        /// 插入右孩子
+        /// </summary>
+        /// <param name="e">节点的值</param>
+        /// <returns>返回插入的节点</returns>
         public BinNode<T> InsertAsRc(T e)
         {
+           
             return RChild = new BinNode<T>(e, this);
         }
 
@@ -103,7 +121,7 @@ namespace Tree
         /// <param name="action"></param>
         public void TravLevel(Action<T> action)
         {
-            Queue<BinNode<T>> q=new Queue<BinNode<T>>();
+            var q=new Queue<BinNode<T>>();
             q.Enqueue(this);
             while (q.Count!=0)
             {
@@ -120,30 +138,63 @@ namespace Tree
             }
         }
 
+        /// <summary>
+        /// 递归先序遍历
+        /// </summary>
+        /// <param name="action"></param>
         public void TravPre(Action<T> action)
         {
-            throw new NotImplementedException();
-            //action(Data);
-            //if (LChild == null) return;
-            //LChild.TravPre(action);
-            //if (RChild == null) return;
-            //RChild.TravPre(action);
-            
+           TravPre(this,action);
         }
+        /// <summary>
+        /// 递归先序
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="trave"></param>
+        private static void TravPre(BinNode<T> x, Action<T> trave)
+        {
+            trave(x.Data);
+            if (x.LChild != null) TravPre(x.LChild, trave);          
+            if (x.RChild != null) TravPre(x.RChild, trave);
+        }
+
+        #region 中序递归遍历
 
         public void TravIn(Action<T> action)
         {
-            throw new NotImplementedException();
+            TravIn(this, action);
         }
+
+        private static void TravIn(BinNode<T> x, Action<T> trave)
+        {
+            if (x.LChild != null) TravIn(x.LChild, trave);
+            trave(x.Data);
+            if (x.RChild != null) TravIn(x.RChild, trave);
+        }
+
+        #endregion
+
+        #region 后序遍历
 
         public void TravPost(Action<T> action)
         {
-            throw new NotImplementedException();
-            //if (LChild == null) return;
-            //{
-                
-            //}
+            TravPost(this, action);
         }
+
+        private static void TravPost(BinNode<T> x, Action<T> trave)
+        {
+            if (x.LChild != null)
+            {
+                TravPost(x.LChild, trave);
+            }
+            if (x.RChild != null)
+            {
+                TravPost(x.RChild, trave);
+            }
+            trave(x.Data);
+        }
+
+        #endregion
 
         public static bool Lt(T a, T b)
         {

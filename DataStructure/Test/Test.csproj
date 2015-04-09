@@ -50,6 +50,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tree">
+      <HintPath>..\Tree\bin\Debug\Tree.dll</HintPath>
+    </Reference>
     <Reference Include="Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Vector\bin\Debug\Vector.dll</HintPath>
@@ -59,6 +62,7 @@
     <Compile Include="TestList.cs" />
     <Compile Include="TestQueue.cs" />
     <Compile Include="TestStack.cs" />
+    <Compile Include="TestTree.cs" />
     <Compile Include="TestVector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
