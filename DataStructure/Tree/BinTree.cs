@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
 namespace Tree
@@ -137,28 +138,255 @@ namespace Tree
 
         public void TravPre(Action<T> action)
         {
-            if (!Empty)
-            {
-                Root.TravPre(action);
-            }
+           
         }
 
         public void TravIn(Action<T> action)
         {
-            if (!Empty)
-            {
-                Root.TravIn(action);
-            }
+            //if (!Empty)
+            //{
+            //    Root.TravIn(action);
+            //}
         }
 
         public void TravePost(Action<T> action)
         {
-            if (!Empty)
+            //if (!Empty)
+            //{
+            //    Root.TravPost(action);
+            //}
+        }
+
+        #region 递归遍历
+        /// <summary>
+        /// 递归先序遍历
+        /// </summary>
+        /// <param name="x">开始节点</param>
+        /// <param name="action">操作</param>
+        public void TravPre_R(BinNode<T> x, Action<T> action)
+        {
+            if (x==null)
             {
-                Root.TravPost(action);
+                return;
+            }
+            action(x.Data);
+            TravPre_R(x.LChild,action);
+            TravPre_R(x.RChild,action);
+        }
+
+        /// <summary>
+        /// 递归后续遍历
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="action"></param>
+        public void TravPost_R(BinNode<T> x, Action<T> action)
+        {
+            if (x == null) return;
+            TravPost_R(x.LChild,action);
+            TravPost_R(x.RChild, action);
+            action(x.Data);
+        }
+        /// <summary>
+        /// 递归中序遍历
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="action"></param>
+        public void TravIn_R(BinNode<T> x, Action<T> action)
+        {
+            if (x==null)
+            {
+                return;
+            }
+            TravIn_R(x.LChild,action);
+            action(x.Data);
+            TravIn_R(x.RChild,action);
+        }
+        #endregion
+
+        #region 迭代遍历
+
+        #region 先序遍历
+
+        private static void VisitAlongLeftBranch(BinNode<T> x, Action<T> action, Stack<BinNode<T>> s)
+        {
+            while (x != null)
+            {
+                action(x.Data);
+                s.Push(x.RChild);
+                x = x.LChild;
             }
         }
-        
 
+        public void TravPre_I2(BinNode<T> x, Action<T> action)
+        {
+            var s = new Stack<BinNode<T>>();
+            while (true)
+            {
+                VisitAlongLeftBranch(x, action, s);
+                if (s.Count == 0)
+                {
+                    break;
+                }
+                x = s.Pop();
+            }
+        }
+
+        public void TravePre_I1(BinNode<T> x, Action<T> action)
+        {
+            Stack<BinNode<T>> s=new Stack<BinNode<T>>();
+            if (x!=null)
+            {
+                s.Push(x);
+            }
+            while (s.Count!=0)
+            {
+                x = s.Pop();
+                action(x.Data);
+                if (x.HasRChild)
+                {
+                    s.Push(x.RChild);
+                }
+                if (x.HasLChild)
+                {
+                    s.Push(x.LChild);
+                }
+            }
+        }
+
+        #endregion
+
+        #region 中序遍历
+
+        private static void GoAlongLeftBranch(BinNode<T> x, Stack<BinNode<T>> s)
+        {
+            while (x!=null)
+            {
+                s.Push(x);
+                x = x.LChild;
+            }
+        }
+        /// <summary>
+        /// 中序遍历的迭代算法
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="action"></param>
+        public void TravIn_I1(BinNode<T> x,Action<T> action)
+        {
+            var s=new Stack<BinNode<T>>();
+            while (true)
+            {
+                GoAlongLeftBranch(x,s);
+                if (s.Count==0)
+                {
+                    break;
+                }
+                x = s.Pop();
+                action(x.Data);
+                x = x.RChild;
+            }
+        }
+
+        public void TravIn_I2(BinNode<T> x, Action<T> action)
+        {
+            Stack<BinNode<T>> s=new Stack<BinNode<T>>();
+            while (true)
+            {
+                if (x != null)
+                {
+                    s.Push(x);
+                    x = x.LChild;
+                }
+                else 
+                {
+                    if (s.Count != 0)
+                    {
+                        x = s.Pop();
+                        action(x.Data);
+                        x = x.RChild;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void TravIn_I3(BinNode<T> x, Action<T> aciton)
+        {
+            bool backTrack = false;
+            while (true)
+            {
+                if (!backTrack && x.HasRChild)
+                {
+                    x = x.LChild;
+                }
+                else
+                {
+                    if (x != null)
+                    {
+                        aciton(x.Data);
+                        if (x.HasRChild)
+                        {
+                            x = x.RChild;
+                            backTrack = false;
+                        }
+                        else
+                        {
+                            if ((x=x.Succ())!=null)
+                            {
+                                break;
+                            }
+                            backTrack = true;
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region 后序遍历
+
+        private static void GotoHLVFL(Stack<BinNode<T>> s)
+        {
+            BinNode<T> x;
+            while ((x=s.Peek())!=null)
+            {
+                if (x.HasLChild)
+                {
+                    if (x.HasRChild)
+                    {
+                        s.Push(x.RChild);
+                    }
+                    s.Push(x.LChild);
+                }
+                else
+                {
+                    s.Push(x.RChild);
+                }
+                s.Pop();
+            }
+            
+        }
+
+        public void TravPost_I(BinNode<T> x, Action<T> action)
+        {
+            Stack<BinNode<T>> s=new Stack<BinNode<T>>();
+            if (x!=null)
+            {
+                s.Push(x);
+            }
+            while (s.Count!=0)
+            {
+                if (s.Peek()==x.Parent)
+                {
+                    GotoHLVFL(s);
+                }
+                x = s.Pop();
+                action(x.Data);
+            }
+        }
+        #endregion
+        #endregion
     }
 }

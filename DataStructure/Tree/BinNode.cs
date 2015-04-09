@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Tree
 {
@@ -69,19 +71,64 @@ namespace Tree
             return RChild = new BinNode<T>(e, this);
         }
 
+        /// <summary>
+        /// 获取中序遍历中的下一个节点
+        /// </summary>
+        /// <returns></returns>
         public BinNode<T> Succ()
         {
-            throw new NotImplementedException();
+            BinNode<T> s = this;
+            if (HasRChild)
+            {
+                s = this.RChild;
+                while (s.HasRChild)
+                {
+                    s = s.LChild;
+                }
+            }
+            else
+            {
+                while (s.IsRChild)
+                {
+                    s = s.Parent;
+                }
+                s = s.Parent;
+            }
+            return s;
         }
 
+        /// <summary>
+        /// 层次遍历
+        /// </summary>
+        /// <param name="action"></param>
         public void TravLevel(Action<T> action)
         {
-            throw new NotImplementedException();
+            Queue<BinNode<T>> q=new Queue<BinNode<T>>();
+            q.Enqueue(this);
+            while (q.Count!=0)
+            {
+                var x = q.Dequeue();
+                action(x.Data);
+                if (x.HasLChild)
+                {
+                    q.Enqueue(x.LChild);
+                }
+                if (x.HasRChild)
+                {
+                    q.Enqueue(x.RChild);
+                }
+            }
         }
 
         public void TravPre(Action<T> action)
         {
             throw new NotImplementedException();
+            //action(Data);
+            //if (LChild == null) return;
+            //LChild.TravPre(action);
+            //if (RChild == null) return;
+            //RChild.TravPre(action);
+            
         }
 
         public void TravIn(Action<T> action)
@@ -92,6 +139,10 @@ namespace Tree
         public void TravPost(Action<T> action)
         {
             throw new NotImplementedException();
+            //if (LChild == null) return;
+            //{
+                
+            //}
         }
 
         public static bool Lt(T a, T b)

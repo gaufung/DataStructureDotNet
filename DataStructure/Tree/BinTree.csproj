@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BinNode.cs" />
     <Compile Include="BinTree.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RbColor.cs" />
   </ItemGroup>
