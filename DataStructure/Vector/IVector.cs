@@ -2,7 +2,7 @@
 
 namespace Vector
 {
-    interface IVector<T>
+    interface IVector<T> where T:IComparable<T>
     {      
         int Size { get;}
         bool Empty { get; }

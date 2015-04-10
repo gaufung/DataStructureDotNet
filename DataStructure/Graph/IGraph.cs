@@ -13,7 +13,7 @@ namespace Graph
         /// <summary>
         /// 顶点数目
         /// </summary>
-        int N { get; set; }
+        int N { get;  set; }
 
         /// <summary>
         /// 插入顶点

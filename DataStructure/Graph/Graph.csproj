@@ -39,8 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GraphMatrix\Edge.cs" />
     <Compile Include="EStatus.cs" />
+    <Compile Include="GraphMatrix\Graph.cs" />
     <Compile Include="IGraph.cs" />
+    <Compile Include="GraphMatrix\Vertex.cs" />
     <Compile Include="VStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

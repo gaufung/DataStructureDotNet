@@ -6,7 +6,7 @@ namespace Vector
     /// 向量数组
     /// </summary>
     /// <typeparam name="T">泛型</typeparam>
-    public class Vector<T> :IVector<T> where T:IComparable
+    public class Vector<T> :IVector<T> where T:IComparable<T>
     {
         private T[] _elem;
         private const int DefaultCapactiry = 4;

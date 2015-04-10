@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Graph">
+      <HintPath>..\Graph\bin\Debug\Graph.dll</HintPath>
+    </Reference>
     <Reference Include="List">
       <HintPath>..\List\bin\Debug\List.dll</HintPath>
     </Reference>
@@ -59,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestGraph.cs" />
     <Compile Include="TestList.cs" />
     <Compile Include="TestQueue.cs" />
     <Compile Include="TestStack.cs" />
