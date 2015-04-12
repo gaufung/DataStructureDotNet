@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PrimEdge.cs" />
     <Compile Include="GraphMatrix\Edge.cs" />
     <Compile Include="EStatus.cs" />
     <Compile Include="GraphMatrix\Graph.cs" />

@@ -188,7 +188,7 @@ namespace Graph
         /// <summary>
         /// 最小支撑树
         /// </summary>
-        void Prim();
+        List<PrimEdge> Prim();
         /// <summary>
         /// 最短路径算法
         /// </summary>
