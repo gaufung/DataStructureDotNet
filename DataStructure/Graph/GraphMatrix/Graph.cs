@@ -300,6 +300,7 @@ namespace Graph.GraphMatrix
             {
                 for (int w = FirstNbr(s); -1 < w; w = NextNbr(s, w))
                 {
+                    //提前判断是否存在边
                     prioUpdater(this, s, w);
                 }
                 for (int shortest = int.MaxValue, w = 0; w < N; w++)
