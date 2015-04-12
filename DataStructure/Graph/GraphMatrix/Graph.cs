@@ -10,7 +10,9 @@ namespace Graph.GraphMatrix
     /// <typeparam name="Tv"></typeparam>
     /// <typeparam name="Te"></typeparam>
     /// <typeparam name="Tp"></typeparam>
-    public class Graph<Tv,Te,Tp>:IGraph<Tv,Te,Tp> where Tv:IComparable<Tv> where Te:IComparable<Te>
+    public class Graph<Tv, Te> : IGraph<Tv, Te>
+        where Tv : IComparable<Tv>
+        where Te : IComparable<Te>
     {
         private List<Vertex<Tv>> _v;
         private List<List<Edge<Te>>> _e;
@@ -33,7 +35,7 @@ namespace Graph.GraphMatrix
                 DTime(i, -1);
                 FTime(i, -1);
                 Parent(i, -1);
-                Prority(i,int.MaxValue);
+                Priority(i,int.MaxValue);
                 for (int j = 0; j < N; j++)
                 {
                     if (Exist(i,j))
@@ -72,13 +74,15 @@ namespace Graph.GraphMatrix
                 edge.Add(null);
             }
             return edge;
-        } 
+        }
+
+        #region 边和点的插入删除操作
 
         public Tv Remove(int vIndex)
         {
             for (int i = 0; i < N; i++)
             {
-                if (Exist(vIndex,i))
+                if (Exist(vIndex, i))
                 {
                     _v[i].InDegree--;
                 }
@@ -87,7 +91,7 @@ namespace Graph.GraphMatrix
             N--;
             for (int i = 0; i < N; i++)
             {
-                if (Exist(i,vIndex))
+                if (Exist(i, vIndex))
                 {
                     _v[i].OutDegree--;
                 }
@@ -97,7 +101,9 @@ namespace Graph.GraphMatrix
             _v.RemoveAt(vIndex);
             return eBak;
         }
+
         #region 获取和设置操作
+
         public Tv Vertex(int vIndex)
         {
             return _v[vIndex].Data;
@@ -117,6 +123,7 @@ namespace Graph.GraphMatrix
         {
             return _v[n].OutDegree;
         }
+
         public VStatus Status(int vIndex)
         {
             return _v[vIndex].Status;
@@ -162,7 +169,7 @@ namespace Graph.GraphMatrix
             return _v[vIndex].Priority;
         }
 
-        public void Prority(int vIndex, int priority)
+        public void Priority(int vIndex, int priority)
         {
             _v[vIndex].Priority = priority;
         }
@@ -172,6 +179,7 @@ namespace Graph.GraphMatrix
             get;
             set;
         }
+
         public EStatus Status(int firVIndex, int secVIndex)
         {
             return _e[firVIndex][secVIndex].Status;
@@ -201,13 +209,15 @@ namespace Graph.GraphMatrix
         {
             _e[firVIndex][secVIndex].Weight = weight;
         }
+
         #endregion
-        
+
 
         public int FirstNbr(int vIndex)
         {
             return NextNbr(vIndex, N);
         }
+
         /// <summary>
         /// 查找下一个邻居
         /// </summary>
@@ -216,14 +226,14 @@ namespace Graph.GraphMatrix
         /// <returns></returns>
         public int NextNbr(int vIndex, int preIndex)
         {
-            while (preIndex>-1&&!Exist(vIndex,--preIndex))
+            while (preIndex > -1 && !Exist(vIndex, --preIndex))
             {
-                
+
             }
             return preIndex;
         }
 
-        
+
 
         public bool Exist(int firVIndex, int secVIndex)
         {
@@ -233,14 +243,15 @@ namespace Graph.GraphMatrix
 
         public void Insert(Te e, int firVIndex, int secVIndex, int weight)
         {
-            if (!Exist(firVIndex,secVIndex))
+            if (!Exist(firVIndex, secVIndex))
             {
-                _e[firVIndex][secVIndex]=new Edge<Te>(e,weight);
+                _e[firVIndex][secVIndex] = new Edge<Te>(e, weight);
                 E++;
                 _v[firVIndex].OutDegree++;
                 _v[secVIndex].InDegree++;
             }
         }
+
         /// <summary>
         /// 先判断该边的确存在
         /// </summary>
@@ -257,7 +268,61 @@ namespace Graph.GraphMatrix
             return back;
         }
 
+        #endregion
 
+        #region 优先级搜索
+
+        public void Pfs(Action<Graph<Tv, Te>, int, int> prioUpdater)
+        {
+            Pfs(0, prioUpdater);
+        }
+
+        public void Pfs(int s, Action<Graph<Tv, Te>, int, int> prioUpdater)
+        {
+            Reset();
+            int v = s;
+            do
+            {
+                if (Status(v) == VStatus.Undiscovered)
+                {
+                    PFS(v, prioUpdater);
+                }
+            } while (s != (++v % N));
+        }
+
+        private void PFS(int s, Action<Graph<Tv, Te>, int, int> prioUpdater)
+        {
+
+            Priority(s, 0);
+            Status(s, VStatus.Visited);
+            Parent(s, -1);
+            while (true)
+            {
+                for (int w = FirstNbr(s); -1 < w; w = NextNbr(s, w))
+                {
+                    prioUpdater(this, s, w);
+                }
+                for (int shortest = int.MaxValue, w = 0; w < N; w++)
+                {
+                    if (Status(w) == VStatus.Undiscovered)
+                    {
+                        if (shortest > Priority(w))
+                        {
+                            shortest = Priority(w);
+                            s = w;
+                        }
+                    }
+                }
+                if (Status(s) == VStatus.Visited)
+                {
+                    break;
+                }
+                Status(s, VStatus.Visited);
+                Status(Parent(s), s, EStatus.Tree);
+            }
+        }
+
+        #endregion
 
         #region 广度优先
 
@@ -310,7 +375,6 @@ namespace Graph.GraphMatrix
 
         #endregion
 
-
         #region 深度优先
 
         public void Dfs()
@@ -358,14 +422,6 @@ namespace Graph.GraphMatrix
         }
 
         #endregion
-
-        /// <summary>
-        /// 双连通域分解
-        /// </summary>
-        public void Bcc()
-        {
-            throw new NotImplementedException();
-        }
 
         #region 拓扑排序
 
@@ -526,14 +582,35 @@ namespace Graph.GraphMatrix
 
         #endregion
 
+        #region Dijkstra算法
+
         public void Dijkstra()
         {
-            throw new NotImplementedException();
+            Dijkstra(0);
         }
 
-        public void Pfs(int n, Tp p)
+        public void Dijkstra(int v)
         {
-            throw new NotImplementedException();
+            Pfs(v, DijkstraAcion());
         }
+
+        private Action<Graph<Tv, Te>, int, int> DijkstraAcion()
+        {
+            return (Graph<Tv, Te> g, int s, int w) =>
+            {
+                if (g.Status(w) != VStatus.Undiscovered)
+                {
+                    return;
+                }
+                if (g.Priority(w) > g.Priority(s) + g.Weight(s, w))
+                {
+                    g.Priority(w, g.Priority(s) + g.Weight(s, w));
+                    g.Parent(w, s);
+                }
+            };
+        }
+
+        #endregion
+
     }
 }

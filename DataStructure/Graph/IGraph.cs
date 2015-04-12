@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Graph.GraphMatrix;
 
 
 namespace Graph
 {
-    public interface IGraph<Tv,Te,Pu> 
+    public interface IGraph<Tv,Te> 
         where Tv:IComparable<Tv> where Te:IComparable<Te>
     {
         /*  
@@ -90,7 +91,7 @@ namespace Graph
         int Parent(int vIndex);
         void Parent(int vIndex, int parent);
         int Priority(int vIndex);
-        void Prority(int vIndex, int priority);
+        void Priority(int vIndex, int priority);
 
         /*
          * 边的相关操作
@@ -176,10 +177,6 @@ namespace Graph
         /// </summary>
         void Dfs();
         /// <summary>
-        /// 基于DFS的双连通量分解算法
-        /// </summary>
-        void Bcc();
-        /// <summary>
         /// 拓扑排序
         /// </summary>
         /// <param name="n"></param>
@@ -196,8 +193,7 @@ namespace Graph
         /// <summary>
         /// 优先级搜索框架
         /// </summary>
-        /// <param name="n"></param>
-        /// <param name="p"></param>
-        void Pfs(int n, Pu p);
+        /// <param name="prioUpdater"></param>
+        void Pfs(Action<Graph<Tv, Te>, int, int> prioUpdater);
     }
 }
