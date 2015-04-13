@@ -5,8 +5,8 @@ using Graph.GraphMatrix;
 
 namespace Graph
 {
-    public interface IGraph<Tv,Te> 
-        where Tv:IComparable<Tv> where Te:IComparable<Te>
+    public interface IGraph<TV,TE> 
+        where TV:IComparable<TV> where TE:IComparable<TE>
     {
         /*  
          * 顶点 相关操作
@@ -21,27 +21,27 @@ namespace Graph
         /// </summary>
         /// <param name="e">顶点的值</param>
         /// <returns>顶点的编号</returns>
-        int Insert(Tv e);
+        int Insert(TV e);
 
         /// <summary>
         /// 删除顶点
         /// </summary>
         /// <param name="vIndex">顶点的序号</param>
         /// <returns>顶点的值</returns>
-        Tv Remove(int vIndex);
+        TV Remove(int vIndex);
 
         /// <summary>
         /// 获取顶点的值
         /// </summary>
         /// <param name="vIndex">顶点的序号</param>
         /// <returns>顶点的值</returns>
-        Tv Vertex(int vIndex);
+        TV Vertex(int vIndex);
         /// <summary>
         /// 设置顶点的值
         /// </summary>
         /// <param name="vIndex"></param>
         /// <param name="vValue"></param>
-        void Vertex(int vIndex, Tv vValue);
+        void Vertex(int vIndex, TV vValue);
         /// <summary>
         /// 顶点的入度
         /// </summary>
@@ -114,14 +114,14 @@ namespace Graph
         /// <param name="firVIndex">第一个顶点的序号</param>
         /// <param name="secVIndex">第二个顶点的序号</param>
         /// <param name="weight">权重</param>
-        void Insert(Te e, int firVIndex, int secVIndex, int weight);
+        void Insert(TE e, int firVIndex, int secVIndex, int weight);
         /// <summary>
         ///删除某条边
         /// </summary>
         /// <param name="firVIndex"></param>
         /// <param name="secVIndex"></param>
         /// <returns></returns>
-        Te Remove(int firVIndex, int secVIndex);
+        TE Remove(int firVIndex, int secVIndex);
         /// <summary>
         /// 边的状态
         /// </summary>
@@ -143,14 +143,14 @@ namespace Graph
         /// <param name="firVIndex"></param>
         /// <param name="secVIndex"></param>
         /// <returns></returns>
-        Te Edge(int firVIndex, int secVIndex);
+        TE Edge(int firVIndex, int secVIndex);
         /// <summary>
         /// 设置边的值
         /// </summary>
         /// <param name="firVIndex"></param>
         /// <param name="secVIndex"></param>
         /// <param name="data"></param>
-        void Edge(int firVIndex, int secVIndex,Te data);
+        void Edge(int firVIndex, int secVIndex,TE data);
         /// <summary>
         /// 获取边的权重
         /// </summary>
@@ -172,28 +172,39 @@ namespace Graph
         /// 广度优先
         /// </summary>
         void Bfs();
+
+        void Bfs(int n);
         /// <summary>
         /// 深度优先
         /// </summary>
         void Dfs();
+
+        void Dfs(int n);
         /// <summary>
         /// 拓扑排序
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        Stack<Tv> Tsort(int n);
+        Stack<TV> Tsort(int n);
+
+        Stack<TV> Tsort();
         /// <summary>
         /// 最小支撑树
         /// </summary>
-        List<PrimEdge> Prim();
+        void Prim();
         /// <summary>
         /// 最短路径算法
         /// </summary>
         void Dijkstra();
+
+        void Dijkstra(int n);
+
         /// <summary>
         /// 优先级搜索框架
         /// </summary>
         /// <param name="prioUpdater"></param>
-        void Pfs(Action<Graph<Tv, Te>, int, int> prioUpdater);
+        void Pfs(Action<Graph<TV, TE>, int, int> prioUpdater);
+
+        void Pfs(int s, Action<Graph<TV, TE>, int, int> prioUpdater);
     }
 }

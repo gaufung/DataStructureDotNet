@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Odbc;
 
 namespace Graph.GraphMatrix
 {
     /// <summary>
     /// 用邻接矩阵表示的图结构
     /// </summary>
-    /// <typeparam name="Tv"></typeparam>
-    /// <typeparam name="Te"></typeparam>
-    /// <typeparam name="Tp"></typeparam>
-    public class Graph<Tv, Te> : IGraph<Tv, Te>
-        where Tv : IComparable<Tv>
-        where Te : IComparable<Te>
+    /// <typeparam name="TV"></typeparam>
+    /// <typeparam name="TE"></typeparam>
+    public class Graph<TV, TE> : IGraph<TV, TE>
+        where TV : IComparable<TV>
+        where TE : IComparable<TE>
     {
-        private List<Vertex<Tv>> _v;
-        private List<List<Edge<Te>>> _e;
+        private readonly List<Vertex<TV>> _v;
+        private readonly List<List<Edge<TE>>> _e;
 
         public Graph()
         {
             N = E = 0;
-            _v=new List<Vertex<Tv>>();
-            _e=new List<List<Edge<Te>>>();
+            _v=new List<Vertex<TV>>();
+            _e=new List<List<Edge<TE>>>();
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace Graph.GraphMatrix
             get; set;
         }
 
-        public int Insert(Tv e)
+        public int Insert(TV e)
         {
             for (int i = 0; i < N; i++)
             {
@@ -58,7 +56,7 @@ namespace Graph.GraphMatrix
             }
             N++;
             _e.Add(CreteEdges(N));
-            _v.Add(new Vertex<Tv>(e));
+            _v.Add(new Vertex<TV>(e));
             return _v.Count - 1;
         }
         /// <summary>
@@ -66,9 +64,9 @@ namespace Graph.GraphMatrix
         /// </summary>
         /// <param name="num"></param>
         /// <returns></returns>
-        private List<Edge<Te>> CreteEdges(int num)
+        private List<Edge<TE>> CreteEdges(int num)
         {
-            List<Edge<Te>> edge=new List<Edge<Te>>(num);
+            List<Edge<TE>> edge=new List<Edge<TE>>(num);
             for (int i = 0; i < num; i++)
             {
                 edge.Add(null);
@@ -78,7 +76,7 @@ namespace Graph.GraphMatrix
 
         #region 边和点的插入删除操作
 
-        public Tv Remove(int vIndex)
+        public TV Remove(int vIndex)
         {
             for (int i = 0; i < N; i++)
             {
@@ -97,19 +95,19 @@ namespace Graph.GraphMatrix
                 }
                 _e[i].RemoveAt(vIndex);
             }
-            Tv eBak = _v[vIndex].Data;
+            TV eBak = _v[vIndex].Data;
             _v.RemoveAt(vIndex);
             return eBak;
         }
 
         #region 获取和设置操作
 
-        public Tv Vertex(int vIndex)
+        public TV Vertex(int vIndex)
         {
             return _v[vIndex].Data;
         }
 
-        public void Vertex(int vIndex, Tv vValue)
+        public void Vertex(int vIndex, TV vValue)
         {
             _v[vIndex].Data = vValue;
         }
@@ -190,12 +188,12 @@ namespace Graph.GraphMatrix
             _e[firVIndex][secVIndex].Status = status;
         }
 
-        public Te Edge(int firVIndex, int secVIndex)
+        public TE Edge(int firVIndex, int secVIndex)
         {
             return _e[firVIndex][secVIndex].Data;
         }
 
-        public void Edge(int firVIndex, int secVIndex, Te data)
+        public void Edge(int firVIndex, int secVIndex, TE data)
         {
             _e[firVIndex][secVIndex].Data = data;
         }
@@ -241,11 +239,11 @@ namespace Graph.GraphMatrix
                    _e[firVIndex][secVIndex] != null;
         }
 
-        public void Insert(Te e, int firVIndex, int secVIndex, int weight)
+        public void Insert(TE e, int firVIndex, int secVIndex, int weight)
         {
             if (!Exist(firVIndex, secVIndex))
             {
-                _e[firVIndex][secVIndex] = new Edge<Te>(e, weight);
+                _e[firVIndex][secVIndex] = new Edge<TE>(e, weight);
                 E++;
                 _v[firVIndex].OutDegree++;
                 _v[secVIndex].InDegree++;
@@ -258,9 +256,9 @@ namespace Graph.GraphMatrix
         /// <param name="firVIndex"></param>
         /// <param name="secVIndex"></param>
         /// <returns></returns>
-        public Te Remove(int firVIndex, int secVIndex)
+        public TE Remove(int firVIndex, int secVIndex)
         {
-            Te back = Edge(firVIndex, secVIndex);
+            TE back = Edge(firVIndex, secVIndex);
             _e[firVIndex][secVIndex] = null;
             _v[firVIndex].OutDegree--;
             _v[secVIndex].InDegree--;
@@ -272,12 +270,12 @@ namespace Graph.GraphMatrix
 
         #region 优先级搜索
 
-        public void Pfs(Action<Graph<Tv, Te>, int, int> prioUpdater)
+        public void Pfs(Action<Graph<TV, TE>, int, int> prioUpdater)
         {
             Pfs(0, prioUpdater);
         }
 
-        public void Pfs(int s, Action<Graph<Tv, Te>, int, int> prioUpdater)
+        public void Pfs(int s, Action<Graph<TV, TE>, int, int> prioUpdater)
         {
             Reset();
             int v = s;
@@ -290,7 +288,7 @@ namespace Graph.GraphMatrix
             } while (s != (++v % N));
         }
 
-        private void PFS(int s, Action<Graph<Tv, Te>, int, int> prioUpdater)
+        private void PFS(int s, Action<Graph<TV, TE>, int, int> prioUpdater)
         {
 
             Priority(s, 0);
@@ -348,7 +346,7 @@ namespace Graph.GraphMatrix
 
         private void Bfs(int startIndex, ref int clock)
         {
-            Queue<int> queue = new Queue<int>();
+            var queue = new Queue<int>();
             Status(startIndex, VStatus.Discovered);
             queue.Enqueue(startIndex);
             DTime(startIndex, ++clock);
@@ -430,17 +428,17 @@ namespace Graph.GraphMatrix
         /// 拓扑排序
         /// </summary>
         /// <returns></returns>
-        public Stack<Tv> Tsort()
+        public Stack<TV> Tsort()
         {
             return Tsort(0);
         }
 
-        public Stack<Tv> Tsort(int n)
+        public Stack<TV> Tsort(int n)
         {
             Reset();
             int clock = 0;
             int v = n;
-            Stack<Tv> s = new Stack<Tv>();
+            Stack<TV> s = new Stack<TV>();
             do
             {
                 if (_v[v].Status == VStatus.Undiscovered)
@@ -459,7 +457,7 @@ namespace Graph.GraphMatrix
             return s;
         }
 
-        private bool Tsort(int v, Stack<Tv> s, ref int clock)
+        private bool Tsort(int v, Stack<TV> s, ref int clock)
         {
             DTime(v, ++clock);
             Status(v, VStatus.Discovered);
@@ -497,90 +495,34 @@ namespace Graph.GraphMatrix
         /// 无向图的prim算法
         /// </summary>
         /// <returns></returns>
-        public List<PrimEdge> Prim()
+        public void Prim()
         {
-            var e = new List<PrimEdge>();
-            if (!Prim(e, 0))
-            {
-                e.Clear();
-            }
-            return e;
+            Prim(0);
         }
 
-        private bool Prim(List<PrimEdge> e, int n)
+        private void Prim(int s)
         {
-            var addSub = new List<int>();
-            var unAddSub = new List<int>();
-            DivideVertexs(addSub, unAddSub, n);
-           
-            while (addSub.Count != N)
+            Reset();
+            int v = s;
+            do
             {
-                var edges = new List<PrimEdge>();
-                for (int i=0; i < addSub.Count; i++)
+                if (InDegree(v)==0 && Status(v)==VStatus.Undiscovered)
                 {
-                    for (int j=0; j < unAddSub.Count; j++)
-                    {
-                        if (EdgeExist(addSub[i], unAddSub[j]))
-                        {
-                            edges.Add(new PrimEdge()
-                            {
-                                FirstVertex = addSub[i],
-                                SecondVertex = unAddSub[j],
-                                Weight = EdgeWeight(addSub[i], unAddSub[j])
-                            });
-                        }
-                    }
-                }                               
-                if (edges.Count!= 0)
-                {
-                    edges.Sort();                  
-                    addSub.Add(edges[0].SecondVertex);
-                    unAddSub.Remove(edges[0].SecondVertex);
-                    e.Add(edges[0]);
+                    PFS(v,PrimAciton());
                 }
-                else
+            } while (s!=(++v%N));
+        }
+        private Action<Graph<TV, TE>, int, int> PrimAciton()
+        {
+            return (Graph<TV, TE> g, int s, int w) =>
+            {
+                if (g.Priority(w) > g.Weight(s, w))
                 {
-                    return false;
+                    g.Priority(w, g.Weight(s, w));
+                    g.Parent(w, s);
                 }
-            }
-            return true;
+            };
         }
-
-        /// <summary>
-        /// 将所有的顶点分为加入的分集和未分开的集合
-        /// </summary>
-        /// <param name="addedSub"></param>
-        /// <param name="unAddedSub"></param>
-        /// <param name="n">开始的分集</param>
-        private void DivideVertexs(List<int> addedSub, List<int> unAddedSub, int n)
-        {
-            addedSub.Add(n);
-            for (int i = 0; i < n; i++)
-            {
-                unAddedSub.Add(i);
-            }
-            for (int i = n + 1; i < N; i++)
-            {
-                unAddedSub.Add(i);
-            }
-        }
-
-        /// <summary>
-        /// 判断连个点之间是否存在边（无向图）
-        /// </summary>
-        /// <param name="v">顶点1</param>
-        /// <param name="u">顶点2</param>
-        /// <returns>是否存在</returns>
-        private bool EdgeExist(int v, int u)
-        {
-            return Exist(v, u) || Exist(u, v);
-        }
-
-        private int EdgeWeight(int v, int u)
-        {
-            return _e[v][u] == null ? _e[u][v].Weight : _e[v][u].Weight;
-        }
-
         #endregion
 
         #region Dijkstra算法
@@ -595,9 +537,9 @@ namespace Graph.GraphMatrix
             Pfs(v, DijkstraAcion());
         }
 
-        private Action<Graph<Tv, Te>, int, int> DijkstraAcion()
+        private Action<Graph<TV, TE>, int, int> DijkstraAcion()
         {
-            return (Graph<Tv, Te> g, int s, int w) =>
+            return (Graph<TV, TE> g, int s, int w) =>
             {
                 if (g.Status(w) != VStatus.Undiscovered)
                 {

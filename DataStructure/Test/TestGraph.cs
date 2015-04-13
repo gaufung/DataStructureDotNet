@@ -47,19 +47,32 @@ namespace Test
                     }
                 }
             };
-            Graph.GraphMatrix.Graph<int,int> graph=new Graph<int, int>();
-            graph.Insert(2);
-            graph.Insert(3);
-            graph.Insert(4);
-            graph.Insert(6);
-            graph.Insert(2, 0, 1, 2);
-            graph.Insert(3, 1, 2, 1);
-            graph.Insert(3, 0, 3, 6);
-            graph.Insert(2, 2, 3, 5);
-            graph.Pfs(bfsAction);
-            for (int i = 0; i < graph.N; i++)
+            Action<Graph.GraphMatrix.Graph<int, int>, int, int> primAction = (Graph<int, int> g, int s, int w) =>
             {
-                Console.WriteLine(graph.Parent(i)); 
+                if (g.Status(w) == VStatus.Undiscovered)
+                {
+                    if (g.Priority(w) > g.Weight(s,w))
+                    {
+                        g.Priority(w, g.Weight(s, w));
+                        g.Parent(w, s);
+                        
+                    }
+                }
+            };
+            IGraph<int,int> pGraph=new Graph<int, int>();
+            pGraph.Insert(2);
+            pGraph.Insert(3);
+            pGraph.Insert(4);
+            pGraph.Insert(6);
+            pGraph.Insert(2, 0, 1, 2);
+            pGraph.Insert(3, 1, 2, 2);
+            pGraph.Insert(3, 0, 3, 6);
+            pGraph.Insert(2, 2, 3, 5);
+            pGraph.Insert(1, 0, 2, 1);
+            pGraph.Prim();
+            for (int i = 0; i < pGraph.N; i++)
+            {
+                Console.WriteLine(pGraph.Parent(i)); 
             }
 
         }
