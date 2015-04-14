@@ -27,22 +27,27 @@ namespace Bst.AVL
                 else                
                     x = Hot.InsertAsRc(e);                
                 Size++;
-                UpdateHeightAbove(x);
             }
+            
             //一直到根节点
             for (BinNode<T> g=Hot;g!=null;g=g.Parent)
             {
                 if (!g.AvlBalanced())
                 {
-                    var p = RotateAt(TallerChild(TallerChild(g)));
-                    if (g.IsRoot)
+                    bool isLchild = g.IsLChild;
+                    bool isRoot = g == Root;
+                    var y=RotateAt(TallerChild(TallerChild(g)));
+                    if (!isRoot)
                     {
-                        Root = p;
-                    }
-                    else
-                    {
-                        g.FromParentTo(p);
-                    }
+                        if (isLchild)
+                        {
+                            y.Parent.LChild = y;
+                        }
+                        else
+                        {
+                            y.Parent.RChild = y;
+                        } 
+                    }                    
                     break;
                 }
                 else
@@ -59,24 +64,29 @@ namespace Bst.AVL
             if (x == null) return false;
             RemoveAt(x);
             Size--;
+            /*
             for (BinNode<T> g=Hot;g!=null;g=g.Parent)
             {
+                bool isLchild = g.IsLChild;
+                bool isRoot = g == Root;
                 if(!g.AvlBalanced())
                 {
-                    var p = RotateAt(TallerChild(TallerChild(g)));
-                    if (g.IsRoot)
+                    var y = RotateAt(TallerChild(TallerChild(g)));
+                    if (!isRoot)
                     {
-                       g= Root = p;
-                    }
-                    else
-                    {
-                       g.FromParentTo(p);
-                        g = p;
-                    }
-                    
+                        if (isLchild)
+                        {
+                            y.Parent.LChild = y;
+                        }
+                        else
+                        {
+                            y.Parent.RChild = y;
+                        }
+                    }  
                 }
                 UpdateHeight(g);
             }
+             */
             return true;
         }
 
@@ -93,12 +103,21 @@ namespace Bst.AVL
             {
                 if (x.IsLChild)
                 {
+                    
                     p.Parent = g.Parent;
+                    if (g.Parent==null)
+                    {
+                        Root = p;
+                    }
                     return Connect34(x, p, g, x.LChild, x.RChild, p.RChild, g.RChild);
                 }
                 else
                 {
                     x.Parent = g.Parent;
+                    if (g.Parent == null)
+                    {
+                        Root = p;
+                    }
                     return Connect34(p, x, g, p.LChild, x.LChild, x.RChild, g.RChild);
                 }
             }
@@ -107,11 +126,19 @@ namespace Bst.AVL
                 if (x.IsRChild)
                 {
                     p.Parent = g.Parent;
+                    if (g.Parent == null)
+                    {
+                        Root = p;
+                    }
                     return Connect34(g, p, x, g.LChild, p.LChild, x.LChild, x.RChild);
                 }
                 else
                 {
                     x.Parent = g.Parent;
+                    if (g.Parent == null)
+                    {
+                        Root = p;
+                    }
                     return Connect34(g, x, p, g.LChild, x.LChild, x.RChild, p.LChild);
                 }
             }
