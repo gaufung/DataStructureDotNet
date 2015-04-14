@@ -14,10 +14,10 @@ namespace Test
         {
            BinTree<int> tree=new BinTree<int>();
            //Assert.AreEqual(1,tree.Size);
-           tree.InsertAsRoot(2);
-           tree.InsertAsLc(tree.Root, 1);
-           tree.InsertAsRc(tree.Root, 3);
-           tree.TravIn_I1(tree.Root,new Action<int>(i=>Console.WriteLine(i)));
+           var first=tree.InsertAsRoot(2);
+           //tree.InsertAsLc(tree.Root, 1);
+           //tree.InsertAsRc(tree.Root, 3);
+           //tree.TravIn_I1(tree.Root,new Action<int>(i=>Console.WriteLine(i)));
         }
     }
 }

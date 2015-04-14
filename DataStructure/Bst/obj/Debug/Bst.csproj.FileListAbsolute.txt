@@ -1,0 +1,6 @@
+D:\DS\DataStructure\Bst\bin\Debug\Bst.dll
+D:\DS\DataStructure\Bst\bin\Debug\Bst.pdb
+D:\DS\DataStructure\Bst\bin\Debug\Tree.dll
+D:\DS\DataStructure\Bst\bin\Debug\Tree.pdb
+D:\DS\DataStructure\Bst\obj\Debug\Bst.dll
+D:\DS\DataStructure\Bst\obj\Debug\Bst.pdb

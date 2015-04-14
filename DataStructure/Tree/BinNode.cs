@@ -8,7 +8,7 @@ namespace Tree
     /// 二叉树的节点类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinNode<T> where T : IComparable<T>
+    public class BinNode<T> where T : IComparable
     {
         #region 属性
 
@@ -99,7 +99,7 @@ namespace Tree
             if (HasRChild)
             {
                 s = this.RChild;
-                while (s.HasRChild)
+                while (s.HasLChild)
                 {
                     s = s.LChild;
                 }
@@ -198,12 +198,12 @@ namespace Tree
 
         public static bool Lt(T a, T b)
         {
-            return (a as IComparable<T>).CompareTo(b) == -1;
+            return (a as IComparable).CompareTo(b) == -1;
         }
 
         public static bool Eq(T a, T b)
         {
-            return (a as IComparable<T>).CompareTo(b) == 0;
+            return (a as IComparable).CompareTo(b) == 0;
         }
 
        

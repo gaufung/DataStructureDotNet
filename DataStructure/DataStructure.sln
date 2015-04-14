@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinTree", "Tree\BinTree.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj", "{FD8FF400-7255-4A83-B2BC-B66E3F363704}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bst", "Bst\Bst.csproj", "{865E5661-E508-4092-A464-E0BB45082123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{FD8FF400-7255-4A83-B2BC-B66E3F363704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD8FF400-7255-4A83-B2BC-B66E3F363704}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD8FF400-7255-4A83-B2BC-B66E3F363704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{865E5661-E508-4092-A464-E0BB45082123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{865E5661-E508-4092-A464-E0BB45082123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{865E5661-E508-4092-A464-E0BB45082123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{865E5661-E508-4092-A464-E0BB45082123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

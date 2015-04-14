@@ -8,11 +8,11 @@ namespace Tree
     /// 二叉树类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinTree<T> where T:IComparable<T>
+    public class BinTree<T> where T:IComparable
     {
         #region 属性
-        public int Size { get;  private set; }
-        public BinNode<T> Root { get; private set; }
+        public int Size { get;   set; }
+        public BinNode<T> Root { get;  set; }
 
         public bool Empty { get { return Root == null; } } 
         #endregion
