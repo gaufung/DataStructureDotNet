@@ -306,6 +306,7 @@ namespace Tree
             get { return IsRoot ? this : (IsLChild ? this.Parent.LChild : this.Parent.RChild); }
             //set { (IsRoot ? this : (IsLChild ? this.Parent.LChild : this.Parent.RChild)) = value; }
         } 
+
         #endregion
 
     }

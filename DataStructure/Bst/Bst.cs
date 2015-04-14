@@ -4,7 +4,7 @@ namespace Bst
 {
     public class Bst<T> : BinTree<T> where T :IComparable
     {
-        private BinNode<T> Hot;
+        protected BinNode<T> Hot;
 
         public Bst():base()
         {
@@ -59,18 +59,24 @@ namespace Bst
             if (Hot == null)
             {
                 Root = new BinNode<T>(e);
+                Size++;
+                UpdateHeightAbove(Root);
                 return Root;
             }
             else
             {
                 if (Lt(e, Hot.Data))
                 {
-                    return Hot.InsertAsLc(e);
+                   
+                    x= Hot.InsertAsLc(e);
                 }
                 else
                 {
-                   return  Hot.InsertAsRc(e);
+                   x=Hot.InsertAsRc(e);
                 }
+                Size++;
+                UpdateHeightAbove(x);
+                return x;
             }
         }
         /// <summary>
@@ -91,7 +97,7 @@ namespace Bst
             return true;
         }
 
-        private  BinNode<T> RemoveAt(BinNode<T> x)
+        protected  BinNode<T> RemoveAt(BinNode<T> x)
         {
             BinNode<T> w = x;
             BinNode<T> succ;
