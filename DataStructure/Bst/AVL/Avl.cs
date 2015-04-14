@@ -14,11 +14,12 @@ namespace Bst.AVL
         {
             BinNode<T> x = Search(e);
             if (x != null) return x;
+            //空树，第一次插入节点
             if (Hot == null)
             {
                 Root = new BinNode<T>(e);
                 Size++;
-                UpdateHeightAbove(Root);
+                UpdateHeight(Root);
             }
             else
             {
@@ -27,6 +28,7 @@ namespace Bst.AVL
                 else                
                     x = Hot.InsertAsRc(e);                
                 Size++;
+                UpdateHeightAbove(x);
             }
             
             //一直到根节点
@@ -64,7 +66,7 @@ namespace Bst.AVL
             if (x == null) return false;
             RemoveAt(x);
             Size--;
-            /*
+            
             for (BinNode<T> g=Hot;g!=null;g=g.Parent)
             {
                 bool isLchild = g.IsLChild;
@@ -86,7 +88,7 @@ namespace Bst.AVL
                 }
                 UpdateHeight(g);
             }
-             */
+             
             return true;
         }
 
@@ -168,8 +170,9 @@ namespace Bst.AVL
             if (t1!=null)
             {
                 t1.Parent = a;
-                UpdateHeight(a);
+                
             }
+            UpdateHeight(a);
             c.LChild = t2;
             if (t2!=null)
             {
@@ -179,8 +182,8 @@ namespace Bst.AVL
             if (t3!=null)
             {
                 t3.Parent = c;
-                UpdateHeight(c);
             }
+            UpdateHeight(c);
             b.LChild = a;
             a.Parent=b;
             b.RChild = c;
