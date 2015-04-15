@@ -32,7 +32,7 @@ namespace Bst
         }
         #endregion
 
-        private  BinNode<T> SearchIn(BinNode<T> v, T e)
+        public  BinNode<T> SearchIn(BinNode<T> v, T e)
         {          
             if (v==null||Eq(v.Data,e))
             {

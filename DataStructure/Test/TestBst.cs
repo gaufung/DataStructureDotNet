@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using Bst.AVL;
+using Bst.SplayTree;
 using NUnit.Framework;
 using Bst;
 using Tree;
@@ -12,6 +14,7 @@ namespace Test
         [Test]
         public void Test()
         {
+            /*
             var bst=new Avl<int>();
             bst.Insert(1);
             bst.Insert(2);
@@ -20,20 +23,32 @@ namespace Test
             bst.Remove(1);
             Console.WriteLine(bst.Root.Data);
             bst.TravIn(new Action<int>(i => Console.WriteLine(i)));
-            /*
-            bst.Insert(2);
-            
-          //  Console.WriteLine(bst.Root.BalFac());
-            bst.Insert(3);
-            Console.WriteLine(bst.Root.Height);
-            Console.WriteLine(bst.Root.RChild.Height);
-            Console.WriteLine(bst.Root.LChild.Height);
-         //   bst.Remove(3);
-         //   Console.WriteLine(bst.Root.Height);
-            //}
-          //  Console.WriteLine(bst.Root.LChild.Data);
-           
              */
+            var bst = new Splay<int>();
+            bst.Insert(4);
+            bst.Insert(2);
+
+            bst.Insert(6);
+            bst.Insert(0);
+            var x=bst.Search(6);
+            Console.WriteLine(x.Data);
+            //Console.WriteLine(bst.Root.Data);
+            Console.WriteLine(bst.Root.LChild.Data);
+            Console.WriteLine(bst.Root.LChild.RChild.Data);
+            Console.WriteLine(bst.Root.LChild.RChild.LChild.Data);
+            //Console.WriteLine(bst.Root.LChild.LChild.Data);
+            //Console.WriteLine(bst.Root.RChild.Data);
+          //  Console.WriteLine(bst.Root.RChild.Data);
+          //  Console.WriteLine(bst.Root.RChild.RChild.Data);
+            //Console.WriteLine(bst.Root.RChild.RChild.RChild.Data);
+            //Console.WriteLine(bst.Root.LChild.Data);
+            //Console.WriteLine(bst.Root.LChild.LChild.Data);
+           // Console.WriteLine();
+            //bst.Insert(3);
+           // Console.WriteLine(x.Data);
+          //  bst.Insert(1);
+        //  bst.TravIn(new Action<int>(i => Console.WriteLine(i)));
+
 
         }
     }
