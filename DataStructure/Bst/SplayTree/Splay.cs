@@ -160,7 +160,7 @@ namespace Bst.SplayTree
                 if (Root!=null)
                 {
                     Root.Parent = null;
-                }
+                }   
             }
             else if (!Root.HasRChild)
             {
@@ -177,11 +177,12 @@ namespace Bst.SplayTree
                 Root.LChild = null;
                 Root = Root.RChild;
                 Root.Parent = null;
+                //调整右子树做下面的左孩子，使之变成根节点
                 Search(w.Data);
                 Root.LChild = lTree;
                 lTree.Parent = Root;
             }
-            Size--;
+            Size--;   
             if (Root!=null)
             {
                 UpdateHeight(Root);

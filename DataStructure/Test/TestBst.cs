@@ -25,17 +25,16 @@ namespace Test
             bst.TravIn(new Action<int>(i => Console.WriteLine(i)));
              */
             var bst = new Splay<int>();
-            bst.Insert(4);
-            bst.Insert(2);
-
+            bst.Insert(4);         
+            bst.Insert(8);
             bst.Insert(6);
-            bst.Insert(0);
-            var x=bst.Search(6);
-            Console.WriteLine(x.Data);
-            //Console.WriteLine(bst.Root.Data);
+            Console.WriteLine(bst.Root.Data);
             Console.WriteLine(bst.Root.LChild.Data);
-            Console.WriteLine(bst.Root.LChild.RChild.Data);
-            Console.WriteLine(bst.Root.LChild.RChild.LChild.Data);
+            Console.WriteLine(bst.Root.RChild.Data);
+            //Console.WriteLine(bst.Root.Data);
+            //Console.WriteLine(bst.Root.LChild.Data);
+            //Console.WriteLine(bst.Root.LChild.RChild.Data);
+            //Console.WriteLine(bst.Root.LChild.RChild.LChild.Data);
             //Console.WriteLine(bst.Root.LChild.LChild.Data);
             //Console.WriteLine(bst.Root.RChild.Data);
           //  Console.WriteLine(bst.Root.RChild.Data);
@@ -47,6 +46,9 @@ namespace Test
             //bst.Insert(3);
            // Console.WriteLine(x.Data);
           //  bst.Insert(1);
+           // Console.WriteLine(bst.Root.Data);
+            //Console.WriteLine(bst.Root.RChild.Data);
+            //Console.WriteLine(bst.Root.RChild.RChild.Data);
         //  bst.TravIn(new Action<int>(i => Console.WriteLine(i)));
 
 
