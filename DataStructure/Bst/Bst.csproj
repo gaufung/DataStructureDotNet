@@ -45,14 +45,14 @@
     <Compile Include="AVL\Avl.cs" />
     <Compile Include="AVL\AvlHelper.cs" />
     <Compile Include="Bst.cs" />
+    <Compile Include="BTree\BTNode.cs" />
+    <Compile Include="BTree\BTree.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplayTree\SpalyHelper.cs" />
     <Compile Include="SplayTree\Splay.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BTree\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
