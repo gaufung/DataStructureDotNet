@@ -9,13 +9,15 @@ namespace Bst.BTree
     /// <typeparam name="T">关键码</typeparam>
     public class BtNode<T> where T:IComparable
     {
-        public BtNode<T> Parent { get; set; }
-        public List<T> Key { get; set; }
-        public List<BtNode<T>> Child { get; set; }
+        public BtNode<T> Parent { get; set; }//父节点
+        public List<T> Key { get; set; }//关键码向量
+        public List<BtNode<T>> Child { get; set; }//
 
         public BtNode()
         {
             Parent = null;
+            Key=new List<T>();
+            Child=new List<BtNode<T>>();
             Child.Insert(0,null);
         }
         public BtNode(T e, BtNode<T> lc = null, BtNode<T> rc = null)
