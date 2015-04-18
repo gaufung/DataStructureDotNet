@@ -35,7 +35,7 @@ namespace Tree
         }
 
         public BinNode(T e, BinNode<T> parent = null, BinNode<T> lChild = null,
-            BinNode<T> rChild = null, int height = 0, int npl = 1, RbColor color = RbColor.RbBlack)
+            BinNode<T> rChild = null, int height = 0, int npl = 1, RbColor color = RbColor.RbRed)
         {
             Data = e;
             Parent = parent;

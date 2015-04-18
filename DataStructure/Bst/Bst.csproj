@@ -50,6 +50,8 @@
     <Compile Include="BTree\BTreeHelper.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RB\RbHelper.cs" />
+    <Compile Include="RB\RedBlack.cs" />
     <Compile Include="SplayTree\SpalyHelper.cs" />
     <Compile Include="SplayTree\Splay.cs" />
   </ItemGroup>
