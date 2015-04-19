@@ -11,3 +11,9 @@ Data Structure via CSharp（数据结构 via C#）
 + 采用TDD（Test Driven Development)方式，使用的测试工具为TestDriven
 + 数据结构采用泛型设计
 
+# 事件
++ 截至到2015年4月19日已经完成的内容有
+  - 向量（即System.Collections.Generic命名空间中List<T>泛型）
+  - 
+  - 
+
