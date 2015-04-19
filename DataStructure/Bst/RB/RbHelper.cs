@@ -35,5 +35,20 @@ namespace Bst.RB
         {
             return p != null ? p.Height : -1;
         }
+
+        public static bool Gt<T>(this T a, T b) where T : IComparable
+        {
+            return (a as IComparable).CompareTo(b) == 1;
+        }
+
+        public static bool Lt<T>(this T a, T b) where T : IComparable
+        {
+            return (a as IComparable).CompareTo(b) == -1;
+        }
+
+        public static bool Eq<T>(this T a, T b) where T : IComparable
+        {
+            return (a as IComparable).CompareTo(b) == 0;
+        }
     }
 }

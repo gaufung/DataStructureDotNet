@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Bst.AVL;
 using Bst.BTree;
+using Bst.RB;
 using Bst.SplayTree;
 using NUnit.Framework;
 
@@ -52,15 +53,22 @@ namespace Test
             //Console.WriteLine(bst.Root.RChild.Data);
             //Console.WriteLine(bst.Root.RChild.RChild.Data);
         //  bst.TravIn(new Action<int>(i => Console.WriteLine(i)));
-            BTree<int> bt=new BTree<int>();
-            bt.Insert(2);
-            bt.Insert(3);
-            bt.Insert(5);
-            bt.Insert(6);
-            bt.Remove(5);
+            //BTree<int> bt=new BTree<int>();
+            //bt.Insert(2);
+            //bt.Insert(3);
+            //bt.Insert(5);
+            //bt.Insert(6);
+            //bt.Remove(5);
          //  bt.Root.Key.ForEach(new Action<int>(i => Console.WriteLine(i)));
            // Console.WriteLine(bt.Root.Key[0]);
-            Console.WriteLine(bt.Root.Child[0].Key[0]);
+            var bt = new RedBlack<int>();
+            bt.Insert(1);
+            bt.Insert(2);
+            bt.Insert(3);
+            bt.Insert(0);
+            bt.Remove(3);
+            Console.WriteLine(bt.Root.Data);
+            Console.WriteLine(bt.Root.Color);
 
         }
     }

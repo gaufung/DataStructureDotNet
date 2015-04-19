@@ -109,34 +109,45 @@ namespace Bst.RB
         }
         protected void SolveDoubleRed(BinNode<T> x)
         {
-            if (x.IsRoot)
+            if (x.IsRoot)//如果x为根节点
             {
-                Root.Color=RbColor.RbBlack;
-                Root.Height++;
+                Root.Color=RbColor.RbBlack;//蚺蛇
+                Root.Height++;//根节点的高度+1；
                 return;
             }
+            //如果父亲节点为黑色，返回，停止更新
             BinNode<T> p = x.Parent;
-            if (p.IsBlack())
-            {
-                return;
-                
-            }
+            if (p.IsBlack()) return;  
+            //获取祖父节点和叔叔节点
             BinNode<T> g = p.Parent;
             BinNode<T> u = x.Uncle;
+            //为黑
+            Boolean isGrandLChild = g.IsLChild;
             if (u.IsBlack())
             {
-                if (x.IsLChild == p.IsLChild)
+                if (x.IsLChild == p.IsLChild)//zig-zig or zag-zag
                 {
-                    p.Color = RbColor.RbBlack;
+                    p.Color = RbColor.RbBlack;//coloring
                 }
-                else
+                else//zig-zag or zag-zig
                 {
                     x.Color = RbColor.RbBlack;
                 }
-                g.Color = RbColor.RbRed;
-                BinNode<T> gg = g.Parent;
-                //fromparent 设置
+                g.Color = RbColor.RbRed;//colring
+                BinNode<T> gg = g.Parent;//grand-grandparent
+                //fromparent 设置               
                 BinNode<T> r = RotateAt(x);
+                if (gg!=null)
+                {
+                    if (isGrandLChild)
+                    {
+                        gg.LChild = r;
+                    }
+                    else
+                    {
+                        gg.RChild = r;
+                    }   
+                }              
                 r.Parent = gg;
             }
             else
@@ -145,7 +156,7 @@ namespace Bst.RB
                 p.Height++;
                 u.Color=RbColor.RbBlack;
                 u.Height++;
-                if (!g.IsRChild)
+                if (!g.IsRoot)
                 {
                     g.Color=RbColor.RbRed;
                 }
@@ -156,23 +167,31 @@ namespace Bst.RB
         protected void SolveDoubleBalck(BinNode<T> r)
         {
             BinNode<T> p = r != null ? r.Parent : Hot;
-            BinNode<T> s = (r == p.LChild) ? p.RChild : p.LChild;
-            if (s.IsBlack())
+            if (p == null) return;
+            BinNode<T> s = (r==p.LChild)?p.RChild:p.LChild;//兄弟节点必然存在
+            Boolean isParentLChild = p.IsLChild;
+            //bb-1
+            if (s.IsBlack())//if sibling node's color is black
             {
                 BinNode<T> t = null;
-                if (s.HasLChild && s.LChild.IsRed())
-                {
-                    t = s.LChild;
-                }
-                else if (s.HasRChild && s.RChild.IsRed())
-                {
-                    t = s.RChild;
-                }
-                if (t != null)
+                if (s.HasLChild && s.LChild.IsRed()) t = s.LChild;
+                else if (s.HasRChild && s.RChild.IsRed()) t = s.RChild;
+                if (t!= null)//如果有红孩子
                 {
                     RbColor oldColor = p.Color;
                     //设置FromParent函数
                     BinNode<T> b = RotateAt(t);
+                    if (p.Parent!=null)
+                    {
+                        if (isParentLChild)
+                        {
+                            p.LChild = b;
+                        }
+                        else
+                        {
+                            p.RChild = b;
+                        }
+                    }
                     if (b.HasLChild)
                     {
                         b.LChild.Color = RbColor.RbBlack;
@@ -186,6 +205,7 @@ namespace Bst.RB
                     b.Color = oldColor;
                     UpdateHeight(b);
                 }
+                //
                 else
                 {
                     s.Color = RbColor.RbRed;
@@ -207,7 +227,18 @@ namespace Bst.RB
                 p.Color=RbColor.RbRed;
                 BinNode<T> t = s.IsLChild ? s.LChild : s.RChild;
                 Hot = p;
-                //设置FromParent
+                BinNode<T> b = RotateAt(r);
+                if(p.Parent!=null)
+                {
+                    if (isParentLChild)
+                    {
+                        p.Parent.LChild = b;
+                    }
+                    else
+                    {
+                        p.Parent.RChild = b;
+                    }
+                }
                 SolveDoubleBalck(r);
             }
         }
@@ -216,42 +247,60 @@ namespace Bst.RB
             x.Height = Math.Max(x.LChild.Stature(), x.RChild.Stature());
             return x.IsBlack() ? x.Height++ : x.Height;
         }
+
+        /// <summary>
+        /// 插入节点
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public override BinNode<T> Insert(T e)
         {
-            BinNode<T> x = Search(e);
+            var x = Search(e);
             if (x!=null)
             {
                 return x;
             }
-            //这一部分需要重新考虑一下
-            x=new BinNode<T>(e,Hot,null,null,-1);
+            //如果插入的是根节点
+            if (Hot == null)
+            {
+                Root = new BinNode<T>(e);
+                Root.Height = 0;
+                Root.Color = RbColor.RbBlack;
+                return Root;
+            }
+            //如果该位置的父亲节点大于要插入的节点，插入为父亲节点的左孩子，否则为右孩子
+            x = Hot.Data.Gt(e) ? Hot.InsertAsLc(e) : Hot.InsertAsRc(e);       
+            x.Height = -1;
             Size++;
+            //解决双红问题问题
             SolveDoubleRed(x);
             return x;
         }
+
+        /// <summary>
+        /// 删除操作
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public override bool Remove(T e)
         {
            //throw new NotImplementedException();
-            BinNode<T> x = Search(e);
-            if (x==null)
-            {
-                return false;
-            }
+            BinNode<T> x = Search(e);           
+            if (x == null) return false;//the node does not exist
+            Boolean isDeleteRed = x.IsRed();
             BinNode<T> r = RemoveAt(x);
-            if (0>=--Size)
+            if (0 >= --Size) return true;//if the tree is empty
+            if (Hot==null)//if delete the Root
             {
+                Root.Color=RbColor.RbBlack;//coloring 
+                UpdateHeight(Root);//update the black height
                 return true;
             }
-            if (Hot==null)
-            {
-                Root.Color=RbColor.RbBlack;
-                UpdateHeight(Root);
-                return true;
-            }
-            if (Hot.BlackHeightUpdated())
-            {
-                return true;
-            }
+            if (isDeleteRed) return true;//if deleted node's color is red : return             
+            //if (Hot.BlackHeightUpdated())//to confirm the height of the node updatded
+            //{
+            //    return true;
+            //}
             if (r.IsRed())
             {
                 r.Color = RbColor.RbBlack;
