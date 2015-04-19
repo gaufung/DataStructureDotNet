@@ -1,4 +1,4 @@
-# DS
+﻿# DS
 Data Structure via CSharp（数据结构 via C#）
 
 # 前言
@@ -12,8 +12,31 @@ Data Structure via CSharp（数据结构 via C#）
 + 数据结构采用泛型设计
 
 # 事件
-+ 截至到2015年4月19日已经完成的内容有
-  - 向量（即System.Collections.Generic命名空间中List<T>泛型）
-  - 
-  - 
++ 截至到2015年4月19日已经完成的数据结构有
+  - 向量（System.Collections.Generic命名空间中List<T>泛型）
+  - 链表（System.Collections.Generic命名空间中LinkList<T>泛型）
+  - 栈(System.Collections.Generic命名空间中的Stack<T>泛型)
+  - 队列(System.Collections.Generic命名空间中的Queue<T>泛型)
+  - 二叉树(binary Tree)
+  - 图(Graph)
+  - 平衡二叉树(Balance Binary Tree)
+  	- Avl树(Avl Tree)
+  	- 伸展树(Splay Tree)
+  	- B树(B-Tree)
+  	- 红黑树(Red-Black Tree)
++ 截至到2015年4月19日完成的算法
+  - 排序
+  	- 选择排序(Select Sort)
+  	- 插入排序(Insert Sort)
+  	- 冒泡排序(Bubble Sort)
+  	- 希尔排序(Shell Sort)
+  	- 快速排序(Quick Sort)
+  - 查找
+  	- 二分查找
+  	- Fibnacci查找
+  - 遍历
+  	- 二叉树先序,中序和后序遍历
+  	- 图广度优先和深度优先遍历
+
+
 
