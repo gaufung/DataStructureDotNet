@@ -1,6 +1,7 @@
 ﻿using System;
+using Vector;
 
-namespace Vector
+namespace Sequence
 {
     /// <summary>
     /// 向量数组
@@ -13,8 +14,16 @@ namespace Vector
         private int _size;
         private int _capacity;
 
+        #region 抽象工厂
+
+        public static IVector<T> VectorFactory()
+        {
+            return new Vector<T>();
+        }
+        #endregion
+
         #region 构造函数
-        public Vector()
+        private Vector()
         {
             _capacity = DefaultCapactiry;
             _elem = new T[_capacity];
@@ -31,22 +40,22 @@ namespace Vector
         }
        
 
-        public Vector(T[] source, int lo, int hi)
+        private Vector(T[] source, int lo, int hi)
         {
             CopyFrom(source,lo,hi);
         }
 
-        public Vector(T[] source,int n)
+        private Vector(T[] source,int n)
         {
             CopyFrom(source,0,n);
         }
 
-        public Vector(Vector<T> v,int lo,int hi)
+        private Vector(Vector<T> v,int lo,int hi)
         {
             CopyFrom(v._elem,lo,hi);
         }
 
-        public Vector(Vector<T> v)
+        private Vector(Vector<T> v)
         {
             CopyFrom(v._elem,0,v._size);
         }
@@ -95,10 +104,12 @@ namespace Vector
 
             get
             {
+                if(index>=_size) throw new IndexOutOfRangeException("向量索引越界");
                 return _elem[index];
             }
             set
             {
+                if (index >= _size) throw new IndexOutOfRangeException("向量索引越界");
                 _elem[index] = value;
             }
         }
@@ -124,10 +135,10 @@ namespace Vector
         /// <returns></returns>
         private static  bool Gt(T a, T b)
         {
-
-            return (a as IComparable).CompareTo(b) == 1;
-           
+            var comparable = a as IComparable;
+            return comparable != null && comparable.CompareTo(b) == 1;
         }
+
         /// <summary>
         /// Equal to
         /// </summary>
@@ -136,8 +147,10 @@ namespace Vector
         /// <returns></returns>
         private static bool Eq(T a, T b)
         {
-            return (a as IComparable).CompareTo(b) == 0;           
+            var comparable = a as IComparable;
+            return comparable != null && comparable.CompareTo(b) == 0;
         }
+
         /// <summary>
         /// Litter than
         /// </summary>
@@ -146,8 +159,10 @@ namespace Vector
         /// <returns></returns>
         private static bool Lt(T a, T b)
         {
-           return (a as IComparable).CompareTo(b) == -1;
+            var comparable = a as IComparable;
+            return comparable != null && comparable.CompareTo(b) == -1;
         }
+
         #endregion
                 
         #region 无序查找
@@ -331,15 +346,18 @@ namespace Vector
         /// <returns></returns>
         public int DisOrdered()
         {
-            int coount = 0;
-            for (int i = 0; i < _size - 1; i++)
+            int counter = 0;
+            for (int i = 1; i < _size; i++)
             {
-                if (Lt(_elem[i + 1], _elem[i]))
+                int n = 0;
+                while (n<i)
                 {
-                    coount++;
+                    if (Lt(this[i], this[n]))
+                        counter++;
+                    n++;
                 }
             }
-            return coount;
+            return counter;
         }
 
         #region 去除重复
@@ -390,7 +408,7 @@ namespace Vector
         /// Traverse the element in the vector
         /// </summary>
         /// <param name="action"></param>
-        public void Traverse(System.Action<T> action)
+        public void Traverse(Action<T> action)
         {
             for (int i = 0; i < _size; i++)
             {
@@ -398,191 +416,191 @@ namespace Vector
             }
         }
 
-        #region 排序
-        /// <summary>
-        /// 交换元素
-        /// </summary>
-        /// <param name="i">序号</param>
-        /// <param name="j">序号</param>
-        private void Swap(int i, int j)
-        {
-            T temp = this[i];
-            this[i] = this[j];
-            this[j] = temp;
-        }
+        //#region 排序
+        ///// <summary>
+        ///// 交换元素
+        ///// </summary>
+        ///// <param name="i">序号</param>
+        ///// <param name="j">序号</param>
+        //private void Swap(int i, int j)
+        //{
+        //    T temp = this[i];
+        //    this[i] = this[j];
+        //    this[j] = temp;
+        //}
 
-        #region 冒泡排序
+        //#region 冒泡排序
 
-        /// <summary>
-        /// 冒泡排序
-        /// </summary>
-        public void BubbleSort()
-        {
-            for (int i = 1; i < _size; i++)
-            {
-                bool exChange = false;
-                for (int j = 0; j < _size - i; j++)
-                {
-                    if (Gt(this[j], this[j + 1]))
-                    {
-                        Swap(j, j + 1);
-                        exChange = true;
-                    }
-                }
-                if (!exChange)
-                {
-                    return;
-                }
-            }
-        }
+        ///// <summary>
+        ///// 冒泡排序
+        ///// </summary>
+        //public void BubbleSort()
+        //{
+        //    for (int i = 1; i < _size; i++)
+        //    {
+        //        bool exChange = false;
+        //        for (int j = 0; j < _size - i; j++)
+        //        {
+        //            if (Gt(this[j], this[j + 1]))
+        //            {
+        //                Swap(j, j + 1);
+        //                exChange = true;
+        //            }
+        //        }
+        //        if (!exChange)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
-        #region 归并排序
+        //#region 归并排序
 
-        /// <summary>
-        /// 归并排序[lo,hi)区间
-        /// </summary>
-        /// <param name="lo"></param>
-        /// <param name="hi"></param>
-        public void MergeSort(int lo, int hi)
-        {
-            if (hi - lo < 2)
-            {
-                return;
-            }
-            int mi = (hi + lo) >> 1;
-            MergeSort(lo, mi);
-            MergeSort(mi, hi);
-            Merge(lo, mi, hi);
-        }
+        ///// <summary>
+        ///// 归并排序[lo,hi)区间
+        ///// </summary>
+        ///// <param name="lo"></param>
+        ///// <param name="hi"></param>
+        //public void MergeSort(int lo, int hi)
+        //{
+        //    if (hi - lo < 2)
+        //    {
+        //        return;
+        //    }
+        //    int mi = (hi + lo) >> 1;
+        //    MergeSort(lo, mi);
+        //    MergeSort(mi, hi);
+        //    Merge(lo, mi, hi);
+        //}
 
-        /// <summary>
-        /// 归并排序
-        /// </summary>
-        /// <param name="lo">低</param>
-        /// <param name="mi">中间</param>
-        /// <param name="hi">高，不包括</param>
-        private void Merge(int lo, int mi, int hi)
-        {
-            var vectorTemp = new Vector<T>(this, lo, hi);
-            int i = lo;
-            int j = mi;
-            int m = 0;
-            while (i < mi && j < hi)
-            {
-                if (Lt(this[i], this[j]))
-                {
-                    vectorTemp[m] = this[i];
-                    m++;
-                    i++;
-                }
-                else
-                {
-                    vectorTemp[m] = this[j];
-                    m++;
-                    j++;
-                }
-            }
-            //如果还有剩余
-            while (i < mi)
-            {
-                vectorTemp[m] = this[i];
-                m++;
-                i++;
-            }
-            while (j < hi)
-            {
-                vectorTemp[m] = this[j];
-                m++;
-                j++;
-            }
-            for (int k = 0; k < vectorTemp.Size; k++)
-            {
-                this[lo] = vectorTemp[k];
-                lo++;
-            }
-        }
+        ///// <summary>
+        ///// 归并排序
+        ///// </summary>
+        ///// <param name="lo">低</param>
+        ///// <param name="mi">中间</param>
+        ///// <param name="hi">高，不包括</param>
+        //private void Merge(int lo, int mi, int hi)
+        //{
+        //    var vectorTemp = new Vector<T>(this, lo, hi);
+        //    int i = lo;
+        //    int j = mi;
+        //    int m = 0;
+        //    while (i < mi && j < hi)
+        //    {
+        //        if (Lt(this[i], this[j]))
+        //        {
+        //            vectorTemp[m] = this[i];
+        //            m++;
+        //            i++;
+        //        }
+        //        else
+        //        {
+        //            vectorTemp[m] = this[j];
+        //            m++;
+        //            j++;
+        //        }
+        //    }
+        //    //如果还有剩余
+        //    while (i < mi)
+        //    {
+        //        vectorTemp[m] = this[i];
+        //        m++;
+        //        i++;
+        //    }
+        //    while (j < hi)
+        //    {
+        //        vectorTemp[m] = this[j];
+        //        m++;
+        //        j++;
+        //    }
+        //    for (int k = 0; k < vectorTemp.Size; k++)
+        //    {
+        //        this[lo] = vectorTemp[k];
+        //        lo++;
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
-        #region 选择排序
+        //#region 选择排序
 
-        public void SelectSort()
-        {
-            for (int i = 0; i < _size-1; i++)
-            {
-                int k = i;
-                for (int j = k; j < _size; j++)
-                {
-                    if (Lt(this[j],this[k]))
-                    {
-                        k = j;
-                    }
-                }
-                if (k!=i)
-                {
-                    Swap(k,i);
-                }
-            }
-        }
-        #endregion
+        //public void SelectSort()
+        //{
+        //    for (int i = 0; i < _size - 1; i++)
+        //    {
+        //        int k = i;
+        //        for (int j = k; j < _size; j++)
+        //        {
+        //            if (Lt(this[j], this[k]))
+        //            {
+        //                k = j;
+        //            }
+        //        }
+        //        if (k != i)
+        //        {
+        //            Swap(k, i);
+        //        }
+        //    }
+        //}
+        //#endregion
 
-        #region 插入排序
+        //#region 插入排序
 
-        public void InsertSort()
-        {
-            for (int i = 1; i < _size; i++)
-            {
-                T temp = this[i];
-                int j;
-                for (j = i-1; j >=0&&Gt(this[j],temp); j--)
-                {
-                    this[j + 1] = this[j];
-                }
-                this[j + 1] = temp;
-            }
-        }
-        #endregion
+        //public void InsertSort()
+        //{
+        //    for (int i = 1; i < _size; i++)
+        //    {
+        //        T temp = this[i];
+        //        int j;
+        //        for (j = i - 1; j >= 0 && Gt(this[j], temp); j--)
+        //        {
+        //            this[j + 1] = this[j];
+        //        }
+        //        this[j + 1] = temp;
+        //    }
+        //}
+        //#endregion
 
-        #region 快排
+        //#region 快排
 
-        private int Partition(int lo, int hi)
-        {
-            int i = lo;
-            int j = hi - 1;
-            T povit = this[lo];
-            while (i<j)
-            {
-                while (i < j && !Lt(this[j], povit))
-                {
-                    --j;
-                }
-                this[i] = this[j];
-                while (i<j&&!Gt(this[i],povit))
-                {
-                    ++i;
-                }
-                this[j] = this[i];
+        //private int Partition(int lo, int hi)
+        //{
+        //    int i = lo;
+        //    int j = hi - 1;
+        //    T povit = this[lo];
+        //    while (i < j)
+        //    {
+        //        while (i < j && !Lt(this[j], povit))
+        //        {
+        //            --j;
+        //        }
+        //        this[i] = this[j];
+        //        while (i < j && !Gt(this[i], povit))
+        //        {
+        //            ++i;
+        //        }
+        //        this[j] = this[i];
 
-            }
-            this[i] = povit;
-            return i;
-        }
+        //    }
+        //    this[i] = povit;
+        //    return i;
+        //}
 
-        public void QuickSort(int lo, int hi)
-        {
-            if (hi-lo<2)
-            {
-                return;
-            }
-            int povit = Partition(lo, hi);
-            QuickSort(lo,povit);
-            QuickSort(povit+1,hi);
-        }
-        #endregion
+        //public void QuickSort(int lo, int hi)
+        //{
+        //    if (hi - lo < 2)
+        //    {
+        //        return;
+        //    }
+        //    int povit = Partition(lo, hi);
+        //    QuickSort(lo, povit);
+        //    QuickSort(povit + 1, hi);
+        //}
+        //#endregion
 
-        #endregion
+        //#endregion
 
 
 

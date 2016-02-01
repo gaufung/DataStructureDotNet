@@ -1,39 +1,38 @@
 ﻿using System;
-using Vector;
-namespace Stack
+
+namespace Sequence
 {
-    public class Stack<T>:IStack<T> where T:IComparable
+    /// <summary>
+    /// the abstract defining of statck
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class Stack<T> where T:IComparable<T>
     {
-        private readonly Vector<T> _vector;
+        /// <summary>
+        /// whether the stack is empty
+        /// </summary>
+        public abstract Boolean Empty { get; }
 
-        public Stack()
-        {
-            _vector=new Vector<T>();
-        }
-        public int Size
-        {
-            get { return _vector.Size; }
-        }
+        /// <summary>
+        /// get the size of stack
+        /// </summary>
+        public abstract int Size { get; }
 
-        public bool Empty
-        {
-            get { return _vector.Empty; }
-        }
+        /// <summary>
+        /// push the element
+        /// </summary>
+        /// <param name="e"></param>
+        public abstract void Push(T e);
 
-        public void Push(T e)
-        {
-            _vector.Insert(e);
-        }
+        /// <summary>
+        /// pop the element
+        /// </summary>
+        /// <returns></returns>
+        public abstract T Pop();
 
-        public T Pop()
-        {
-          
-            return _vector.Remove(_vector.Size - 1);
-        }
-
-        public T Top()
-        {
-            return _vector[_vector.Size - 1];
-        }
+        /// <summary>
+        /// get the top of the stack
+        /// </summary>
+        public abstract T Top { get; }
     }
 }

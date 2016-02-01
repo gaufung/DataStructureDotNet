@@ -7,8 +7,8 @@
     <ProjectGuid>{B45D2BB1-313A-40D7-96EB-E791A42FBCE0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Queue</RootNamespace>
-    <AssemblyName>Queue</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.Queue</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="List">
-      <HintPath>..\List\bin\Debug\List.dll</HintPath>
+    <Reference Include="Sequence.List">
+      <HintPath>..\List\bin\Debug\Sequence.List.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,9 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IQueue.cs" />
-    <Compile Include="Queue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queue.cs" />
+    <Compile Include="QueueFactory.cs" />
+    <Compile Include="QueueListImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

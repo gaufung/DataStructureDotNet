@@ -1,36 +1,37 @@
 ﻿using System;
-using List;
-namespace Queue
+
+namespace Sequence
 {
-    public class Queue<T>:IQueue<T> where T:IComparable
+    /// <summary>
+    /// the abstract class the queue
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class Queue<T> where T:IComparable<T>
     {
-        private readonly List<T> _list;
-        public Queue()
-        {
-            _list=new List<T>();
-        }
-        public void Enqueue(T e)
-        {
-            _list.InsertAsLast(e);
-        }
-        public T Dequeue()
-        {
-            return _list.Remove(_list.First);
-        }
-        public T Front
-        {
-            get
-            {
-                return _list.First.Data;
-            }
-            set
-            {
-                _list.First.Data = value;
-            }
-        }
-        public bool Empty
-        {
-            get { return _list.Empty; }
-        }
+        /// <summary>
+        /// whether the queue is empty
+        /// </summary>
+        public abstract bool Empty { get; }
+
+        /// <summary>
+        /// the front value of the queue
+        /// </summary>
+        public abstract T Front { get; }
+
+        /// <summary>
+        /// de queue
+        /// </summary>
+        /// <returns></returns>
+        public abstract T Dequeue();
+        /// <summary>
+        /// en queue
+        /// </summary>
+        /// <param name="e"></param>
+        public abstract void Enqueue(T e);
+
+        /// <summary>
+        /// the size of the queue
+        /// </summary>
+        public abstract int Size { get; }
     }
 }

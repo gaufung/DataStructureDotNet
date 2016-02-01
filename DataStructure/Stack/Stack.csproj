@@ -7,8 +7,8 @@
     <ProjectGuid>{C265D22B-FF75-450A-BE26-B046DF8DE3BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stack</RootNamespace>
-    <AssemblyName>Stack</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.Stack</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Sequence.Vector">
+      <HintPath>..\Vector\bin\Debug\Sequence.Vector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -37,14 +40,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vector">
-      <HintPath>..\Vector\bin\Debug\Vector.dll</HintPath>
-    </Reference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Compile Include="IStack.cs" />
-    <Compile Include="Stack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stack.cs" />
+    <Compile Include="StackFactory.cs" />
+    <Compile Include="StackVectorImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

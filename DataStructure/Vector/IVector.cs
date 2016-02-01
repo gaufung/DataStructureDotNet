@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Vector
+namespace Sequence
 {
-    interface IVector<T> where T:IComparable<T>
+    public interface IVector<T> where T:IComparable<T>
     {
         /// <summary>
         /// The size of Vector

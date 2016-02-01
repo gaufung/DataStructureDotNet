@@ -7,8 +7,8 @@
     <ProjectGuid>{65EDB28C-BA99-475E-AC93-44F792C2FEC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vector</RootNamespace>
-    <AssemblyName>Vector</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.Vector</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,8 +36,8 @@
   <ItemGroup>
     <Compile Include="Fib.cs" />
     <Compile Include="IVector.cs" />
-    <Compile Include="Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

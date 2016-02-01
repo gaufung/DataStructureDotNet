@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace List
+namespace Sequence
 {
-    public class List<T> : IList<T> where T : IComparable
+    public class List<T> : IList<T> where T : IComparable<T>
     {
         #region 私有字段
 
@@ -15,7 +15,7 @@ namespace List
         /// <summary>
         /// 初始化
         /// </summary>
-        void Init()
+        private void Init()
         {
             _header=new ListNode<T>();
             _tailer=new ListNode<T>();
@@ -34,7 +34,7 @@ namespace List
             }
         }
 
-        void CopyNode(ListNode<T> p, int num)
+        private void CopyNode(ListNode<T> p, int num)
         {
             Init();
             while (num>0)
@@ -45,17 +45,17 @@ namespace List
             }
         }
 
-        public List()
+        private List()
         {
             Init();
         }
 
-        public List(List<T> l)
+        private List(Sequence.IList<T> l)
         {
             CopyNode(l.First,l.Size);
         }
 
-        public List(List<T> l, int from, int num)
+        private List(Sequence.IList<T> l, int from, int num)
         {
             ListNode<T> p = l.First;
             while (from>0)
@@ -66,9 +66,32 @@ namespace List
             CopyNode(p,num);
         }
 
-        public List(ListNode<T> p, int num)
+        private List(ListNode<T> p, int num)
         {
             CopyNode(p,num);
+        }
+        #endregion
+
+        #region 抽象工厂模式
+
+        public static Sequence.IList<T> ListFactory()
+        {
+            return new List<T>();
+        }
+
+        public static Sequence.IList<T> ListFactory(Sequence.IList<T> list)
+        {
+            return new List<T>(list);
+        }
+
+        public static Sequence.IList<T> ListFactory(Sequence.IList<T> list, int from, int num)
+        {
+            return new List<T>(list, from, num);
+        }
+
+        public static Sequence.IList<T> ListFactory(ListNode<T> p, int num)
+        {
+            return new List<T>(p,num);
         }
         #endregion
 
@@ -121,6 +144,7 @@ namespace List
         {
             get
             {
+                if(index>=_size) throw new IndexOutOfRangeException("索引超出边界");
                 ListNode<T> p = First;
                 while (index>0)
                 {
@@ -131,6 +155,7 @@ namespace List
             }
             set
             {
+                if (index >= _size) throw new IndexOutOfRangeException("索引超出边界");
                 ListNode<T> p = First;
                 while (index>0)
                 {
@@ -186,17 +211,19 @@ namespace List
 
         public int DisOrder()
         {
-            ListNode<T> p = First.Succ;
-            int n = 0;
-            while (p.Succ.Succ!=null)
+            ListNode<T> current = _header.Succ;
+            int counter = 0;
+            while (current != _tailer)
             {
-                if (Gt(p.Pred.Data,p.Data))
+                ListNode<T> p = _header.Succ;
+                while (p!=current)
                 {
-                    n++;
+                    if (Lt(current.Data, p.Data)) counter++;
+                    p = p.Succ;
                 }
-                p = p.Succ;
+                current = current.Succ;
             }
-            return n;
+            return counter;
         }
 
         /// <summary>

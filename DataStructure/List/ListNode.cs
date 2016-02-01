@@ -1,7 +1,5 @@
 ﻿
-using System.Threading;
-
-namespace List
+namespace Sequence
 {
     /// <summary>
     /// 列表的节点类
@@ -9,44 +7,38 @@ namespace List
     /// <typeparam name="T"></typeparam>
     public class ListNode<T>
     {
-        private T _data;
-        private ListNode<T> _pred;
-        private ListNode<T> _succ;
-
         #region 构造函数
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ListNode()
         {
-            _data = default(T);
-            _pred = _succ = null;
+            Data = default(T);
+            Pred = Succ = null;
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="data">data</param>
+        /// <param name="pred">pred</param>
+        /// <param name="succ">succ</param>
         public ListNode(T data, ListNode<T> pred = null, ListNode<T> succ = null)
         {
-            _data = data;
-            _pred = pred;
-            _succ = succ;
+            Data = data;
+            Pred = pred;
+            Succ = succ;
         }
 
         #endregion
 
-        public ListNode<T> Succ
-        {
-            get { return _succ; }
-            set { _succ = value; }
-        }
+        public ListNode<T> Succ { get; set; }
 
-        public ListNode<T> Pred
-        {
-            get { return _pred; }
-            set { _pred = value; }
-        }
+        public ListNode<T> Pred { get; set; }
 
-        public T Data
-        {
-            get { return _data; }
-            set { _data = value; }
-        }
+        public T Data { get; set; }
+
         #region 插入函数
 
         /// <summary>
@@ -56,18 +48,20 @@ namespace List
         /// <returns></returns>
         public ListNode<T> InsertAsPred(T e)
         {
-            var pre = new ListNode<T>(e, null, null);
-            pre.Pred = this.Pred;
+            var pre = new ListNode<T>(e, null, null) {Pred = this.Pred};
             pre.Pred.Succ = pre;
             this.Pred = pre;
             pre.Succ = this;
             return pre;
         }
-
+        /// <summary>
+        /// 当前节点后面插入
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public ListNode<T> InsertAsSucc(T e)
         {
-            var s = new ListNode<T>(e, null, null);
-            s.Succ = this.Succ;
+            var s = new ListNode<T>(e, null, null) {Succ = this.Succ};
             s.Succ.Pred = s;
             this.Succ = s;
             s.Pred = this;
@@ -76,7 +70,7 @@ namespace List
 
         public override string ToString()
         {
-            return string.Format("The Node Data Value is {0}", _data.ToString());
+            return string.Format("The Node Data Value is {0}", Data);
         }
 
         #endregion
