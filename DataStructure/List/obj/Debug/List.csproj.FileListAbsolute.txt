@@ -1,5 +1,0 @@
-D:\DS\DataStructure\List\bin\Debug\List.dll
-D:\DS\DataStructure\List\bin\Debug\List.pdb
-D:\DS\DataStructure\List\obj\Debug\List.dll
-D:\DS\DataStructure\List\obj\Debug\List.pdb
-D:\DS\DataStructure\List\obj\Debug\List.csprojResolveAssemblyReference.cache
