@@ -1,4 +1,4 @@
-﻿namespace Graph
+﻿namespace Sequence
 {
     /// <summary>
     /// 边状态

@@ -7,8 +7,8 @@
     <ProjectGuid>{FD8FF400-7255-4A83-B2BC-B66E3F363704}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Graph</RootNamespace>
-    <AssemblyName>Graph</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.Graph</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,21 +32,17 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GraphMatrix\Edge.cs" />
+    <Compile Include="Graph.cs" />
+    <Compile Include="Edge.cs" />
     <Compile Include="EStatus.cs" />
-    <Compile Include="GraphMatrix\Graph.cs" />
-    <Compile Include="IGraph.cs" />
-    <Compile Include="GraphMatrix\Vertex.cs" />
+    <Compile Include="GraphMatrix\GraphMatrix.cs" />
+    <Compile Include="Vertex.cs" />
     <Compile Include="VStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

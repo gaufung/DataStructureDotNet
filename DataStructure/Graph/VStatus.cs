@@ -1,5 +1,4 @@
-﻿
-namespace Graph
+﻿namespace Sequence
 {
     /// <summary>
     /// 顶点状态
