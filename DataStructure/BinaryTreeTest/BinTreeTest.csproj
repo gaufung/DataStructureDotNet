@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{20260DA5-0E6A-4B83-8714-DE4519C8F16F}</ProjectGuid>
+    <ProjectGuid>{6CDC5A67-896F-47EE-8A74-1440BF16958C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sequence</RootNamespace>
-    <AssemblyName>Sequence.Tree</AssemblyName>
+    <RootNamespace>BinaryTreeTest</RootNamespace>
+    <AssemblyName>BinaryTreeTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,14 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\package\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Tree">
+      <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinNode.cs" />
-    <Compile Include="BinTree.cs" />
+    <Compile Include="TestRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RbColor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

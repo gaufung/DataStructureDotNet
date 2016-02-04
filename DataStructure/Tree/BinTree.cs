@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
-namespace Tree
+namespace Sequence
 {
     /// <summary>
     /// 二叉树类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinTree<T> where T:IComparable
+    public class BinTree<T> where T:IComparable<T>
     {
         #region 属性
-        public int Size { get;   set; }
-        public BinNode<T> Root { get;  set; }
 
+        /// <summary>
+        /// 树的大小
+        /// </summary>
+        public int Size { get;  private set; }
+        /// <summary>
+        /// the root of the tree
+        /// </summary>
+        public BinNode<T> Root { get;  set; }
+        /// <summary>
+        /// if the tree is empty or not
+        /// </summary>
         public bool Empty { get { return Root == null; } } 
         #endregion
 
@@ -40,6 +48,9 @@ namespace Tree
         }
         #region 构造函数
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public BinTree()
         {
             Size = 0;
@@ -47,49 +58,88 @@ namespace Tree
         }
         #endregion
 
+        /// <summary>
+        /// the status the tree node
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         private int Status(BinNode<T> p)
         {
             return p != null ? p.Height : -1;
         }
+        /// <summary>
+        /// 新的结点作为根节点插入
+        /// </summary>
+        /// <param name="e">结点的值</param>
+        /// <returns>新的根节点</returns>
         public BinNode<T> InsertAsRoot(T e)
         {
             Size = 1;
             return Root = new BinNode<T>(e);
         }
-
+        /// <summary>
+        /// 作为某个结点的左孩子结点插入
+        /// </summary>
+        /// <param name="x">要插入的父节点</param>
+        /// <param name="e">结点的值</param>
+        /// <returns>插入的结点的值</returns>
         public BinNode<T> InsertAsLc(BinNode<T> x, T e)
         {
             Size++;
-            x.InsertAsLc(e);
+            var leftChild=x.InsertAsLc(e);
             UpdateHeightAbove(x);
-            return x.LChild;
+            return leftChild;
         }
+        /// <summary>
+        /// 作为右孩子结点插入
+        /// </summary>
+        /// <param name="x">结点</param>
+        /// <param name="e">要插入的结点的值</param>
+        /// <returns>插入的结点</returns>
         public BinNode<T> InsertAsRc(BinNode<T> x, T e)
         {
             Size++;
-            x.InsertAsRc(e);
+            var rightChild=x.InsertAsRc(e);
             UpdateHeightAbove(x);
-            return x.RChild;
+            return rightChild;
         }
-
+        /// <summary>
+        /// 将一棵树作为结点x的Left Child插入
+        /// </summary>
+        /// <param name="x">要插入的结点</param>
+        /// <param name="tr">要插入的树</param>
+        /// <returns>返回结点</returns>
         public BinNode<T> AttachAsLc(BinNode<T> x, BinTree<T> tr)
         {
-            x.LChild = tr.Root;
+            int xSize=RemoveAt(x.LChild);
+            x.LChild = tr.Root; 
             x.LChild.Parent = x;
-            Size += tr.Size;
+            Size =Size-xSize+tr.Size;
+            var backup = x;
             UpdateHeightAbove(x);
-            return x;
+            return backup;
         }
-
+        /// <summary>
+        /// 将一棵树作为结点x的Right Child插入
+        /// </summary>
+        /// <param name="x">要插入的结点</param>
+        /// <param name="tr">要插入的树</param>
+        /// <returns>返回结点</returns>
         public BinNode<T> AttachAsRc(BinNode<T> x, BinTree<T> tr)
         {
+            int xSize = RemoveAt(x.RChild);
             x.RChild = tr.Root;
             x.RChild.Parent = x;
-            Size += tr.Size;
+            Size =Size-xSize+tr.Size;
+            var backup = x;
             UpdateHeightAbove(x);
-            return x;
+            return backup;
         }
-
+        /// <summary>
+        /// 将结点X从树中摘除
+        /// </summary>
+        /// <param name="x">结点X</param>
+        /// <returns>摘除结点为根节点的子树的结点数目</returns>
         public int Remove(BinNode<T> x)
         {
             ClearFromParent(x);
@@ -98,7 +148,10 @@ namespace Tree
             Size -= n;
             return n;
         }
-
+        /// <summary>
+        /// 从父节点的关系链中摘除
+        /// </summary>
+        /// <param name="x"></param>
         private void ClearFromParent(BinNode<T> x)
         {            
             if (x.IsRChild)
@@ -110,6 +163,11 @@ namespace Tree
                 x.Parent.LChild = null;
             }
         }
+        /// <summary>
+        /// 从结点X为子树的所有结点的数目
+        /// </summary>
+        /// <param name="x">作为根节点的子树</param>
+        /// <returns>结点的数目</returns>
         private int RemoveAt(BinNode<T> x)
         {
             if (x==null)
@@ -120,12 +178,16 @@ namespace Tree
             return n;
         }
 
-        BinTree<T> Secede(BinNode<T> x)
+        /// <summary>
+        /// 从某个结点摘除出，并且以此为根节点创建一个树
+        /// </summary>
+        /// <param name="x">摘除的结点</param>
+        /// <returns>摘除出来的树</returns>
+        public BinTree<T> Secede(BinNode<T> x)
         {
             ClearFromParent(x);
             UpdateHeightAbove(x.Parent);
-            var s=new BinTree<T>();
-            s.Root = x;
+            var s = new BinTree<T> {Root = x};
             x.Parent = null;
             s.Size = x.Size();
             Size -= s.Size;
@@ -183,10 +245,6 @@ namespace Tree
         }
 
         #endregion
-
-
-        
-
         #region 迭代遍历
 
         #region 先序遍历
@@ -196,7 +254,8 @@ namespace Tree
         /// <param name="x">当前子树的根节点</param>
         /// <param name="action">操作</param>
         /// <param name="s">栈</param>
-        private static void VisitAlongLeftBranch(BinNode<T> x, Action<T> action, Stack<BinNode<T>> s)
+        private static void VisitAlongLeftBranch(BinNode<T> x, 
+            Action<T> action, Stack<BinNode<T>> s)
         {
             
             while (x != null)
@@ -217,10 +276,7 @@ namespace Tree
             while (true)
             {
                 VisitAlongLeftBranch(x, action, s);
-                if (s.Count == 0)
-                {
-                    break;
-                }
+                if (s.Count == 0) break;
                 x = s.Pop();
             }
         }

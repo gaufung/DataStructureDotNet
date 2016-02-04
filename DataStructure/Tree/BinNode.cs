@@ -1,28 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
-namespace Tree
+namespace Sequence
 {
     /// <summary>
     /// 二叉树的节点类
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class BinNode<T> where T : IComparable
+    /// <typeparam name="T">The type of data</typeparam>
+    public class BinNode<T> where T : IComparable<T>
     {
         #region 属性
-
+        /// <summary>
+        /// the binnode data
+        /// </summary>
         public T Data { get;  set; }
+
+        /// <summary>
+        /// parent
+        /// </summary>
         public BinNode<T> Parent { get;  set; }
+        /// <summary>
+        /// left child
+        /// </summary>
         public BinNode<T> LChild { get;  set; }
+        /// <summary>
+        /// right child
+        /// </summary>
         public BinNode<T> RChild { get;  set; }
+
+        /// <summary>
+        /// the node height
+        /// </summary>
         public int Height { get; set; }
+
+        /// <summary>
+        /// null path length
+        /// </summary>
         public int Npl { get; set; }
+
+        /// <summary>
+        /// the node color(red-black tree)
+        /// </summary>
         public RbColor Color { get; set; }
 
         #endregion
 
         #region 构造函数
+
+        /// <summary>
+        /// the default constructor
+        /// </summary>
         public BinNode()
         {
             Data = default(T);
@@ -33,7 +60,16 @@ namespace Tree
             Npl = 1;
             Color = RbColor.RbRed;
         }
-
+        /// <summary>
+        /// the constructor
+        /// </summary>
+        /// <param name="e">data</param>
+        /// <param name="parent">parent</param>
+        /// <param name="lChild">left child</param>
+        /// <param name="rChild">right child</param>
+        /// <param name="height">height</param>
+        /// <param name="npl">null path length</param>
+        /// <param name="color">the color</param>
         public BinNode(T e, BinNode<T> parent = null, BinNode<T> lChild = null,
             BinNode<T> rChild = null, int height = 0, int npl = 1, RbColor color = RbColor.RbRed)
         {
@@ -147,10 +183,10 @@ namespace Tree
            TravPre(this,action);
         }
         /// <summary>
-        /// 递归先序
+        /// 递归先序遍历  
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="trave"></param>
+        /// <param name="x">the node </param>
+        /// <param name="trave">the action</param>
         private static void TravPre(BinNode<T> x, Action<T> trave)
         {
             trave(x.Data);
@@ -159,7 +195,10 @@ namespace Tree
         }
 
         #region 中序递归遍历
-
+        /// <summary>
+        /// 中序递归遍历
+        /// </summary>
+        /// <param name="action"></param>
         public void TravIn(Action<T> action)
         {
             TravIn(this, action);
@@ -175,7 +214,10 @@ namespace Tree
         #endregion
 
         #region 后序遍历
-
+        /// <summary>
+        /// 后续递归遍历
+        /// </summary>
+        /// <param name="action"></param>
         public void TravPost(Action<T> action)
         {
             TravPost(this, action);
@@ -198,18 +240,27 @@ namespace Tree
 
         public static bool Lt(T a, T b)
         {
-            return (a as IComparable).CompareTo(b) == -1;
+            var comparable = a as IComparable<T>;
+            return comparable != null && comparable.CompareTo(b) == -1;
         }
 
         public static bool Eq(T a, T b)
         {
-            return (a as IComparable).CompareTo(b) == 0;
+            var comparable = a as IComparable<T>;
+            return comparable != null && comparable.CompareTo(b) == 0;
         }
 
-       
+        public static bool Gt(T a, T b)
+        {
+            var comparable = a as IComparable<T>;
+            return comparable.CompareTo(b) == 1;
+        }
         #endregion
 
         #region 辅助方法
+        /// <summary>
+        /// 是否为根节点
+        /// </summary>
         public bool IsRoot
         {
             get
@@ -217,7 +268,9 @@ namespace Tree
                 return this.Parent == null;
             }
         }
-
+        /// <summary>
+        /// 是否为左孩子结点
+        /// </summary>
         public bool IsLChild
         {
             get
@@ -225,7 +278,9 @@ namespace Tree
                 return !IsRoot && this == this.Parent.LChild;
             }
         }
-
+        /// <summary>
+        /// 是否为右孩子结点
+        /// </summary>
         public bool IsRChild
         {
             get
@@ -233,7 +288,9 @@ namespace Tree
                 return !IsRoot && this == this.Parent.RChild;
             }
         }
-
+        /// <summary>
+        /// 是否有父节点
+        /// </summary>
         public bool HasParent
         {
             get
@@ -241,7 +298,9 @@ namespace Tree
                 return !IsRoot;
             }
         }
-
+        /// <summary>
+        /// 是否有左孩子
+        /// </summary>
         public bool HasLChild
         {
             get
@@ -249,7 +308,9 @@ namespace Tree
                 return LChild != null;
             }
         }
-
+        /// <summary>
+        /// 是否有右孩子
+        /// </summary>
         public bool HasRChild
         {
             get
@@ -257,7 +318,9 @@ namespace Tree
                 return RChild != null;
             }
         }
-
+        /// <summary>
+        /// 是否有孩子结点
+        /// </summary>
         public bool HasChild
         {
             get
@@ -265,7 +328,9 @@ namespace Tree
                 return HasLChild || HasRChild;
             }
         }
-
+        /// <summary>
+        /// 是否有两个孩子结点
+        /// </summary>
         public bool HasBothChild
         {
             get
@@ -273,7 +338,9 @@ namespace Tree
                 return HasLChild && HasRChild;
             }
         }
-
+        /// <summary>
+        /// 是否为叶子结点
+        /// </summary>
         public bool IsLeaf
         {
             get
@@ -282,7 +349,7 @@ namespace Tree
             }
         }
         /// <summary>
-        /// 兄弟节点
+        /// 获取兄弟节点
         /// </summary>
         public BinNode<T> Sibling
         {
@@ -291,7 +358,9 @@ namespace Tree
                 return IsLChild ? this.Parent.RChild : this.Parent.LChild;
             }
         }
-
+        /// <summary>
+        /// 获取叔叔结点
+        /// </summary>
         public BinNode<T> Uncle
         {
             get
@@ -300,11 +369,12 @@ namespace Tree
                     this.Parent.Parent.RChild : this.Parent.Parent.LChild;
             }
         }
-
+        /// <summary>
+        /// 来自父节点的指针
+        /// </summary>
         public BinNode<T> FromParentTo
         {
             get { return IsRoot ? this : (IsLChild ? this.Parent.LChild : this.Parent.RChild); }
-            //set { (IsRoot ? this : (IsLChild ? this.Parent.LChild : this.Parent.RChild)) = value; }
         } 
 
         #endregion

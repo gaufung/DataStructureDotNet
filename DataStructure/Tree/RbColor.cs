@@ -1,4 +1,4 @@
-﻿namespace Tree
+﻿namespace Sequence
 {
     /// <summary>
     /// 红黑树的节点颜色
