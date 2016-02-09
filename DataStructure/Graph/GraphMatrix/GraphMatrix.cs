@@ -29,137 +29,177 @@ namespace Sequence.GraphMatrix
         }
         public override int Insert(TV e)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < N; i++)
+            {
+                _e[i].Add(null);
+            }
+            ++N;
+            _e.Add(CreateEdges());
+            _v.Add(new Vertex<TV>(e));
+            return _v.Count - 1;
+        }
+
+        private List<Edge<TE, TW>> CreateEdges()
+        {
+            var edge=new List<Edge<TE,TW>>();
+            for (int i = 0; i < N; i++)
+            {
+                edge.Add(null);
+            }
+            return edge;
         }
 
         public override TV Remove(int index)
         {
-            throw new NotImplementedException();
+            //修改结点的进度和初度
+            for (int i = 0; i < N; i++)
+            {
+                if (Exist(index,i))
+                {
+                    _v[i].InDegree--;
+                }
+                if (Exist(i,index))
+                {
+                    _v[i].OutDegree--;
+                }
+                _e[i].RemoveAt(index);
+            }
+            TV backup = _v[index].Data;
+            _v.RemoveAt(index);
+            _e.RemoveAt(index);
+            N--;
+            return backup;
         }
 
         public override TV Vertex(int index)
         {
-            throw new NotImplementedException();
+            return _v[index].Data;
         }
 
         public override void Vertex(int index, TV value)
         {
-            throw new NotImplementedException();
+            _v[index].Data = value;
         }
 
         public override int InDegree(int index)
         {
-            throw new NotImplementedException();
+            return _v[index].InDegree;
         }
 
         protected override void InDegree(int index, int value)
         {
-            throw new NotImplementedException();
+            _v[index].InDegree = value;
         }
 
         public override int OutDegree(int index)
         {
-            throw new NotImplementedException();
+            return _v[index].OutDegree;
         }
 
         protected override void OutDegree(int index, int value)
         {
-            throw new NotImplementedException();
+            _v[index].OutDegree = value;
         }
 
         public override VStatus Status(int index)
         {
-            throw new NotImplementedException();
+            return _v[index].Status;
         }
 
         protected override void Status(int index, VStatus status)
         {
-            throw new NotImplementedException();
+            _v[index].Status = status;
         }
 
         public override int DTime(int index)
         {
-            throw new NotImplementedException();
+           return  _v[index].DTime;
         }
 
         protected override void DTime(int index, int dTime)
         {
-            throw new NotImplementedException();
+            _v[index].DTime = dTime;
         }
 
         public override int FTime(int index)
         {
-            throw new NotImplementedException();
+            return _v[index].FTime;
         }
 
         protected override void FTime(int index, int fTime)
         {
-            throw new NotImplementedException();
+            _v[index].FTime = fTime;
         }
 
         public override int Parent(int index)
         {
-            throw new NotImplementedException();
+            return _v[index].Parent;
         }
 
         protected override void Parent(int index, int parent)
         {
-            throw new NotImplementedException();
+            _v[index].Parent = parent;
         }
 
         public override int Priority(int index)
         {
-            throw new NotImplementedException();
+            return _v[index].Priority;
         }
 
         protected override void Priority(int index, int priority)
         {
-            throw new NotImplementedException();
+            _v[index].Priority = priority;
         }
 
         public override bool Exist(int firVIndex, int secVIndex)
         {
-            throw new NotImplementedException();
+            return  _e[firVIndex][secVIndex] != null;
         }
 
-        public override void Insert(TE e, int firVIndex, int secVindex, TW weight)
+        public override void Insert(TE e, int firVIndex, int secVindex, TW weight=default(TW))
         {
-            throw new NotImplementedException();
+            _e[firVIndex][secVindex]=new Edge<TE, TW>(e,weight);
+            E++;
         }
 
         public override TE Remove(int firVIndex, int secVIndex)
         {
-            throw new NotImplementedException();
+            TE backup = _e[firVIndex][secVIndex].Data;
+            _e[firVIndex][secVIndex] = null;
+            _v[firVIndex].OutDegree--;
+            _v[secVIndex].InDegree--;
+            E--;
+            return backup;
         }
 
         public override EStatus Status(int firVIndex, int secVIndex)
         {
-            throw new NotImplementedException();
+            return _e[firVIndex][secVIndex].Status;
         }
 
         protected override void Status(int firVIndex, int secVindex, EStatus status)
         {
-            throw new NotImplementedException();
+            _e[firVIndex][secVindex].Status = status;
         }
 
         public override TE Edge(int firVIndex, int secVIndex)
         {
-            throw new NotImplementedException();
+            return _e[firVIndex][secVIndex].Data;
         }
 
         protected override void Edge(int firVIndex, int secVIndex, TE edge)
         {
-            throw new NotImplementedException();
+            _e[firVIndex][secVIndex].Data = edge;
         }
 
         public override TW Weight(int firVIndex, int secVIndex)
         {
-            throw new NotImplementedException();
+            return _e[firVIndex][secVIndex].Weight;
         }
 
         protected override void Weight(int firVIndex, int secVIndex, TW weight)
         {
-            throw new NotImplementedException();
+            _e[firVIndex][secVIndex].Weight = weight;
         }
     }
 }

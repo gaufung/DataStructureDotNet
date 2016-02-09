@@ -6,7 +6,7 @@ namespace Sequence
     /// 顶点的类
     /// </summary>
     /// <typeparam name="TV"></typeparam>
-    public class Vertex<TV> where TV:IComparable<TV>
+    internal class Vertex<TV> where TV:IComparable<TV>
     {
         #region 属性
         

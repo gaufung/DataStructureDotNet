@@ -168,7 +168,7 @@ namespace Sequence
         public abstract bool Exist(int firVIndex, int secVIndex);
 
         public abstract void Insert(TE e, int firVIndex, 
-            int secVindex, TW weight);
+            int secVindex, TW weight=default(TW));
 
         public abstract TE Remove(int firVIndex, int secVIndex);
 
