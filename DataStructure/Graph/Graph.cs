@@ -207,6 +207,11 @@ namespace Sequence
         }
 
         #region 广度优先搜索
+
+        /// <summary>
+        /// 广度优先搜索
+        /// </summary>
+        /// <param name="startIndex"></param>
         public void Bfs(int startIndex = 0)
         {
             Reset();
@@ -252,6 +257,10 @@ namespace Sequence
 
         #region 深度优先搜索
 
+        /// <summary>
+        /// 深度优先搜索
+        /// </summary>
+        /// <param name="startIndex"></param>
         public void Dfs(int startIndex = 0)
         {
             Reset();
@@ -290,6 +299,63 @@ namespace Sequence
             }
             Status(startIndex, VStatus.Visited);
             FTime(startIndex, ++clock);
+        }
+        #endregion
+
+        #region 拓扑排序
+
+        public Stack<TV> TopoSort(int s)
+        {
+            Reset();
+            int clock = 0;
+            int v = s;
+            Stack<TV> stack=new Stack<TV>();
+            do
+            {
+                if (VStatus.Undiscovered==Status(v))
+                {
+                    if (!TopoSort(v,ref clock,stack))
+                    {
+                        while (stack.Count!=0)
+                        {
+                            stack.Pop();
+                        }
+                        break;
+                    }
+                }
+            } while (s!=(v=(++v%N)));
+            return stack;
+        }
+
+        private bool TopoSort(int v, ref int clock, Stack<TV> s)
+        {
+            DTime(v, ++clock);
+            Status(v, VStatus.Discovered);
+            for (int u = FirstNbr(v); -1< u; u=NextNbr(v,u))
+            {
+                switch (Status(u))
+                {
+                   case VStatus.Undiscovered:
+                        Parent(u, v);
+                        Status(v,u,EStatus.Tree);
+                        if (!TopoSort(u,ref clock,s))
+                        {
+                            return false;
+                        }
+                        break;
+                    case VStatus.Discovered:
+                        Status(v,u,EStatus.Backward);
+                        return false;
+                    default:
+                        Status(v, u, DTime(v) < DTime(u)
+                            ? EStatus.Forward
+                            : EStatus.Cross);
+                        break;
+                }           
+            }
+            Status(v, VStatus.Visited);
+            s.Push(Vertex(v));
+            return true;
         }
         #endregion
         #endregion
