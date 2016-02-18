@@ -14,7 +14,7 @@ namespace Sequence
         /// <summary>
         /// 树的大小
         /// </summary>
-        public int Size { get;  private set; }
+        public int Size { get;  protected set; }
         /// <summary>
         /// the root of the tree
         /// </summary>

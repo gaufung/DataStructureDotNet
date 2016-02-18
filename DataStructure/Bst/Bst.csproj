@@ -7,8 +7,8 @@
     <ProjectGuid>{865E5661-E508-4092-A464-E0BB45082123}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bst</RootNamespace>
-    <AssemblyName>Bst</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.Bst</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,32 +30,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Sequence.Tree">
+      <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Tree">
-      <HintPath>..\Tree\bin\Debug\Tree.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AVL\Avl.cs" />
-    <Compile Include="AVL\AvlHelper.cs" />
+    <Compile Include="AVL\AvlTree.cs" />
+    <Compile Include="AVL\AvlTreeHelper.cs" />
     <Compile Include="Bst.cs" />
-    <Compile Include="BTree\BTNode.cs" />
-    <Compile Include="BTree\BTree.cs" />
-    <Compile Include="BTree\BTreeHelper.cs" />
-    <Compile Include="Entry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RB\RbHelper.cs" />
-    <Compile Include="RB\RedBlack.cs" />
-    <Compile Include="SplayTree\SpalyHelper.cs" />
-    <Compile Include="SplayTree\Splay.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BTree\" />
+    <Folder Include="RB\" />
+    <Folder Include="SplayTree\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

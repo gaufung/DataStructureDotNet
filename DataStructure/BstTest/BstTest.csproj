@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FCDC68F1-D639-4B92-A63B-552718235BBA}</ProjectGuid>
+    <ProjectGuid>{E93D3D6C-AD22-4553-9253-15FD8C56928B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test</RootNamespace>
-    <AssemblyName>Test</AssemblyName>
+    <RootNamespace>BstTest</RootNamespace>
+    <AssemblyName>BstTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,24 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bst">
-      <HintPath>..\Bst\bin\Debug\Bst.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Graph">
-      <HintPath>..\Graph\bin\Debug\Graph.dll</HintPath>
+    <Reference Include="Sequence.Bst">
+      <HintPath>..\Bst\bin\Debug\Sequence.Bst.dll</HintPath>
     </Reference>
-    <Reference Include="List">
-      <HintPath>..\List\bin\Debug\List.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.2.9.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\TestDriven.NET 3\NUnit\2.5\framework\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Queue">
-      <HintPath>..\Queue\bin\Debug\Queue.dll</HintPath>
-    </Reference>
-    <Reference Include="Stack">
-      <HintPath>..\Stack\bin\Debug\Stack.dll</HintPath>
+    <Reference Include="Sequence.Tree">
+      <HintPath>..\Bst\bin\Debug\Sequence.Tree.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,22 +46,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tree">
-      <HintPath>..\Tree\bin\Debug\Tree.dll</HintPath>
-    </Reference>
-    <Reference Include="Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Vector\bin\Debug\Vector.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestBst.cs" />
-    <Compile Include="TestGraph.cs" />
-    <Compile Include="TestList.cs" />
-    <Compile Include="TestQueue.cs" />
-    <Compile Include="TestStack.cs" />
-    <Compile Include="TestTree.cs" />
-    <Compile Include="TestVector.cs" />
+    <Compile Include="RunAvl.cs" />
+    <Compile Include="RunBst.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

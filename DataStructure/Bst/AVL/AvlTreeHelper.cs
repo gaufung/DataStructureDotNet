@@ -1,8 +1,8 @@
 ﻿using System;
-using Tree;
-namespace Bst.AVL
+
+namespace Sequence.AVL
 {
-    public static class AvlHelper
+    internal static class AvlTreeHelper
     {
         /// <summary>
         /// 计算高度
@@ -10,7 +10,7 @@ namespace Bst.AVL
         /// <typeparam name="T"></typeparam>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static int Stature<T>(this BinNode<T> p) where T :IComparable
+        public static int Stature<T>(this BinNode<T> p) where T : IComparable<T>
         {
             return p != null ? p.Height : -1;
         }
@@ -20,7 +20,7 @@ namespace Bst.AVL
         /// <typeparam name="T"></typeparam>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static bool Balanced<T>(this BinNode<T> p) where T : IComparable
+        public static bool Balanced<T>(this BinNode<T> p) where T : IComparable<T>
         {
             return p.RChild.Stature() == p.LChild.Stature();
         }
@@ -31,7 +31,7 @@ namespace Bst.AVL
         /// <typeparam name="T"></typeparam>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static int BalFac<T>(this BinNode<T> p) where T : IComparable
+        public static int BalFac<T>(this BinNode<T> p) where T : IComparable<T>
         {
             return p.LChild.Stature() - p.RChild.Stature();
         }
@@ -42,12 +42,13 @@ namespace Bst.AVL
         /// <typeparam name="T"></typeparam>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static bool AvlBalanced<T>(this BinNode<T> p) where T : IComparable
+        public static bool AvlBalanced<T>(this BinNode<T> p) where T : IComparable<T>
         {
             return p.BalFac() > -2 && p.BalFac() < 2;
         }
 
-        public static void FromParentTo<T>(this BinNode<T> x, BinNode<T> p) where T : IComparable
+        public static void FromParentTo<T>(this BinNode<T> x, BinNode<T> p) 
+            where T : IComparable<T>
         {
             if (!x.IsRoot)
             {
@@ -59,9 +60,7 @@ namespace Bst.AVL
                 {
                     x.Parent.RChild = p;
                 }
-
             }
         }
-        
     }
 }
