@@ -30,7 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sequence.Tree">
+    <Reference Include="Sequence.Tree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
     </Reference>
     <Reference Include="System" />

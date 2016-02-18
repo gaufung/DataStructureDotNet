@@ -47,7 +47,7 @@ namespace BstTest
             _bst.Insert(6);
             _bst.Insert(5);
             _bst.Remove(1);
-            Console.WriteLine(_bst.Root.Data);
+            Assert.AreEqual(6,_bst.Root.Data);
         }
     }
 }

@@ -62,23 +62,30 @@ namespace Sequence.AVL
             Size--;
             for (BinNode<T> g = Hot; g != null; g = g.Parent)
             {
-                bool isLchild = g.IsLChild;
-                bool isRoot = g == Root;
+               
                 if (!g.AvlBalanced())
                 {
+                    bool isLeft = g.IsLChild;
+                    bool isRoot = g.IsRoot;
+                    var parent = g.Parent;
                     var y = RotateAt(TallerChild(TallerChild(g)));
+                    if (isRoot)
+                    {
+                        Root = y;
+                    }
+                    else
+                    {
+                        if (isLeft)
+                        {
+                            g.Parent.LChild = y;
+                        }
+                        else
+                        {
+                            g.Parent.RChild = y;
+                        }
+                    }
                     g.Parent = y;
-                    //if (!isRoot)
-                    //{
-                    //    if (isLchild)
-                    //    {
-                    //        y.Parent.LChild = y;
-                    //    }
-                    //    else
-                    //    {
-                    //        y.Parent.RChild = y;
-                    //    }
-                    //}
+                    y.Parent = parent;
                 }
                 UpdateHeight(g);
             }
