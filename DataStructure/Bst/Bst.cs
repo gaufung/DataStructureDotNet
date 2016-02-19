@@ -71,7 +71,7 @@ namespace Sequence
         /// <param name="v"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private  BinNode<T> SearchIn(BinNode<T> v, T e)
+        protected BinNode<T> SearchIn(BinNode<T> v, T e)
         {          
             if (v==null||Eq(v.Data,e))
             {
