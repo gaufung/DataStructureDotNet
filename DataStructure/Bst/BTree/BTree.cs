@@ -3,7 +3,7 @@
 namespace Sequence.BTree
 {
     /// <summary>
-    /// B树
+    /// B树 Not Complete
     /// </summary>
     /// <typeparam name="T">类型参数，继承IComparable&lt;T&gt;接口</typeparam>
     public class BTree<T> where T: IComparable<T>
@@ -14,12 +14,16 @@ namespace Sequence.BTree
         public int Size { get; private set; }
 
         /// <summary>
-        /// the order of the btree
+        /// B 树的阶(表示该B树共几路分枝)
         /// <remarks>
-        /// 每个超级结点中包含不超过_order-1个关键码
-        /// 并且每个结点包含不超过_order个引用
-        /// 每个超级结点的结点数目也不能太少，要保证
-        /// _order+1>[m/2]（向上取整）
+        /// <list type="Bullet">
+        /// <item>
+        /// key&lt;_order
+        /// </item>
+        /// <item>
+        /// key+1&gt;=(_order+1)/2
+        /// </item>
+        /// </list>
         /// </remarks>
         /// </summary>
         private readonly int _order;
@@ -27,10 +31,11 @@ namespace Sequence.BTree
         /// 根结点
         /// </summary>
         public BtNode<T> Root { get; private set; }
+
         /// <summary>
-        /// 上一个命中的结点
+        /// 命中结点的上一个
         /// </summary>
-        public BtNode<T> Hot { get; private set; }
+        private BtNode<T> Hot { get; set; }
 
         /// <summary>
         /// 判断B树是否为空
@@ -57,9 +62,9 @@ namespace Sequence.BTree
         /// 解决上溢问题
         /// </summary>
         /// <param name="v"></param>
-        protected void SolveOverFlow(BtNode<T> v)
+        private void SolveOverFlow(BtNode<T> v)
         {
-            if (_order > v.Child.Count) return;//尚未达到溢出状态，递归基返回(分支数目)
+            if (_order > v.Key.Count) return;//尚未达到溢出状态，递归基返回(分支数目)
             int s = _order / 2;//获取中间的节点
             BtNode<T> u = new BtNode<T>();
             for (int j = 0; j < _order - s - 1; j++)
@@ -95,7 +100,7 @@ namespace Sequence.BTree
         /// <param name="v"></param>
         protected void SolveUnderFlow(BtNode<T> v)
         {
-            if ((_order + 1) / 2 <= v.Child.Count) return;//递归基
+            if ((_order + 1) / 2 <= v.Key.Count) return;//递归基
             BtNode<T> p = v.Parent;//找到其父节点
             if (p == null)//已经到达根节点
             {
@@ -256,6 +261,8 @@ namespace Sequence.BTree
         {
             BtNode<T> v = Search(e);
             if (v != null) return false;//如果节点存在，不必插入
+            //Hot指针指向的为当前要插入的数据的超级结点
+            //并且肯定是位于叶结点处
             int r = Hot.Key.Search(e);//hot 当前null的父节点，对当前超级节点做一次查询
             Hot.Key.Insert(r + 1, e);
             Hot.Child.Insert(r + 2, null);

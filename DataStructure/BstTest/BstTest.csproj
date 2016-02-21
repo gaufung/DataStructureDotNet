@@ -33,10 +33,12 @@
     <Reference Include="nunit.framework">
       <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.Bst">
+    <Reference Include="Sequence.Bst, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Bst\bin\Debug\Sequence.Bst.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.Tree">
+    <Reference Include="Sequence.Tree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Bst\bin\Debug\Sequence.Tree.dll</HintPath>
     </Reference>
     <Reference Include="System" />

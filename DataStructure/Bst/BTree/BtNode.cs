@@ -9,10 +9,24 @@ namespace Sequence.BTree
     /// <typeparam name="T">关键码</typeparam>
     public class BtNode<T> where T : IComparable<T>
     {
+        /// <summary>
+        /// 父节点
+        /// </summary>
         public BtNode<T> Parent { get; set; }//父节点
-        public List<T> Key { get; set; }//关键码向量
-        public List<BtNode<T>> Child { get; set; }//
 
+        /// <summary>
+        /// 关键码向量
+        /// </summary>
+        public List<T> Key { get; private set; }
+
+        /// <summary>
+        /// 孩子结点指针向量
+        /// <remarks>孩子结点指针向量的数量始终关键码向量的数量多1</remarks>
+        /// </summary>
+        public List<BtNode<T>> Child { get; private set; }
+        /// <summary>
+        /// no parameter constructor
+        /// </summary>
         public BtNode()
         {
             Parent = null;
@@ -20,19 +34,27 @@ namespace Sequence.BTree
             Child = new List<BtNode<T>>();
             Child.Insert(0, null);
         }
-        public BtNode(T e, BtNode<T> lc = null, BtNode<T> rc = null)
+
+
+        /// <summary>
+        /// the constructor
+        /// </summary>
+        /// <param name="e">the value</param>
+        /// <param name="lc">left child</param>
+        /// <param name="rc">right child</param>
+        public BtNode(T e, BtNode<T> lc = null, BtNode<T> rc = null):this()
         {
             Parent = null;
             Key.Insert(0, e);
-            Child.Insert(0, lc);
+            Child[0] = lc;
             Child.Insert(1, rc);
-            if (lc != null)
+            if (Child[0] != null)
             {
-                lc.Parent = this;
+                Child[0].Parent = this;
             }
-            if (rc != null)
+            if (Child[1] != null)
             {
-                rc.Parent = this;
+                Child[1].Parent = this;
             }
         }
     }
