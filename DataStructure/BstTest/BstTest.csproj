@@ -46,6 +46,7 @@
     <Compile Include="RunAvl.cs" />
     <Compile Include="RunBst.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunBTree.cs" />
     <Compile Include="RunSplay.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
