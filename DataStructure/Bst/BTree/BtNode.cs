@@ -44,7 +44,6 @@ namespace Sequence.BTree
         /// <param name="rc">right child</param>
         public BtNode(T e, BtNode<T> lc = null, BtNode<T> rc = null):this()
         {
-            Parent = null;
             Key.Insert(0, e);
             Child[0] = lc;
             Child.Insert(1, rc);

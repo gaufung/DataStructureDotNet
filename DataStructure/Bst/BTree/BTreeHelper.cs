@@ -16,24 +16,24 @@ namespace Sequence.BTree
         /// <returns></returns>
         public static int Search<T>(this List<T> list,T value) where T:IComparable<T>
         {
-            int lo = 0;
-            int hi = list.Count;
-            while (lo < hi)
-            {
-                int mi = (lo + hi) >> 1;
-                if (value.Lt(list[mi]))
-                    hi = mi;
-                else
-                    lo = mi + 1;
-            }
-            return --lo;
-            //int j = list.Count - 1;
-            //for (; j >= 0; j--)
+            //int lo = 0;
+            //int hi = list.Count;
+            //while (lo < hi)
             //{
-            //    if (!list[j].Gt(value))
-            //        break;
+            //    int mi = (lo + hi) >> 1;
+            //    if (value.Lt(list[mi]))
+            //        hi = mi;
+            //    else
+            //        lo = mi + 1;
             //}
-            //return j;
+            //return --lo;
+            int j = list.Count - 1;
+            for (; j >= 0; j--)
+            {
+                if (!list[j].Gt(value))
+                    break;
+            }
+            return j;
         }
 
         /// <summary>

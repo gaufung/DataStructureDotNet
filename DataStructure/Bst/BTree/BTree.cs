@@ -67,32 +67,34 @@ namespace Sequence.BTree
             if (_order > v.Key.Count) return;//尚未达到溢出状态，递归基返回(分支数目)
             int s = _order / 2;//获取中间的节点
             BtNode<T> u = new BtNode<T>();
-            for (int j = 0; j < _order - s - 1; j++)
+            for (int j = 0; j < (_order-1)-s; j++)
             {
                 u.Child.Insert(j, v.Child.RemoveFrom(s + 1));
                 u.Key.Insert(j, v.Key.RemoveFrom(s + 1));
             }
-            u.Child[_order - s - 1] = v.Child.RemoveFrom(s + 1);
-            if (u.Child[0] != null)
+            u.Child[_order-1-s] = v.Child.RemoveFrom(s + 1);
+            for (int j = 0; j < _order-s; j++)
             {
-                for (int j = 0; j < _order - s; j++)
+                if (u.Child[j]!=null)
                 {
-                    u.Child[j].Parent = u;
+                    u.Child[j].Parent = u;                    
                 }
             }
             BtNode<T> p = v.Parent;
+            T liftingNoe = v.Key.RemoveFrom(s);
+            //如果V是Root
             if (p == null)
             {
-                Root = p = new BtNode<T>();
-                p.Child[0] = v;
-                v.Parent = p;
+                Root = new BtNode<T>(liftingNoe,v,u);
             }
-            int r = 1 + p.Key.Search(v.Key[0]);
-            p.Key.Insert(r, v.Key.RemoveFrom(s));
-            p.Child.Insert(r + 1, u);
-            u.Parent = p;
-            SolveOverFlow(p);//上升一层
-
+            else
+            {
+                int r = 1 + p.Key.Search(liftingNoe);
+                p.Key.Insert(r, liftingNoe);
+                p.Child.Insert(r + 1, u);
+                u.Parent = p;
+                SolveOverFlow(p);//上升一层
+            }
         }
         /// <summary>
         /// 节点下溢
@@ -100,7 +102,7 @@ namespace Sequence.BTree
         /// <param name="v"></param>
         protected void SolveUnderFlow(BtNode<T> v)
         {
-            if ((_order + 1) / 2 <= v.Key.Count) return;//递归基
+            if ((_order + 1) / 2 <= v.Key.Count+1) return;//递归基
             BtNode<T> p = v.Parent;//找到其父节点
             if (p == null)//已经到达根节点
             {
@@ -121,7 +123,7 @@ namespace Sequence.BTree
             if (r > 0)//如果不是第一个孩子
             {
                 BtNode<T> ls = p.Child[r - 1];//找到其左边的兄弟
-                if ((_order + 1) / 2 < ls.Child.Count)//如果其兄弟大于分支数目的下限
+                if ((_order + 1) / 2 < ls.Key.Count)//如果其兄弟大于分支数目的下限
                 {
                     v.Key.Insert(0, p.Key[r - 1]);//v插入关键码
                     p.Key[r - 1] = ls.Key.RemoveFrom(ls.Key.Count - 1);//将左边的最后一个关键码移动到上面
@@ -136,7 +138,7 @@ namespace Sequence.BTree
             if (p.Child.Count - 1 > r)//如果v不是最后一个孩子
             {
                 BtNode<T> rs = p.Child[r + 1];//右孩子
-                if ((_order + 1) / 2 < rs.Child.Count)//如果有孩子大于
+                if ((_order + 1) / 2 < rs.Key.Count)//如果有孩子大于
                 {
                     v.Key.Insert(v.Key.Count, p.Key[r]);
                     p.Key[r] = rs.Key.RemoveFrom(0);
