@@ -24,5 +24,7 @@ namespace Sequence
         /// </summary>
         /// <returns></returns>
         T DelMax();
+
+        int Count { get; }
     }
 }
