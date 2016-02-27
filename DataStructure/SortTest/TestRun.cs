@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using NUnit.Framework;
 using Sequence;
 
@@ -15,9 +11,9 @@ namespace SortTest
 
         public TestRun()
         {
-            _nums=new int[]
+            _nums = new int[]
             {
-                4,1,5,3,2
+                4, 1, 5, 3, 2
             };
         }
 
@@ -25,7 +21,7 @@ namespace SortTest
         {
             foreach (var num in _nums)
             {
-                Console.Write(num+"\t");
+                Console.Write(num + "\t");
             }
         }
 
@@ -47,6 +43,27 @@ namespace SortTest
         public void TestInsertSort()
         {
             Sort<int>.InsertSort(_nums);
+            Print();
+        }
+
+        [Test]
+        public void TestMergeSort()
+        {
+            Sort<int>.MergeSort(_nums);
+            Print();
+        }
+
+        [Test]
+        public void TestQuickSort()
+        {
+            Sort<int>.QuickSort(_nums);
+            Print();
+        }
+
+        [Test]
+        public void TestHeapSort()
+        {
+            Sort<int>.HeapSort(_nums);
             Print();
         }
     }

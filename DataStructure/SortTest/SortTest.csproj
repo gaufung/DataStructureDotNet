@@ -33,7 +33,8 @@
     <Reference Include="nunit.framework">
       <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.Sort">
+    <Reference Include="Sequence.Sort, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Sort\bin\Debug\Sequence.Sort.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -47,6 +48,7 @@
   <ItemGroup>
     <Compile Include="TestRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestSortTimeCost.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
