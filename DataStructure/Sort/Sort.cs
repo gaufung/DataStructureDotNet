@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Sequence
 {
@@ -16,7 +17,7 @@ namespace Sequence
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        static Boolean Gt(T a, T b)
+        public static Boolean Gt(T a, T b)
         {
             return (a as IComparable<T>).CompareTo(b) > 0;
         }
@@ -39,7 +40,7 @@ namespace Sequence
         static Boolean Eq(T a, T b)
         {
             return (a as IComparable<T>).CompareTo(b) == 0;
-        }
+        }   
 
         /// <summary>
         /// 交换
@@ -412,6 +413,98 @@ namespace Sequence
         public static void ShellSort(T[] nums)
         {
             throw new NotImplementedException();
+        }
+        #endregion
+
+        #region 众数选取
+
+        public static bool Majority(T[] nums, ref T maj)
+        {
+            maj = MajorityCandidate(nums);
+            return MajorityCheck(nums,maj);
+        }
+
+        private static T MajorityCandidate(T[] nums)
+        {
+            T maj = nums[0];
+            for (int c = 0, i = 0; i < nums.Length; i++)
+            {
+                if (0 == c)
+                {
+                    maj = nums[i];
+                    c = 1;
+                }
+                else
+                {
+                    if (Eq(maj, nums[i]))
+                        c++;
+                    else
+                    {
+                        c--;
+                    }
+                }
+            }
+            return maj;
+        }
+
+        private static bool MajorityCheck(T[] nums, T maj)
+        {
+            int occurrence = nums.Count(t => Eq(maj, t));
+            return 2*occurrence > nums.Length;
+        }
+        #endregion
+
+        #region 中位数选取
+
+        /// <summary>
+        /// 子向量s1[lo1,lo1+n1)和s2[lo2,lo2+n2)分别有序，通过归并的方法获取
+        /// 计算出中位数
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="lo1"></param>
+        /// <param name="n1"></param>
+        /// <param name="s2"></param>
+        /// <param name="lo2"></param>
+        /// <param name="n2"></param>
+        /// <returns></returns>
+        private static T TrivialMedian(T[] s1, int lo1, int n1, T[] s2, int lo2, int n2)
+        {
+            int h1 = lo1 + n1;
+            int h2 = lo1 + n2;
+            T[] s = new T[n1 + n2];
+            int k = 0;
+            while (lo1<h1&&lo2<h2)
+            {
+                if (Lt(s1[lo1],s2[lo2]))
+                {
+                    s[k++] = s1[lo1++];
+                }
+                else
+                {
+                    s[k++] = s2[lo2++];
+                }
+            }
+            while (lo1 < h1) s[k++] = s1[lo1++];
+            while (lo2 < h2) s[k++] = s2[lo2++];
+            return s[(n1 + n2)/2];
+        }
+
+        public static T Median(T[] s1, int lo1, int n1, T[] s2, int lo2, int n2)
+        {
+            if(n1>n2) return Median(s2,lo2,n2,s1,lo1,n1);
+            if(n2<6)
+                return TrivialMedian(s1,lo1,n1,s2,lo2,n2);
+            if (2*n1 < n2)           
+                return Median(s1,lo1,n1,s2,lo2+(n2-n1-1)/2,n1+2-(n2-n1)%2);
+            int mi1 = lo1 + n1/2;
+            int mi2a = lo2 + (n1 - 1)/2;
+            int mi2b = lo2 + n2 - 1 - n1/2;
+            if (Gt(s1[mi1], s2[mi2b]))
+                return Median(s1, lo1, n1/2 + 1, s2, mi2a, n2 - (n1 - 1)/2);
+            else if (Lt(s1[mi1], s2[mi2a]))
+                return Median(s1, mi1, (n1 + 1)/2, s2, lo2, n2 - n1/2);
+            else
+                return Median(s1, lo1, n1, s2, mi2a, n2 - (n1 - 1)/2*2);
         }
         #endregion
     }
