@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 
 namespace Sequence
@@ -7,7 +6,7 @@ namespace Sequence
     /// <summary>
     /// 排序算法
     /// </summary>
-    public static  class Sort<T> where T:IComparable<T>
+    public static  class Sort
     {
         #region 辅助
 
@@ -17,9 +16,9 @@ namespace Sequence
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Boolean Gt(T a, T b)
+        private static  bool Gt(this IComparable a, IComparable b)
         {
-            return (a as IComparable<T>).CompareTo(b) > 0;
+            return a.CompareTo(b) > 0;
         }
         /// <summary>
         /// a 小于 b
@@ -27,9 +26,9 @@ namespace Sequence
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        static Boolean Lt(T a, T b)
+        static Boolean Lt(this IComparable a, IComparable b)
         {
-            return (a as IComparable<T>).CompareTo(b) < 0;
+            return a.CompareTo(b) < 0;
         }
         /// <summary>
         /// a 等于 b
@@ -37,9 +36,9 @@ namespace Sequence
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        static Boolean Eq(T a, T b)
+        static Boolean Eq(this IComparable a, IComparable b)
         {
-            return (a as IComparable<T>).CompareTo(b) == 0;
+            return a.CompareTo(b) == 0;
         }   
 
         /// <summary>
@@ -48,9 +47,9 @@ namespace Sequence
         /// <param name="items"></param>
         /// <param name="i"></param>
         /// <param name="j"></param>
-        static void Swap(T[] items, int i, int j)
+        static void Swap(IComparable[] items, int i, int j)
         {
-            T temp = items[i];
+            IComparable temp = items[i];
             items[i] = items[j];
             items[j] = temp;
         }
@@ -62,12 +61,12 @@ namespace Sequence
         /// 快排
         /// </summary>
         /// <param name="nums">待排序的数组</param>
-        public static void QuickSort(T[] nums)
+        public static void QuickSort(IComparable[] nums)
         {
             QuickSort(nums,0,nums.Length);
         }
 
-        private static void QuickSort(T[] nums, int lo, int hi)
+        private static void QuickSort(IComparable[] nums, int lo, int hi)
         {
             if(hi-lo<2)return;
             int mi = Partition(nums,lo,hi - 1);
@@ -81,10 +80,10 @@ namespace Sequence
         /// <param name="lo"></param>
         /// <param name="hi"></param>
         /// <returns></returns>
-        private static int Partition(T[] nums, int lo, int hi)
+        private static int Partition(IComparable[] nums, int lo, int hi)
         {
             Swap(nums,lo,new Random().Next()%(hi-lo));
-            T pivot = nums[lo];
+            IComparable pivot = nums[lo];
             while (lo<hi)
             {
                 while (lo < hi && !Gt(pivot, nums[hi])) 
@@ -104,7 +103,7 @@ namespace Sequence
         /// 冒泡排序
         /// </summary>
         /// <param name="nums">待排序的数组</param>
-        public static void BubbleSort(T[] nums)
+        public static void BubbleSort(IComparable[] nums)
         {
             int n = nums.Length;
             for (int i = 0; i < n-1; i++)
@@ -134,7 +133,7 @@ namespace Sequence
         /// 选择排序
         /// </summary>
         /// <param name="nums">待排序的数组</param>
-        public static void SelectionSort(T[] nums)
+        public static void SelectionSort(IComparable[] nums)
         {
             int n = nums.Length;
             for (int i = 0; i < n-1; i++)
@@ -155,12 +154,12 @@ namespace Sequence
         /// 快排
         /// </summary>
         /// <param name="nums">待排序的数组</param>
-        public static void InsertSort(T[] nums)
+        public static void InsertSort(IComparable[] nums)
         {
             int n = nums.Length;
             for (int i = 1; i < n; i++)
             {
-                T backup = nums[i];
+                IComparable backup = nums[i];
                 int j = i - 1;
                 for (; j >=0; j--)
                 {
@@ -181,12 +180,12 @@ namespace Sequence
         /// 归并排序
         /// </summary>
         /// <param name="nums">待排序的数组</param>
-        public static void MergeSort(T[] nums)
+        public static void MergeSort(IComparable[] nums)
         {
             MergetSort(nums,0,nums.Length);
         }
 
-        private static void MergetSort(T[] nums, int lo, int hi)
+        private static void MergetSort(IComparable[] nums, int lo, int hi)
         {
             if (hi - lo < 2) return;
             int mi = (lo + hi) >> 1;
@@ -194,11 +193,11 @@ namespace Sequence
             MergetSort(nums,mi,hi);
             Merge(nums,lo,mi,hi);
         }
-        private static void Merge(T[] nums, int lo, int mi, int hi)
+        private static void Merge(IComparable[] nums, int lo, int mi, int hi)
         {
             int m = mi - lo;
             int n = hi - mi;
-            T[] temp=new T[m];
+            IComparable[] temp = new IComparable[m];
             int i;
             for (i = lo; i < mi; i++)
             {
@@ -240,7 +239,7 @@ namespace Sequence
         /// 堆排序
         /// </summary>
         /// <param name="nums">待排序的数组</param>
-        public static void HeapSort(T[] nums)
+        public static void HeapSort(IComparable[] nums)
         {
             Heapfy(nums);
             int counter = 1;
@@ -259,7 +258,7 @@ namespace Sequence
         /// <param name="n"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        private static  int PercolateDown(T[] nums,int n,int i)
+        private static int PercolateDown(IComparable[] nums, int n, int i)
         {
             int j;
             while (i != (j = ProperParent(nums,n, i)))
@@ -276,7 +275,7 @@ namespace Sequence
         /// <param name="nums"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        private static int PercolateUp(T[] nums,int i)
+        private static int PercolateUp(IComparable[] nums, int i)
         {
             while (ParentValid(i))
             {
@@ -288,7 +287,7 @@ namespace Sequence
             return i;
         }
 
-        private static void Heapfy(T[] nums)
+        private static void Heapfy(IComparable[] nums)
         {
             int count = nums.Length;
             for (int i = LastInternal(count); InHeap(count, i); i--)
@@ -380,9 +379,9 @@ namespace Sequence
         /// <param name="i"></param>
         /// <param name="j"></param>
         /// <returns></returns>
-        private static int Bigger(T[] nums,int i, int j)
+        private static int Bigger(IComparable[] nums, int i, int j)
         {
-            return (nums[i] as IComparable<T>).CompareTo(nums[j]) >= 0
+            return nums[i].CompareTo(nums[j]) >= 0
                 ? i
                 : j;
         }
@@ -394,7 +393,7 @@ namespace Sequence
         /// <param name="n"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        private static int ProperParent(T[] nums,int n, int i)
+        private static int ProperParent(IComparable[] nums, int n, int i)
         {
             if (RChildValid(n, i))
             {
@@ -410,7 +409,7 @@ namespace Sequence
 
         #region Shell排序
 
-        public static void ShellSort(T[] nums)
+        public static void ShellSort(IComparable[] nums)
         {
             throw new NotImplementedException();
         }
@@ -418,15 +417,15 @@ namespace Sequence
 
         #region 众数选取
 
-        public static bool Majority(T[] nums, ref T maj)
+        public static bool Majority(IComparable[] nums, ref IComparable maj)
         {
             maj = MajorityCandidate(nums);
             return MajorityCheck(nums,maj);
         }
 
-        private static T MajorityCandidate(T[] nums)
+        private static IComparable MajorityCandidate(IComparable[] nums)
         {
-            T maj = nums[0];
+            IComparable maj = nums[0];
             for (int c = 0, i = 0; i < nums.Length; i++)
             {
                 if (0 == c)
@@ -447,7 +446,7 @@ namespace Sequence
             return maj;
         }
 
-        private static bool MajorityCheck(T[] nums, T maj)
+        private static bool MajorityCheck(IComparable[] nums, IComparable maj)
         {
             int occurrence = nums.Count(t => Eq(maj, t));
             return 2*occurrence > nums.Length;
@@ -467,11 +466,12 @@ namespace Sequence
         /// <param name="lo2"></param>
         /// <param name="n2"></param>
         /// <returns></returns>
-        private static T TrivialMedian(T[] s1, int lo1, int n1, T[] s2, int lo2, int n2)
+        private static IComparable TrivialMedian(IComparable[] s1, int lo1, int n1, 
+            IComparable[] s2, int lo2, int n2)
         {
             int h1 = lo1 + n1;
             int h2 = lo1 + n2;
-            T[] s = new T[n1 + n2];
+            IComparable[] s = new IComparable[n1 + n2];
             int k = 0;
             while (lo1<h1&&lo2<h2)
             {
@@ -489,7 +489,7 @@ namespace Sequence
             return s[(n1 + n2)/2];
         }
 
-        public static T Median(T[] s1, int lo1, int n1, T[] s2, int lo2, int n2)
+        public static IComparable Median(IComparable[] s1, int lo1, int n1, IComparable[] s2, int lo2, int n2)
         {
             if(n1>n2) return Median(s2,lo2,n2,s1,lo1,n1);
             if(n2<6)
