@@ -46,6 +46,6 @@ Data Structure via CSharp（数据结构 via C#）
     - 第kth元素查找
 
 # RoadMap
-学习[Algorithm](http://www.minxue.net/attachments/2013/04/10/1_2013041018523912FV0.jpg)
+学习和阅读 [Algorithm](http://www.minxue.net/attachments/2013/04/10/1_2013041018523912FV0.jpg)书中的知识
 
 
