@@ -68,7 +68,7 @@ namespace Sequence
 
         private static void QuickSort(IComparable[] nums, int lo, int hi)
         {
-            if(hi-lo<2)return;
+            if(hi-lo<=1) return;
             int mi = Partition(nums,lo,hi - 1);
             QuickSort(nums,lo,mi);
             QuickSort(nums,mi+1,hi);
@@ -81,16 +81,13 @@ namespace Sequence
         /// <param name="hi"></param>
         /// <returns></returns>
         private static int Partition(IComparable[] nums, int lo, int hi)
-        {
-            Swap(nums,lo,new Random().Next()%(hi-lo));
+        {           
             IComparable pivot = nums[lo];
             while (lo<hi)
             {
-                while (lo < hi && !Gt(pivot, nums[hi])) 
-                    hi--;
+                while (lo < hi && !nums[hi].Lt(pivot)) { hi--; }                    
                 nums[lo] = nums[hi];
-                while (lo < hi && !Gt(nums[lo], pivot)) 
-                    lo++;
+                while (lo < hi && !nums[lo].Gt(pivot)) { lo++; }                    
                 nums[hi] = nums[lo];
             }
             nums[lo] = pivot;
@@ -411,7 +408,19 @@ namespace Sequence
 
         public static void ShellSort(IComparable[] nums)
         {
-            throw new NotImplementedException();
+            int n = nums.Length;
+            int h = 1;
+            while (h < n/3) h = h*3 + 1;
+            while (h>=1)
+            {
+                for (int i = h; i < n; i++)
+                {
+                    for(int j=i;j>=h&&nums[j].Lt(nums[j-h]);j-=h)
+                        Swap(nums,j,j-h);
+                }
+                h /= 3;
+            }
+
         }
         #endregion
 

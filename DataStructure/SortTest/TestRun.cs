@@ -13,7 +13,7 @@ namespace SortTest
         {
             _nums = new IComparable[]
             {
-                4, 1, 5, 3, 2
+                4, 1, 5, 3, 2,6,8,0,13,11,-4,99,43,8
             };
         }
 
@@ -64,6 +64,13 @@ namespace SortTest
         public void TestHeapSort()
         {
             Sort.HeapSort(_nums);
+            Print();
+        }
+
+        [Test]
+        public void TestShellSort()
+        {
+            Sort.ShellSort(_nums);
             Print();
         }
     }

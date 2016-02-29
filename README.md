@@ -12,7 +12,7 @@ Data Structure via CSharp（数据结构 via C#）
 + 数据结构采用泛型设计
 
 # Event
-+ 截至到2016年2月24日已经完成的数据结构有
++ 截至到2016年2月29日已经完成的数据结构有
   - 向量（System.Collections.Generic命名空间中List<T>泛型）
   - 链表（System.Collections.Generic命名空间中LinkList<T>泛型）
   - 栈(System.Collections.Generic命名空间中的Stack<T>泛型)  
@@ -30,11 +30,22 @@ Data Structure via CSharp（数据结构 via C#）
   	- 伸展树(Splay Tree)
   	- B树(B-Tree)  
   - 二叉堆(Heap)
-    - 完全二叉树实现的借口
+    - 完全二叉树实现的接口  
+  - 串
+    - KMP算法
+  - 排序算法
+    - 选择排序
+    - 插入排序
+    - 冒泡排序
+    - 希尔排序
+    - 归并排序
+    - 快速排序
+    - 堆排序
+  - 查找 
+    - 众数查找
+    - 第kth元素查找
 
 # RoadMap
-接下来要完成的数据结构和相关的算法主要包括
-  - KMP算法  
-  - 排序算法 
+学习[Algorithm](http://www.minxue.net/attachments/2013/04/10/1_2013041018523912FV0.jpg)
 
 
