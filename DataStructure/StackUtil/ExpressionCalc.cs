@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Text;
-using Sequence;
 
-namespace StackApplication
+namespace Sequence
 {
-    class ExpressionCalc
+    public class ExpressionCalc
     {
         #region 操作符比较矩阵
         static Char[,] pri ={
@@ -70,17 +69,20 @@ namespace StackApplication
         }
         #endregion
 
-        public static void Caluc(string expression )
+        public static Int32 Reuslt { get; private set; }
+
+        public static string Rpn { get; private set; }
+        public static void Caluc(string expression)
         {
-             StringBuilder rpn=new StringBuilder();
+            StringBuilder rpn = new StringBuilder();
             Stack<int> opnd = StackFactory<int>.Generate();
             var optr = StackFactory<Char>.Generate();
             optr.Push('\0');
             int counter = 0;
             while (!optr.Empty)
             {
-               // if(counter>expression.Length) break;
-                if (counter<expression.Length&&Isdigit(expression[counter]))
+                // if(counter>expression.Length) break;
+                if (counter < expression.Length && Isdigit(expression[counter]))
                 {
                     ReadNumber(ref counter, expression, opnd);
                     rpn.Append(opnd.Top);
@@ -88,11 +90,11 @@ namespace StackApplication
                 else
                 {
                     char compareOp = counter == expression.Length ? '\0' : expression[counter];
-                    switch (OrderBetween(optr.Top,compareOp))
+                    switch (OrderBetween(optr.Top, compareOp))
                     {
                         case '<':
                             optr.Push(expression[counter]);
-                            counter ++;
+                            counter++;
                             break;
                         case '=':
                             optr.Pop();
@@ -110,15 +112,14 @@ namespace StackApplication
                             {
                                 int pOnd2 = opnd.Pop();
                                 int pOnd1 = opnd.Pop();
-                                opnd.Push(Caluc(pOnd1,op,pOnd2));
+                                opnd.Push(Caluc(pOnd1, op, pOnd2));
                             }
                             break;
                     }
                 }
             }
-            Console.WriteLine(expression+" = "+opnd.Pop());
-            Console.WriteLine("RPN = "+rpn);
+            Reuslt = opnd.Pop();
+            Rpn = rpn.ToString();
         }
-       
     }
 }
