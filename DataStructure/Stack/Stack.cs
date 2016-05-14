@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Sequence
 {
@@ -34,5 +35,14 @@ namespace Sequence
         /// get the top of the stack
         /// </summary>
         public abstract T Top { get; }
+
+        /// <summary>
+        /// Find the Value
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public  abstract int Find(T other);
+
+        public abstract void Travese(Action<T> traves);
     }
 }

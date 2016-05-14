@@ -34,5 +34,18 @@ namespace Sequence
         {
             get { return _vector[_vector.Size-1]; }
         }
+
+        public override int Find(T other)
+        {
+            return _vector.Find(other);
+        }
+    
+        public override void Travese(Action<T> traves)
+        {
+            for (int i = 0; i < _vector.Size; i++)
+            {
+                traves(_vector[i]);
+            }
+        }
     }
 }

@@ -12,11 +12,12 @@ Data Structure via CSharp（数据结构 via C#）
 + 数据结构采用泛型设计
 
 # Event
-+ 截至到2016年2月29日已经完成的数据结构有
++ 截至到2016年6月14日已经完成的数据结构有
   - 向量（System.Collections.Generic命名空间中List<T>泛型）
   - 链表（System.Collections.Generic命名空间中LinkList<T>泛型）
   - 栈(System.Collections.Generic命名空间中的Stack<T>泛型) 
-    - 使用栈完成表达式求值和逆波兰表达式(Reverse Polish Natation) 
+    - 使用栈完成表达式求值和逆波兰表达式(Reverse Polish Natation)
+    - 使用栈完成N皇后排列问题 
   - 队列(System.Collections.Generic命名空间中的Queue<T>泛型)  
   - 二叉树(binary Tree)  
     - 递归版先序遍历，中序遍历和后序遍历   
