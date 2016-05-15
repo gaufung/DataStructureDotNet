@@ -33,5 +33,12 @@ namespace Sequence
         /// the size of the queue
         /// </summary>
         public abstract int Size { get; }
+
+
+        /// <summary>
+        /// traverse 
+        /// </summary>
+        /// <param name="traverse"></param>
+        public abstract void Foreach(Action<T> traverse);
     }
 }

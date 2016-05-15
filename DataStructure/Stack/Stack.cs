@@ -43,6 +43,6 @@ namespace Sequence
         /// <returns></returns>
         public  abstract int Find(T other);
 
-        public abstract void Travese(Action<T> traves);
+        public abstract void Foreach(Action<T> traverse);
     }
 }

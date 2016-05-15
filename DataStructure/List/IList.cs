@@ -125,7 +125,7 @@ namespace Sequence
         /// 遍历
         /// </summary>
         /// <param name="action">操作委托</param>
-        void Traverse(Action<T> action);
+        void Foreach(Action<T> action);
 
         void Clear();
     }

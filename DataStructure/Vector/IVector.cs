@@ -104,6 +104,6 @@ namespace Sequence
         /// traverse the vector
         /// </summary>
         /// <param name="action">the delegate</param>
-        void Traverse(Action<T> action);
+        void Foreach(Action<T> action);
     }
 }

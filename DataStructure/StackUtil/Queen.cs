@@ -2,18 +2,18 @@
 
 namespace Sequence
 {
-    class Queue:IComparable<Queue>
+    public class Queen:IComparable<Queen>
     {
         public int X { get;  set; }
         public int Y { get;  set; }
 
-        public Queue(int x, int y)
+        public Queen(int x, int y)
         {
             X = x;
             Y = y;  
         }
 
-        public int CompareTo(Queue other)
+        public int CompareTo(Queen other)
         {
             if (X == other.X || Y == other.Y || X + Y == other.X + other.Y
                 || (X - Y) == (other.X - other.Y))

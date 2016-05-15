@@ -50,12 +50,12 @@ namespace Sequence
             Init();
         }
 
-        private List(Sequence.IList<T> l)
+        private List(IList<T> l)
         {
             CopyNode(l.First,l.Size);
         }
 
-        private List(Sequence.IList<T> l, int from, int num)
+        private List(IList<T> l, int from, int num)
         {
             ListNode<T> p = l.First;
             while (from>0)
@@ -74,22 +74,22 @@ namespace Sequence
 
         #region 抽象工厂模式
 
-        public static Sequence.IList<T> ListFactory()
+        public static IList<T> ListFactory()
         {
             return new List<T>();
         }
 
-        public static Sequence.IList<T> ListFactory(Sequence.IList<T> list)
+        public static IList<T> ListFactory(IList<T> list)
         {
             return new List<T>(list);
         }
 
-        public static Sequence.IList<T> ListFactory(Sequence.IList<T> list, int from, int num)
+        public static IList<T> ListFactory(IList<T> list, int from, int num)
         {
             return new List<T>(list, from, num);
         }
 
-        public static Sequence.IList<T> ListFactory(ListNode<T> p, int num)
+        public static IList<T> ListFactory(ListNode<T> p, int num)
         {
             return new List<T>(p,num);
         }
@@ -106,7 +106,7 @@ namespace Sequence
         private static bool Gt(T a, T b)
         {
 
-            return (a as IComparable).CompareTo(b) == 1;
+            return a.CompareTo(b) == 1;
 
         }
         /// <summary>
@@ -117,7 +117,7 @@ namespace Sequence
         /// <returns></returns>
         private static bool Eq(T a, T b)
         {
-            return (a as IComparable).CompareTo(b) == 0;
+            return a.CompareTo(b) == 0;
         }
         /// <summary>
         /// Litter than
@@ -127,7 +127,7 @@ namespace Sequence
         /// <returns></returns>
         private static bool Lt(T a, T b)
         {
-            return (a as IComparable).CompareTo(b) == -1;
+            return a.CompareTo(b) == -1;
         }
         #endregion
         public int Size
@@ -313,7 +313,7 @@ namespace Sequence
             return oldSize - _size;
         }
 
-        public void Traverse(Action<T> action)
+        public void Foreach(Action<T> action)
         {
             ListNode<T> p;
             for (p=First;p!=_tailer;p=p.Succ)

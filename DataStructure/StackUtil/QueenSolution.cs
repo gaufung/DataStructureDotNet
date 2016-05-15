@@ -3,13 +3,13 @@ using System.Text;
 
 namespace Sequence
 {
-    public class QueueSolution
+    public class QueenSolution
     {
-        public static IList<string> PalceQueue(int n)
+        public static IList<string> PalceQueeu(int n)
         {
-            Stack<Queue> solu = StackFactory<Queue>.Generate();
+            Stack<Queen> solu = StackFactory<Queen>.Generate();
             IList<String> solutions = List<String>.ListFactory();
-            Queue q=new Queue(0,0);
+            Queen q=new Queen(0,0);
             do
             {
                 if (n <= solu.Size || n <= q.Y)
@@ -30,17 +30,17 @@ namespace Sequence
                         {
                             solutions.InsertAsLast(PrintSolution(solu));
                         }
-                        q=new Queue(++q.X,0);
+                        q=new Queen(q.X+1,0);
                     }
                 }
             } while (0 < q.X || q.Y < n);
             return solutions;
         }
 
-        private static string PrintSolution(Stack<Queue> solu)
+        private static string PrintSolution(Stack<Queen> solu)
         {
             StringBuilder sb=new StringBuilder();
-            solu.Travese(item=>sb.Append(item));
+            solu.Foreach(item=>sb.Append(item));
             return sb.ToString();
         }
     }

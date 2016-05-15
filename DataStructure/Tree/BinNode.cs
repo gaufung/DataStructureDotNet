@@ -240,20 +240,17 @@ namespace Sequence
 
         public static bool Lt(T a, T b)
         {
-            var comparable = a as IComparable<T>;
-            return comparable != null && comparable.CompareTo(b) == -1;
+            return a.CompareTo(b) == -1;
         }
 
         public static bool Eq(T a, T b)
         {
-            var comparable = a as IComparable<T>;
-            return comparable != null && comparable.CompareTo(b) == 0;
+            return a.CompareTo(b) == 0;
         }
 
         public static bool Gt(T a, T b)
         {
-            var comparable = a as IComparable<T>;
-            return comparable.CompareTo(b) == 1;
+            return a.CompareTo(b) == 1;
         }
         #endregion
 

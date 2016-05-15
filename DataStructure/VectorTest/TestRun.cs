@@ -88,4 +88,21 @@ namespace VectorTest
             _vector.Traverse(Cout);
         }
     }
+
+    [TestFixture]
+    public class TestUdtRun
+    {
+        private readonly IVector<Coordinate> _vector;
+
+        public TestUdtRun()
+        {
+            _vector = Vector<Coordinate>.VectorFactory();
+        }
+        [Test]
+        public void TestFind()
+        {          
+            _vector.Insert(new Coordinate() {X = 0, Y = 0});
+            Assert.AreEqual(_vector.Find(new Coordinate() {X = 0, Y = 0}),0);
+        }
+    }
 }

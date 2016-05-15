@@ -4,9 +4,18 @@ namespace Sequence
 {
     internal class StackVectorImpl<T>:Stack<T> where T:IComparable<T>
     {
+
+        #region 方法工厂
+
+        public static Stack<T> StackFactory()
+        {
+            return new StackVectorImpl<T>();
+        }
+        #endregion
+
         private readonly IVector<T> _vector;
 
-        public StackVectorImpl()
+        private  StackVectorImpl()
         {
             _vector = Vector<T>.VectorFactory();
         }
@@ -32,7 +41,11 @@ namespace Sequence
 
         public override T Top
         {
-            get { return _vector[_vector.Size-1]; }
+            get
+            {
+                if (Empty) return default(T);
+                return _vector[_vector.Size - 1];
+            }
         }
 
         public override int Find(T other)
@@ -40,12 +53,9 @@ namespace Sequence
             return _vector.Find(other);
         }
     
-        public override void Travese(Action<T> traves)
+        public override void Foreach(Action<T> traverse)
         {
-            for (int i = 0; i < _vector.Size; i++)
-            {
-                traves(_vector[i]);
-            }
+            _vector.Foreach(traverse);
         }
     }
 }

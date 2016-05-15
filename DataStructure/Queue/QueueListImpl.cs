@@ -2,11 +2,20 @@
 
 namespace Sequence
 {
-    internal class QueueListImpl<T>:Queue<T> where T:IComparable<T>
+    public class QueueListImpl<T>:Queue<T> where T:IComparable<T>
     {
+        #region
+
+        public static Queue<T> QueueFacotry()
+        {
+            return new QueueListImpl<T>();
+        }
+        #endregion
+
+
         private readonly IList<T> _list;
 
-        public QueueListImpl()
+        private QueueListImpl()
         {
             _list = List<T>.ListFactory();
         }
@@ -33,6 +42,11 @@ namespace Sequence
         public override int Size
         {
             get { return _list.Size; }
+        }
+
+        public override void Foreach(Action<T> traverse)
+        {
+            _list.Foreach(traverse);
         }
     }
 }
