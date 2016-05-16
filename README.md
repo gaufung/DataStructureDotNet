@@ -12,7 +12,7 @@ Data Structure via CSharp（数据结构 via C#）
 + 数据结构采用泛型设计
 
 # Event
-+ 截至到2016年6月14日已经完成的数据结构有
++ 截至到2016年6月16日已经完成的数据结构有
   - 向量（System.Collections.Generic命名空间中List<T>泛型）
   - 链表（System.Collections.Generic命名空间中LinkList<T>泛型）
   - 栈(System.Collections.Generic命名空间中的Stack<T>泛型) 
@@ -22,6 +22,7 @@ Data Structure via CSharp（数据结构 via C#）
   - 二叉树(binary Tree)  
     - 递归版先序遍历，中序遍历和后序遍历   
     - 迭代版先序遍历，中序遍历和后序遍历  
+    - 完成Huffman编码树实现
   - 图(Graph)  
     - 邻接表实现  
     - 邻接矩阵实现  

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Sequence
 {
@@ -272,11 +271,11 @@ namespace Sequence
         /// <param name="action">操作</param>
         public void TravPre_I2(BinNode<T> x, Action<T> action)
         {
-            var s = new Stack<BinNode<T>>();
+            Stack<BinNode<T>> s = StackVectorImpl<BinNode<T>>.StackFactory();
             while (true)
             {
                 VisitAlongLeftBranch(x, action, s);
-                if (s.Count == 0) break;
+                if (s.Size == 0) break;
                 x = s.Pop();
             }
         }
@@ -288,12 +287,12 @@ namespace Sequence
         /// <param name="action">遍历操作，委托</param>
         public void TravePre_I1(BinNode<T> x, Action<T> action)
         {
-            var s=new Stack<BinNode<T>>();
+            var s = StackVectorImpl<BinNode<T>>.StackFactory();
             if (x!=null)
             {
                 s.Push(x);
             }
-            while (s.Count!=0)
+            while (s.Size!=0)
             {
                 x = s.Pop();
                 action(x.Data);
@@ -327,11 +326,11 @@ namespace Sequence
         /// <param name="action"></param>
         public void TravIn_I1(BinNode<T> x,Action<T> action)
         {
-            var s=new Stack<BinNode<T>>();
+            var s = StackVectorImpl<BinNode<T>>.StackFactory();
             while (true)
             {
                 GoAlongLeftBranch(x,s);
-                if (s.Count==0)
+                if (s.Size==0)
                 {
                     break;
                 }
@@ -343,7 +342,7 @@ namespace Sequence
 
         public void TravIn_I2(BinNode<T> x, Action<T> action)
         {
-            Stack<BinNode<T>> s=new Stack<BinNode<T>>();
+            Stack<BinNode<T>> s = StackVectorImpl<BinNode<T>>.StackFactory();
             while (true)
             {
                 if(x != null)
@@ -353,7 +352,7 @@ namespace Sequence
                 }
                 else 
                 {
-                    if (s.Count != 0)
+                    if (s.Size != 0)
                     {
                         x = s.Pop();
                         action(x.Data);
@@ -404,7 +403,7 @@ namespace Sequence
         private static void GotoHLVFL(Stack<BinNode<T>> s)
         {
             BinNode<T> x;
-            while ((x=s.Peek())!=null)
+            while ((x=s.Top)!=null)
             {
                 if (x.HasLChild)
                 {
@@ -425,14 +424,14 @@ namespace Sequence
 
         public void TravPost_I(BinNode<T> x, Action<T> action)
         {
-            Stack<BinNode<T>> s=new Stack<BinNode<T>>();
+            Stack<BinNode<T>> s = StackVectorImpl<BinNode<T>>.StackFactory();
             if (x!=null)
             {
                 s.Push(x);
             }
-            while (s.Count!=0)
+            while (s.Size!=0)
             {
-                if (s.Peek()==x.Parent)
+                if (s.Top==x.Parent)
                 {
                     GotoHLVFL(s);
                 }

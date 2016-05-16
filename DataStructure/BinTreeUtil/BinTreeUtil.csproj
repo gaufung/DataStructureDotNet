@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CDC5A67-896F-47EE-8A74-1440BF16958C}</ProjectGuid>
+    <ProjectGuid>{BE2D322A-ED8C-4EDB-ACEE-2A2F1ECBBC5D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BinaryTreeTest</RootNamespace>
-    <AssemblyName>BinaryTreeTest</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.BinTreeUtil</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\package\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.BinTreeUtil">
-      <HintPath>..\BinTreeUtil\bin\Debug\Sequence.BinTreeUtil.dll</HintPath>
-    </Reference>
     <Reference Include="Sequence.List">
       <HintPath>..\Tree\bin\Debug\Sequence.List.dll</HintPath>
     </Reference>
@@ -54,11 +47,16 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HuffmanTreeTest.cs" />
-    <Compile Include="TestRun.cs" />
+    <Compile Include="HuffmanTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeightBinNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

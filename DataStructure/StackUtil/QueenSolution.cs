@@ -7,7 +7,7 @@ namespace Sequence
     {
         public static IList<string> PalceQueeu(int n)
         {
-            Stack<Queen> solu = StackFactory<Queen>.Generate();
+            Stack<Queen> solu = StackVectorImpl<Queen>.StackFactory();
             IList<String> solutions = List<String>.ListFactory();
             Queen q=new Queen(0,0);
             do
@@ -23,7 +23,7 @@ namespace Sequence
                     {
                         q.Y++;
                     }
-                    if (n > q.Y)
+                    if (q.Y<n)
                     {
                         solu.Push(q);
                         if (n <= solu.Size)

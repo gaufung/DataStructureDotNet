@@ -30,6 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Sequence.List">
+      <HintPath>..\Queue\bin\Debug\Sequence.List.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Queue">
+      <HintPath>..\Queue\bin\Debug\Sequence.Queue.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Stack">
+      <HintPath>..\Stack\bin\Debug\Sequence.Stack.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Vector">
+      <HintPath>..\Stack\bin\Debug\Sequence.Vector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>

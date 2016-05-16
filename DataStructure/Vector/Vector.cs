@@ -20,6 +20,15 @@ namespace Sequence
         {
             return new Vector<T>();
         }
+
+        public static IVector<T> VectorFactory(T[] source, int lo, int hi)
+        {
+            return new Vector<T>(source, lo, hi);
+        }
+        public static IVector<T> VectorFactory(T[] source,int n)
+        {
+            return new Vector<T>(source, n);
+        }
         #endregion
 
         #region 构造函数
@@ -48,16 +57,6 @@ namespace Sequence
         private Vector(T[] source,int n)
         {
             CopyFrom(source,0,n);
-        }
-
-        private Vector(Vector<T> v,int lo,int hi)
-        {
-            CopyFrom(v._elem,lo,hi);
-        }
-
-        private Vector(Vector<T> v)
-        {
-            CopyFrom(v._elem,0,v._size);
         }
         #endregion
 

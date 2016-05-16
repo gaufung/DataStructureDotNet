@@ -75,8 +75,8 @@ namespace Sequence
         public static void Caluc(string expression)
         {
             StringBuilder rpn = new StringBuilder();
-            Stack<int> opnd = StackFactory<int>.Generate();
-            var optr = StackFactory<Char>.Generate();
+            Stack<int> opnd = StackVectorImpl<int>.StackFactory();
+            Stack<Char> optr = StackVectorImpl<Char>.StackFactory();
             optr.Push('\0');
             int counter = 0;
             while (!optr.Empty)

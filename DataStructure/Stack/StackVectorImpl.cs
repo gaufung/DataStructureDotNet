@@ -2,7 +2,7 @@
 
 namespace Sequence
 {
-    internal class StackVectorImpl<T>:Stack<T> where T:IComparable<T>
+    public class StackVectorImpl<T>:Stack<T> where T:IComparable<T>
     {
 
         #region 方法工厂

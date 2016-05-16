@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Sequence
 {
@@ -7,7 +6,7 @@ namespace Sequence
     /// 二叉树的节点类
     /// </summary>
     /// <typeparam name="T">The type of data</typeparam>
-    public class BinNode<T> where T : IComparable<T>
+    public class BinNode<T> :IComparable<BinNode<T>> where T : IComparable<T>
     {
         #region 属性
         /// <summary>
@@ -50,15 +49,8 @@ namespace Sequence
         /// <summary>
         /// the default constructor
         /// </summary>
-        public BinNode()
-        {
-            Data = default(T);
-            Parent = null;
-            LChild = null;
-            RChild = null;
-            Height = 0;
-            Npl = 1;
-            Color = RbColor.RbRed;
+        public BinNode():this(default(T))
+        {           
         }
         /// <summary>
         /// the constructor
@@ -95,7 +87,7 @@ namespace Sequence
         }
 
         /// <summary>
-        /// 递归调用
+        /// 递归调用求取Size
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
@@ -104,6 +96,7 @@ namespace Sequence
             if (x == null) return 0;
             return 1 + Size(x.LChild) + Size(x.RChild);
         }
+
         /// <summary>
         /// 插入左孩子
         /// </summary>
@@ -114,6 +107,7 @@ namespace Sequence
          
            return LChild=new BinNode<T>(e,this);
         }
+
         /// <summary>
         /// 插入右孩子
         /// </summary>
@@ -128,13 +122,13 @@ namespace Sequence
         /// <summary>
         /// 获取中序遍历中的下一个节点
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the successor node </returns>
         public BinNode<T> Succ()
         {
             BinNode<T> s = this;
             if (HasRChild)
             {
-                s = this.RChild;
+                s = RChild;
                 while (s.HasLChild)
                 {
                     s = s.LChild;
@@ -154,12 +148,12 @@ namespace Sequence
         /// <summary>
         /// 层次遍历
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">the action</param>
         public void TravLevel(Action<T> action)
         {
-            var q=new Queue<BinNode<T>>();
+            Queue<BinNode<T>> q = QueueListImpl<BinNode<T>>.QueueFacotry();
             q.Enqueue(this);
-            while (q.Count!=0)
+            while (q.Size!=0)
             {
                 var x = q.Dequeue();
                 action(x.Data);
@@ -217,7 +211,7 @@ namespace Sequence
         /// <summary>
         /// 后续递归遍历
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">the action</param>
         public void TravPost(Action<T> action)
         {
             TravPost(this, action);
@@ -262,7 +256,7 @@ namespace Sequence
         {
             get
             {
-                return this.Parent == null;
+                return Parent == null;
             }
         }
         /// <summary>
@@ -272,7 +266,7 @@ namespace Sequence
         {
             get
             {
-                return !IsRoot && this == this.Parent.LChild;
+                return !IsRoot && this == Parent.LChild;
             }
         }
         /// <summary>
@@ -282,7 +276,7 @@ namespace Sequence
         {
             get
             {
-                return !IsRoot && this == this.Parent.RChild;
+                return !IsRoot && this == Parent.RChild;
             }
         }
         /// <summary>
@@ -352,7 +346,7 @@ namespace Sequence
         {
             get
             {
-                return IsLChild ? this.Parent.RChild : this.Parent.LChild;
+                return IsLChild ? Parent.RChild : Parent.LChild;
             }
         }
         /// <summary>
@@ -362,8 +356,8 @@ namespace Sequence
         {
             get
             {
-                return this.Parent.IsLChild ? 
-                    this.Parent.Parent.RChild : this.Parent.Parent.LChild;
+                return Parent.IsLChild ? 
+                    Parent.Parent.RChild : Parent.Parent.LChild;
             }
         }
         /// <summary>
@@ -371,10 +365,15 @@ namespace Sequence
         /// </summary>
         public BinNode<T> FromParentTo
         {
-            get { return IsRoot ? this : (IsLChild ? this.Parent.LChild : this.Parent.RChild); }
+            get { return IsRoot ? this : (IsLChild ? Parent.LChild : Parent.RChild); }
         } 
 
         #endregion
 
+
+        public int CompareTo(BinNode<T> other)
+        {
+            return Data.CompareTo(other.Data);
+        }
     }
 }
