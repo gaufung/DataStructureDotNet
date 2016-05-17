@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sequence</RootNamespace>
-    <AssemblyName>Sequence.BinTreeUtil</AssemblyName>
+    <AssemblyName>Sequence.HuffmanTree</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

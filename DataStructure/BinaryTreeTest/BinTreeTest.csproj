@@ -34,8 +34,8 @@
     <Reference Include="nunit.framework">
       <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.BinTreeUtil">
-      <HintPath>..\BinTreeUtil\bin\Debug\Sequence.BinTreeUtil.dll</HintPath>
+    <Reference Include="Sequence.HuffmanTree">
+      <HintPath>..\BinTreeUtil\bin\Debug\Sequence.HuffmanTree.dll</HintPath>
     </Reference>
     <Reference Include="Sequence.List">
       <HintPath>..\Tree\bin\Debug\Sequence.List.dll</HintPath>

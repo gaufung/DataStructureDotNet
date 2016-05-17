@@ -172,7 +172,7 @@ namespace Sequence
         /// 递归先序遍历
         /// </summary>
         /// <param name="action"></param>
-        public void TravPre(Action<T> action)
+        public void TravPre(Action<BinNode<T>> action)
         {
            TravPre(this,action);
         }
@@ -181,9 +181,9 @@ namespace Sequence
         /// </summary>
         /// <param name="x">the node </param>
         /// <param name="trave">the action</param>
-        private static void TravPre(BinNode<T> x, Action<T> trave)
+        private static void TravPre(BinNode<T> x, Action<BinNode<T>> trave)
         {
-            trave(x.Data);
+            trave(x);
             if (x.LChild != null) TravPre(x.LChild, trave);          
             if (x.RChild != null) TravPre(x.RChild, trave);
         }
@@ -193,15 +193,15 @@ namespace Sequence
         /// 中序递归遍历
         /// </summary>
         /// <param name="action"></param>
-        public void TravIn(Action<T> action)
+        public void TravIn(Action<BinNode<T>> action)
         {
             TravIn(this, action);
         }
 
-        private static void TravIn(BinNode<T> x, Action<T> trave)
+        private static void TravIn(BinNode<T> x, Action<BinNode<T>> trave)
         {
             if (x.LChild != null) TravIn(x.LChild, trave);
-            trave(x.Data);
+            trave(x);
             if (x.RChild != null) TravIn(x.RChild, trave);
         }
 
@@ -212,12 +212,12 @@ namespace Sequence
         /// 后续递归遍历
         /// </summary>
         /// <param name="action">the action</param>
-        public void TravPost(Action<T> action)
+        public void TravPost(Action<BinNode<T>> action)
         {
             TravPost(this, action);
         }
 
-        private static void TravPost(BinNode<T> x, Action<T> trave)
+        private static void TravPost(BinNode<T> x, Action<BinNode<T>> trave)
         {
             if (x.LChild != null)
             {
@@ -227,7 +227,7 @@ namespace Sequence
             {
                 TravPost(x.RChild, trave);
             }
-            trave(x.Data);
+            trave(x);
         }
 
         #endregion

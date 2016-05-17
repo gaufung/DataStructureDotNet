@@ -211,7 +211,7 @@ namespace Sequence
         /// 调用递归先序
         /// </summary>
         /// <param name="action"></param>
-        public void TravPre(Action<T> action)
+        public void TravPre(Action<BinNode<T>> action)
         {
             if (!Empty)
             {
@@ -223,7 +223,7 @@ namespace Sequence
         /// 递归中序
         /// </summary>
         /// <param name="action"></param>
-        public void TravIn(Action<T> action)
+        public void TravIn(Action<BinNode<T>> action)
         {
             if (!Empty)
             {
@@ -235,7 +235,7 @@ namespace Sequence
         /// 递归后序
         /// </summary>
         /// <param name="action"></param>
-        public void TravePost(Action<T> action)
+        public void TravePost(Action<BinNode<T>> action)
         {
             if (!Empty)
             {
@@ -253,13 +253,13 @@ namespace Sequence
         /// <param name="x">当前子树的根节点</param>
         /// <param name="action">操作</param>
         /// <param name="s">栈</param>
-        private static void VisitAlongLeftBranch(BinNode<T> x, 
-            Action<T> action, Stack<BinNode<T>> s)
+        private static void VisitAlongLeftBranch(BinNode<T> x,
+            Action<BinNode<T>> action, Stack<BinNode<T>> s)
         {
             
             while (x != null)
             {
-                action(x.Data);
+                action(x);
                 s.Push(x.RChild);
                 x = x.LChild;
             }
@@ -269,7 +269,7 @@ namespace Sequence
         /// </summary>
         /// <param name="x">开始根节点</param>
         /// <param name="action">操作</param>
-        public void TravPre_I2(BinNode<T> x, Action<T> action)
+        public void TravPre_I2(BinNode<T> x, Action<BinNode<T>> action)
         {
             Stack<BinNode<T>> s = StackVectorImpl<BinNode<T>>.StackFactory();
             while (true)
@@ -285,7 +285,7 @@ namespace Sequence
         /// </summary>
         /// <param name="x">开始节点</param>
         /// <param name="action">遍历操作，委托</param>
-        public void TravePre_I1(BinNode<T> x, Action<T> action)
+        public void TravePre_I1(BinNode<T> x, Action<BinNode<T>> action)
         {
             var s = StackVectorImpl<BinNode<T>>.StackFactory();
             if (x!=null)
@@ -295,7 +295,7 @@ namespace Sequence
             while (s.Size!=0)
             {
                 x = s.Pop();
-                action(x.Data);
+                action(x);
                 if (x.HasRChild)
                 {
                     s.Push(x.RChild);
@@ -324,7 +324,7 @@ namespace Sequence
         /// </summary>
         /// <param name="x"></param>
         /// <param name="action"></param>
-        public void TravIn_I1(BinNode<T> x,Action<T> action)
+        public void TravIn_I1(BinNode<T> x, Action<BinNode<T>> action)
         {
             var s = StackVectorImpl<BinNode<T>>.StackFactory();
             while (true)
@@ -335,12 +335,12 @@ namespace Sequence
                     break;
                 }
                 x = s.Pop();
-                action(x.Data);
+                action(x);
                 x = x.RChild;
             }
         }
 
-        public void TravIn_I2(BinNode<T> x, Action<T> action)
+        public void TravIn_I2(BinNode<T> x, Action<BinNode<T>> action)
         {
             Stack<BinNode<T>> s = StackVectorImpl<BinNode<T>>.StackFactory();
             while (true)
@@ -355,7 +355,7 @@ namespace Sequence
                     if (s.Size != 0)
                     {
                         x = s.Pop();
-                        action(x.Data);
+                        action(x);
                         x = x.RChild;
                     }
                     else
@@ -366,7 +366,7 @@ namespace Sequence
             }
         }
 
-        public void TravIn_I3(BinNode<T> x, Action<T> aciton)
+        public void TravIn_I3(BinNode<T> x, Action<BinNode<T>> aciton)
         {
             bool backTrack = false;
             while (true)
@@ -379,7 +379,7 @@ namespace Sequence
                 {
                     if (x != null)
                     {
-                        aciton(x.Data);
+                        aciton(x);
                         if (x.HasRChild)
                         {
                             x = x.RChild;
@@ -422,7 +422,7 @@ namespace Sequence
             
         }
 
-        public void TravPost_I(BinNode<T> x, Action<T> action)
+        public void TravPost_I(BinNode<T> x, Action<BinNode<T>> action)
         {
             Stack<BinNode<T>> s = StackVectorImpl<BinNode<T>>.StackFactory();
             if (x!=null)
@@ -436,7 +436,7 @@ namespace Sequence
                     GotoHlvfl(s);
                 }
                 x = s.Pop();
-                action(x.Data);
+                action(x);
             }
         }
         #endregion

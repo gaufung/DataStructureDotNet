@@ -61,7 +61,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackUtil", "StackUtil\Stac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackQueueTest", "StackQueueTest\StackQueueTest.csproj", "{AC668B37-ED06-4E71-9750-355EE01DD5AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinTreeUtil", "BinTreeUtil\BinTreeUtil.csproj", "{BE2D322A-ED8C-4EDB-ACEE-2A2F1ECBBC5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuffmanTree", "BinTreeUtil\HuffmanTree.csproj", "{BE2D322A-ED8C-4EDB-ACEE-2A2F1ECBBC5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

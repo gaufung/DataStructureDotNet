@@ -88,9 +88,9 @@ namespace BinaryTreeTest
             Console.WriteLine();
             _tree.TravIn_I2(_tree.Root,Cout);
         }
-        private void Cout(int value)
+        private void Cout(BinNode<int> value)
         {
-            Console.Write(value+"\t");
+            Console.Write(value.Data+"\t");
         }
     }
 }
