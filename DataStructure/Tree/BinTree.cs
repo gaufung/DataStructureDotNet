@@ -400,7 +400,7 @@ namespace Sequence
 
         #region 后序遍历
 
-        private static void GotoHLVFL(Stack<BinNode<T>> s)
+        private static void GotoHlvfl(Stack<BinNode<T>> s)
         {
             BinNode<T> x;
             while ((x=s.Top)!=null)
@@ -433,7 +433,7 @@ namespace Sequence
             {
                 if (s.Top==x.Parent)
                 {
-                    GotoHLVFL(s);
+                    GotoHlvfl(s);
                 }
                 x = s.Pop();
                 action(x.Data);

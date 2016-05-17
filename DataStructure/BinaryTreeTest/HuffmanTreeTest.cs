@@ -27,5 +27,14 @@ namespace BinaryTreeTest
             root.TravLevel(item => Trace.Write(item));
 
         }
+
+        [Test]
+        public void TestNew()
+        {
+            char[] chars = {'a', 'b', 'c', 'd'};
+            double[] weight = {7.0, 5.0, 2.0, 4.0};
+            BinNode<HuffChar> root = HuffTree.BuildHuffTree(chars, weight);
+            root.TravLevel(item=>Trace.WriteLine(item));
+        }
     }
 }

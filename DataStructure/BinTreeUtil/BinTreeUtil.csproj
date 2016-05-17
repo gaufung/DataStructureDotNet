@@ -30,15 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sequence.List">
-      <HintPath>..\Tree\bin\Debug\Sequence.List.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Queue">
-      <HintPath>..\Tree\bin\Debug\Sequence.Queue.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Stack">
-      <HintPath>..\Tree\bin\Debug\Sequence.Stack.dll</HintPath>
-    </Reference>
     <Reference Include="Sequence.Tree">
       <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
     </Reference>
@@ -47,16 +38,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HuffmanTree.cs" />
+    <Compile Include="HuffChar.cs" />
+    <Compile Include="HuffTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeightBinNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
