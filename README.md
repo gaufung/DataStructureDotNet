@@ -1,5 +1,5 @@
-﻿# DS
-Data Structure via CSharp（数据结构 via C#）
+# Data Structure
+Data Structure in C#  Language（数据结构 C#）
 
 # Introduction
 + 通过C#语言完成数据结构（主要包含：向量、链表、树、图）
@@ -7,36 +7,48 @@ Data Structure via CSharp（数据结构 via C#）
 + 网络公开课地址:[MOOC](https://www.xuetangx.com/)
 
 # Description
-+ 将上述《数据结构 C++版》中所有算法按照C#语言改写，整本书以一个解决方案的形式存放，每种数据结构均以一个工程的形式组织起来。
-+ 采用TDD（Test Driven Development)方式，使用的测试工具为NUnit
++ 将书中中所有数据结构和算法，使用C#语言重写，整本书以一个解决方案的形式存放，每种数据结构均以一个工程的形式组织起来。
++ 采用TDD 方式，使用的测试工具为NUnit
 + 数据结构采用泛型设计
 
-# Event
-+ 截至到2016年6月16日已经完成的数据结构有
-  - 向量（System.Collections.Generic命名空间中List<T>泛型）
-  - 链表（System.Collections.Generic命名空间中LinkList<T>泛型）
-  - 栈(System.Collections.Generic命名空间中的Stack<T>泛型) 
-    - 使用栈完成表达式求值和逆波兰表达式(Reverse Polish Natation)
-    - 使用栈完成N皇后排列问题 
-  - 队列(System.Collections.Generic命名空间中的Queue<T>泛型)  
-  - 二叉树(binary Tree)  
+# Content
+
+## Abstract Data Type
+
+内容 | 说明
+---|---
+Vector | C++ STL 中Vector模板类
+List | .Net Framework中的List<T>泛型
+Stack | .Net Framework中的Stack<T>泛型
+Queue | .Net Framework中的Queue<T>泛型
+Binary Tree | 二叉树实现
+Graph | 图
+
+## Algorithm
+- [x] 栈
+    - 达式求值和逆波兰表达式(Reverse Polish Natation)
+    - N 皇后排列问题
+- [x] 二叉树遍历
     - 递归版先序遍历，中序遍历和后序遍历   
     - 迭代版先序遍历，中序遍历和后序遍历  
-    - 完成Huffman编码树实现
-  - 图(Graph)  
-    - 邻接表实现  
-    - 邻接矩阵实现  
+    - Huffman编码树
+- [x] 图搜索
     - 广度优先搜索  
     - 深度优先搜索  
-  - 平衡二叉树(Balance Binary Tree)
+- [ ] 图
+    - 拓扑排序
+    - 最小支撑树
+    - 最短路径
+    - 优先级搜索
+- [x] 查找平衡树
   	- Avl树(Avl Tree)
   	- 伸展树(Splay Tree)
   	- B树(B-Tree)  
-  - 二叉堆(Heap)
-    - 完全二叉树实现的接口  
-  - 串
+- [ ] 红黑树
+- [x] 二叉堆(Heap)
+- [x] 串
     - KMP算法
-  - 排序算法
+- [x] 排序算法
     - 选择排序
     - 插入排序
     - 冒泡排序
@@ -44,11 +56,6 @@ Data Structure via CSharp（数据结构 via C#）
     - 归并排序
     - 快速排序
     - 堆排序
-  - 查找 
+- [x] 查找
     - 众数查找
     - 第kth元素查找
-
-# RoadMap
-学习和阅读 [Algorithm](http://www.minxue.net/attachments/2013/04/10/1_2013041018523912FV0.jpg)书中的知识
-
-
