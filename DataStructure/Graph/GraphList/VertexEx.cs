@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Sequence.GraphList
 {
@@ -15,14 +14,14 @@ namespace Sequence.GraphList
         where TW : IComparable<TW>
     {
 
-        public List<EdgeEx<TE,TW>> Edges { get; set; }
+        public IList<EdgeEx<TE,TW>> Edges { get; set; }
         public VertexEx(TV d, int inDegree = 0, 
             int outDegree = 0, VStatus status = VStatus.Undiscovered, 
             int dTime = -1, int fTime = -1, int parent = -1, 
             int priority = Int32.MaxValue) : 
             base(d, inDegree, outDegree, status, dTime, fTime, parent, priority)
         {
-            Edges = new List<EdgeEx<TE, TW>>();
+            Edges = List<EdgeEx<TE, TW>>.ListFactory();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Sequence.GraphMatrix
 {
@@ -14,8 +13,8 @@ namespace Sequence.GraphMatrix
         where TE : IComparable<TE>
         where TW : IComparable<TW>
     {
-        private readonly List<Vertex<TV>> _v;
-        private readonly List<List<Edge<TE,TW>>> _e;
+        private readonly IVector<Vertex<TV>> _v;
+        private readonly IVector<IVector<Edge<TE, TW>>> _e; 
 
         public static Graph<TV, TE, TW> GraphFactory()
         {
@@ -24,27 +23,27 @@ namespace Sequence.GraphMatrix
         private GraphMatrix()
         {
             N = E = 0;
-            _v=new List<Vertex<TV>>();
-            _e=new List<List<Edge<TE, TW>>>();
+            _v = Vector<Vertex<TV>>.VectorFactory();
+            _e = Vector<IVector<Edge<TE, TW>>>.VectorFactory();
         }
         public override int Insert(TV e)
         {
             for (int i = 0; i < N; i++)
             {
-                _e[i].Add(null);
+                _e[i].Insert(null);
             }
             ++N;
-            _e.Add(CreateEdges());
-            _v.Add(new Vertex<TV>(e));
-            return _v.Count - 1;
+            _e.Insert(CreateEdges());
+            _v.Insert(new Vertex<TV>(e));
+            return _v.Size - 1;
         }
 
-        private List<Edge<TE, TW>> CreateEdges()
+        private IVector<Edge<TE, TW>> CreateEdges()
         {
-            var edge=new List<Edge<TE,TW>>();
+            var edge = Vector<Edge<TE, TW>>.VectorFactory();
             for (int i = 0; i < N; i++)
             {
-                edge.Add(null);
+                edge.Insert(null);
             }
             return edge;
         }
@@ -62,11 +61,11 @@ namespace Sequence.GraphMatrix
                 {
                     _v[i].OutDegree--;
                 }
-                _e[i].RemoveAt(index);
+                _e[i].Remove(index);
             }
             TV backup = _v[index].Data;
-            _v.RemoveAt(index);
-            _e.RemoveAt(index);
+            _v.Remove(index);
+            _e.Remove(index);
             N--;
             return backup;
         }

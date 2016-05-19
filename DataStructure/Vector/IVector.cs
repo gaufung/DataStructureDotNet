@@ -2,7 +2,7 @@
 
 namespace Sequence
 {
-    public interface IVector<T> where T:IComparable<T>
+    public interface IVector<T> :IComparable<IVector<T>> where T:IComparable<T>
     {
         /// <summary>
         /// The size of Vector
@@ -105,5 +105,21 @@ namespace Sequence
         /// </summary>
         /// <param name="action">the delegate</param>
         void Foreach(Action<T> action);
+
+        /// <summary>
+        /// Any method if once  element is fitted return true; 
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        bool Any(Func<T, bool> func);
+
+        /// <summary>
+        /// take the first element when condition is required
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        T FirstOrDefault(Func<T, bool> func);
+
+        T First(Func<T, bool> func);
     }
 }

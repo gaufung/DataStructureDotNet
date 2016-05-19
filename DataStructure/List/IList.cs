@@ -6,7 +6,7 @@ namespace Sequence
     /// the interface of List
     /// </summary>
     /// <typeparam name="T">type argument</typeparam>
-    public interface IList<T>
+    public interface IList<T>:IComparable<IList<T>>
     {
         /// <summary>
         /// the size of list
@@ -26,7 +26,7 @@ namespace Sequence
         T this[int index] { get; set; }
 
         /// <summary>
-        /// the first element
+        /// the FirstOrDefault element
         /// </summary>
         ListNode<T> First { get; }
         /// <summary>
@@ -35,7 +35,7 @@ namespace Sequence
         ListNode<T> Last { get; }
 
         /// <summary>
-        /// insert the value of e as the first element
+        /// insert the value of e as the FirstOrDefault element
         /// </summary>
         /// <param name="e">the value</param>
         /// <returns></returns>
@@ -70,6 +70,14 @@ namespace Sequence
         /// <param name="p">the position</param>
         /// <returns></returns>
         T Remove(ListNode<T> p);
+
+
+        /// <summary>
+        /// 删除索引为index
+        /// </summary>
+        /// <param name="index">索引号</param>
+        /// <returns></returns>
+        T Remove(int index);
 
         /// <summary>
         /// count the inversion
@@ -126,7 +134,15 @@ namespace Sequence
         /// </summary>
         /// <param name="action">操作委托</param>
         void Foreach(Action<T> action);
-
+        /// <summary>
+        /// clear the element
+        /// </summary>
         void Clear();
+
+        bool Any(Func<T, bool> func);
+
+        T FirstOrDefault(Func<T, bool> func);
+
+        T FirstItme(Func<T, bool> func);
     }
 }

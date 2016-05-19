@@ -411,5 +411,42 @@ namespace Sequence
                 action(_elem[i]);
             }
         }
+
+        public int CompareTo(IVector<T> other)
+        {
+            return Size.CompareTo(other.Size);
+        }
+
+
+        public bool Any(Func<T, bool> func)
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                if (func(_elem[i]))
+                    return true;
+            }
+            return false;
+        }
+
+        public T FirstOrDefault(Func<T, bool> func)
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                if (func(_elem[i]))
+                    return _elem[i];
+            }
+            return default(T);
+        }
+
+
+        public T First(Func<T, bool> func)
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                if (func(_elem[i]))
+                    return _elem[i];
+            }
+            throw new InvalidOperationException("Could Not found");
+        }
     }
 }

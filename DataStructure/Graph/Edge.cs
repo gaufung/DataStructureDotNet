@@ -7,7 +7,9 @@ namespace Sequence
     /// </summary>
     /// <typeparam name="TE">边存储的数据</typeparam>
     /// <typeparam name="TW">边的权重</typeparam>
-    internal class Edge<TE,TW> where TE:IComparable<TE> where TW:IComparable<TW>
+    internal class Edge<TE, TW> : IComparable<Edge<TE, TW>>
+        where TE : IComparable<TE>
+        where TW : IComparable<TW>
     {
         #region 属性
 
@@ -21,6 +23,11 @@ namespace Sequence
             Data = d;
             Weight = w;
             Status = EStatus.Undetermined;
+        }
+
+        public int CompareTo(Edge<TE, TW> other)
+        {
+            return Weight.CompareTo(other.Weight);
         }
     }
 }

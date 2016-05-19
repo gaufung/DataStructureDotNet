@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Sequence.GraphList
 {
@@ -15,7 +13,8 @@ namespace Sequence.GraphList
         where TE : IComparable<TE>
         where TW : IComparable<TW>
     {
-        private readonly List<VertexEx<TV, TE, TW>> _list;
+       // private readonly List<VertexEx<TV, TE, TW>> _list;
+        private readonly IList<VertexEx<TV, TE, TW>> _list; 
 
         public static Graph<TV, TE, TW> GraphFactory()
         {
@@ -24,14 +23,14 @@ namespace Sequence.GraphList
         private GraphList()
         {
             N = E = 0;
-            _list = new List<VertexEx<TV, TE, TW>>();
+            _list = List<VertexEx<TV, TE, TW>>.ListFactory();
         }
 
         public override int Insert(TV e)
         {
-            _list.Add(new VertexEx<TV, TE, TW>(e));
+            _list.InsertAsLast(new VertexEx<TV, TE, TW>(e));
             ++N;
-            return _list.Count - 1;
+            return _list.Size - 1;
         }
 
         public override TV Remove(int index)
@@ -58,12 +57,9 @@ namespace Sequence.GraphList
         private void RemoveSource(int index)
         {
             VertexEx<TV, TE, TW> vertex = _list[index];
-            var edge= vertex.Edges;
-            foreach (var edgeEx in edge)
-            {
-                _list[edgeEx.Destination].InDegree--;
-            }
-            _list.RemoveAt(index);
+            IList<EdgeEx<TE, TW>> edge = vertex.Edges;
+            edge.Foreach(item=>_list[item.Destination].InDegree--);
+            _list.Remove(index);
         }
 
         /// <summary>
@@ -83,16 +79,17 @@ namespace Sequence.GraphList
         /// <param name="index"></param>
         private void RemoveDestination(int index)
         {
-            foreach (var vertex in _list)
-            {
-                RemoveDestination(vertex,index);
-            }
+            //foreach (var vertex in _list)
+            //{
+            //    RemoveDestination(vertex,index);
+            //}
+            _list.Foreach(item=>RemoveDestination(item,index));
         }
 
         private void RemoveDestination(VertexEx<TV, TE, TW> vertex,int index)
         {
             var edge = vertex.Edges;
-            for (int i = 0; i < edge.Count;)
+            for (int i = 0; i < edge.Size;)
             {
                 if (edge[i].Destination>index)
                 {
@@ -102,7 +99,7 @@ namespace Sequence.GraphList
                 }
                 if (edge[i].Destination==index)
                 {
-                    edge.RemoveAt(i);
+                    edge.Remove(i);
                 }
             }
         }
@@ -196,7 +193,7 @@ namespace Sequence.GraphList
         public override void Insert(TE e, int firVIndex, int secVindex, TW weight=default(TW))
         {
             var edges = _list[firVIndex].Edges;
-            edges.Add(new EdgeEx<TE, TW>(secVindex,e,weight));
+            edges.InsertAsLast(new EdgeEx<TE, TW>(secVindex,e,weight));
             _list[firVIndex].OutDegree++;
             _list[secVindex].InDegree++;
             E++;
@@ -205,7 +202,7 @@ namespace Sequence.GraphList
         public override TE Remove(int firVIndex, int secVIndex)
         {
             var edges = _list[firVIndex].Edges;
-            TE backup = edges.First(item => item.Destination == secVIndex).Data;
+            TE backup = edges.FirstItme(item => item.Destination == secVIndex).Data;
             _list[firVIndex].OutDegree--;
             _list[secVIndex].InDegree--;
             E--;
@@ -215,37 +212,37 @@ namespace Sequence.GraphList
         public override EStatus Status(int firVIndex, int secVIndex)
         {
             return _list[firVIndex].
-                Edges.First(item => item.Destination == secVIndex).Status;
+                Edges.FirstItme(item => item.Destination == secVIndex).Status;
         }
 
         protected override void Status(int firVIndex, int secVindex, EStatus status)
         {
             _list[firVIndex].
-                Edges.First(item => item.Destination == secVindex).Status = status;
+                Edges.FirstItme(item => item.Destination == secVindex).Status = status;
         }
 
         public override TE Edge(int firVIndex, int secVIndex)
         {
             return _list[firVIndex].Edges.
-                First(item => item.Destination == secVIndex).Data;
+                FirstItme(item => item.Destination == secVIndex).Data;
         }
 
         protected override void Edge(int firVIndex, int secVIndex, TE edge)
         {
             _list[firVIndex].Edges.
-                First(item => item.Destination == secVIndex).Data = edge;
+                FirstItme(item => item.Destination == secVIndex).Data = edge;
         }
 
         public override TW Weight(int firVIndex, int secVIndex)
         {
             return _list[firVIndex].Edges.
-                First(item => item.Destination == secVIndex).Weight;
+                FirstItme(item => item.Destination == secVIndex).Weight;
         }
 
         protected override void Weight(int firVIndex, int secVIndex, TW weight)
         {
              _list[firVIndex].Edges.
-                    First(item => item.Destination == secVIndex).Weight=weight;
+                    FirstItme(item => item.Destination == secVIndex).Weight = weight;
         }
     }
 }

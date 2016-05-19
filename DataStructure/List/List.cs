@@ -321,5 +321,62 @@ namespace Sequence
                 action(p.Data);
             }
         }
+
+        public int CompareTo(IList<T> other)
+        {
+            return Size.CompareTo(other.Size);
+        }
+
+
+        public T Remove(int index)
+        {
+            if(index>=Size)
+                throw new ArgumentException("The index is out of range");
+            ListNode<T> p = _header;
+            while (index>=0)
+            {
+                p = p.Succ;
+                index--;
+            }
+            return Remove(p);
+        }
+
+
+        public bool Any(Func<T, bool> func)
+        {
+            ListNode<T> p = _header.Succ;
+            while (p!=_tailer)
+            {
+                if (func(p.Data))
+                    return true;
+                p = p.Succ;
+            }
+            return false;
+        }
+
+        public T FirstOrDefault(Func<T, bool> func)
+        {
+            ListNode<T> p = _header.Succ;
+            while (p!=_tailer)
+            {
+                if (func(p.Data))
+                    return p.Data;
+                p = p.Succ;
+            }
+            return default(T);
+        }
+
+
+        public T FirstItme(Func<T, bool> func)
+        {
+            ListNode<T> p = _header.Succ;
+            while (p != _tailer)
+            {
+                if (func(p.Data))
+                    return p.Data;
+                p = p.Succ;
+            }
+            throw new InvalidOperationException("Could not find the first");
+        }
     }
 }

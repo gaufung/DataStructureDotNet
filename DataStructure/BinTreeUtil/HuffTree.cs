@@ -93,6 +93,13 @@ namespace Sequence
             return huffChars;
         }
 
+        /// <summary>
+        /// 递归基，平凡情况，如果只有两个或者三个要素时
+        /// </summary>
+        /// <param name="huffchars"></param>
+        /// <param name="lo"></param>
+        /// <param name="hi"></param>
+        /// <returns></returns>
         private  Tuple<Int32, Int32> TrivialTwoMin(IVector<BinNode<HuffChar>> huffchars, Int32 lo, int hi)
         {
             int first = huffchars[lo].Data.Weight < huffchars[lo + 1].Data.Weight ? lo : lo + 1;
@@ -115,6 +122,13 @@ namespace Sequence
             return new Tuple<int, int>(first, second);
         }
 
+        /// <summary>
+        /// 递归迭代版查找最小的两个要素
+        /// </summary>
+        /// <param name="huffchars"></param>
+        /// <param name="lo"></param>
+        /// <param name="hi"></param>
+        /// <returns></returns>
         private  Tuple<Int32, Int32> FindTwoMin(IVector<BinNode<HuffChar>> huffchars, Int32 lo, Int32 hi)
         {
             if (hi - lo <= 3)
@@ -140,11 +154,18 @@ namespace Sequence
 
         #region Build char code Map
 
+        /// <summary>
+        /// 遍历整个二叉树
+        /// </summary>
         private void BuildCodeMap()
         {
             _huffmanRoot.TravIn(BuildCodeMap);
         }
 
+        /// <summary>
+        /// 如果是叶节点
+        /// </summary>
+        /// <param name="node"></param>
         private void BuildCodeMap(BinNode<HuffChar> node)
         {
             if (!node.HasBothChild)

@@ -6,7 +6,7 @@ namespace Sequence
     /// 顶点的类
     /// </summary>
     /// <typeparam name="TV"></typeparam>
-    internal class Vertex<TV> where TV:IComparable<TV>
+    internal class Vertex<TV> : IComparable<Vertex<TV>> where TV : IComparable<TV>
     {
         #region 属性
         
@@ -35,5 +35,10 @@ namespace Sequence
             Priority = priority;
         }
 
+
+        public int CompareTo(Vertex<TV> other)
+        {
+            return Data.CompareTo(other.Data);
+        }
     }
 }
