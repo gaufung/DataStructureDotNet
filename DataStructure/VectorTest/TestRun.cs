@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
 using Sequence;
 
@@ -50,43 +52,62 @@ namespace VectorTest
             Console.Write(i+"\t");
         }
 
-        [Test]
-        public void TestTraverse()
-        {
-            InsertVector();
-            _vector.Traverse(Cout);
-        }
+        //[Test]
+        //public void TestTraverse()
+        //{
+        //    InsertVector();
+        //    _vector.Traverse(Cout);
+        //}
+
+        //[Test]
+        //public void TestDeduplicate()
+        //{
+        //    _vector.Insert(4);
+        //    _vector.Insert(3);
+        //    _vector.Insert(4);
+        //    _vector.Insert(7);
+        //    _vector.Insert(7);
+        //    _vector.Insert(8);
+        //    _vector.Traverse(Cout);
+        //    Console.WriteLine();
+        //    _vector.Deduplicate();
+        //    _vector.Traverse(Cout);
+        //}
+
+        //[Test]
+        //public void TestUniquify()
+        //{
+        //    _vector.Insert(3);
+        //    _vector.Insert(3);
+        //    _vector.Insert(4);
+        //    _vector.Insert(7);
+        //    _vector.Insert(7);
+        //    _vector.Insert(7);
+        //    _vector.Insert(8);
+        //    _vector.Traverse(Cout);
+        //    Console.WriteLine();
+        //    _vector.Uniquify();
+        //    _vector.Traverse(Cout);
+        //}
 
         [Test]
-        public void TestDeduplicate()
+        public void TestPredict()
         {
-            _vector.Insert(4);
-            _vector.Insert(3);
-            _vector.Insert(4);
+            Assert.AreEqual(_vector.Any(item=>item==1),false);
+            _vector.Insert(1);
+            _vector.Insert(2);
+            _vector.Insert(9);
             _vector.Insert(7);
-            _vector.Insert(7);
+            _vector.Insert(2);
             _vector.Insert(8);
-            _vector.Traverse(Cout);
-            Console.WriteLine();
-            _vector.Deduplicate();
-            _vector.Traverse(Cout);
+            _vector.Foreach(item => Trace.WriteLine(item));
+            Assert.AreEqual(_vector.Any(item => item == 6),false);
+            Assert.AreEqual(_vector.Any(item=>item==1),true);
+            Assert.AreEqual(_vector.FirstOrDefault(item=>item==1),1);
+            Assert.AreEqual(_vector.FirstOrDefault(item => item == 6), 0);
+            Assert.AreEqual(_vector.First(item=>item==6),false);
         }
 
-        [Test]
-        public void TestUniquify()
-        {
-            _vector.Insert(3);
-            _vector.Insert(3);
-            _vector.Insert(4);
-            _vector.Insert(7);
-            _vector.Insert(7);
-            _vector.Insert(7);
-            _vector.Insert(8);
-            _vector.Traverse(Cout);
-            Console.WriteLine();
-            _vector.Uniquify();
-            _vector.Traverse(Cout);
-        }
     }
 
     [TestFixture]

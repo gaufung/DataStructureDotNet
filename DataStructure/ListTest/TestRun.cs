@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using Sequence;
 
 namespace ListTest
@@ -71,45 +72,62 @@ namespace ListTest
             Assert.AreEqual(_list.Search(5).Data,4);
             Assert.AreEqual(_list.Search(8).Data,8);
         }
-        [Test]
-        public void TestDeduplicate()
-        {
-            _list.InsertAsLast(5);
-            _list.InsertAsLast(2);
-            _list.InsertAsLast(2);
-            _list.InsertAsLast(4);
-            _list.InsertAsLast(5);
-            _list.InsertAsLast(4);
-            _list.InsertAsLast(5);
-            _list.InsertAsLast(2);
-            _list.Traverse(Cout);
-            _list.Deduplicate();
-            Console.WriteLine();
-            _list.Traverse(Cout);
-        }
-        [Test]
-        public void TestUniquify()
-        {
-            _list.InsertAsLast(3);
-            _list.InsertAsLast(3);
+        //[Test]
+        //public void TestDeduplicate()
+        //{
+        //    _list.InsertAsLast(5);
+        //    _list.InsertAsLast(2);
+        //    _list.InsertAsLast(2);
+        //    _list.InsertAsLast(4);
+        //    _list.InsertAsLast(5);
+        //    _list.InsertAsLast(4);
+        //    _list.InsertAsLast(5);
+        //    _list.InsertAsLast(2);
+        //    _list.Traverse(Cout);
+        //    _list.Deduplicate();
+        //    Console.WriteLine();
+        //    _list.Traverse(Cout);
+        //}
+        //[Test]
+        //public void TestUniquify()
+        //{
+        //    _list.InsertAsLast(3);
+        //    _list.InsertAsLast(3);
 
-            _list.InsertAsLast(4);
-            _list.InsertAsLast(6);
-            _list.InsertAsLast(7);
-            _list.InsertAsLast(7);
-            _list.InsertAsLast(7);
-            _list.InsertAsLast(8);
-            _list.InsertAsLast(8);
-            _list.InsertAsLast(8);
-            _list.InsertAsLast(12);
-            _list.Traverse(Cout);
-            _list.Uniquify();
-            Console.WriteLine();
-            _list.Traverse(Cout);
-        }
-        private void Cout(int value)
+        //    _list.InsertAsLast(4);
+        //    _list.InsertAsLast(6);
+        //    _list.InsertAsLast(7);
+        //    _list.InsertAsLast(7);
+        //    _list.InsertAsLast(7);
+        //    _list.InsertAsLast(8);
+        //    _list.InsertAsLast(8);
+        //    _list.InsertAsLast(8);
+        //    _list.InsertAsLast(12);
+        //    _list.Traverse(Cout);
+        //    _list.Uniquify();
+        //    Console.WriteLine();
+        //    _list.Traverse(Cout);
+        //}
+        //private void Cout(int value)
+        //{
+        //    Console.Write(value+"\t");
+        //}
+
+        [Test]
+        public void TestPred()
         {
-            Console.Write(value+"\t");
+            _list.InsertAsLast(1);
+            _list.InsertAsLast(2);
+            _list.InsertAsLast(14);
+            _list.InsertAsLast(6); 
+            _list.InsertAsLast(7);
+            _list.InsertAsLast(4);
+            Assert.AreEqual(_list.Any(item=>item==1),true);
+            Assert.AreEqual(_list.Any(item => item == 3), false);
+            Assert.AreEqual(_list.FirstOrDefault(item=>item==1),1);
+            Assert.AreEqual(_list.FirstOrDefault(item => item == 3), 0);
+            Assert.AreEqual(_list.FirstItme(item=>item==1),1);
+            Assert.AreEqual(_list.FirstItme(item => item == 3), 0);
         }
     }
 }

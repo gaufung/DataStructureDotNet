@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Sequence
 {
@@ -75,10 +74,11 @@ namespace Sequence
         /// 获取某个顶点的第一个邻居结点
         /// </summary>
         /// <param name="index"></param>
+        /// <param name="isDirected"></param>
         /// <returns></returns>
-        public int FirstNbr(int index)
+        public int FirstNbr(int index, bool isDirected = true)
         {
-            return NextNbr(index, N);
+            return NextNbr(index, N,isDirected);
         }
 
         /// <summary>
@@ -86,10 +86,11 @@ namespace Sequence
         /// </summary>
         /// <param name="index"></param>
         /// <param name="preIndex"></param>
+        /// <param name="isDirected"></param>
         /// <returns></returns>
-        public int NextNbr(int index, int preIndex)
+        public int NextNbr(int index, int preIndex,bool isDirected=true)
         {
-            while (preIndex > -1 && !Exist(index, --preIndex))
+            while (preIndex > -1 && !Exist(index, --preIndex,isDirected))
             {
             }           
             return preIndex;
@@ -159,13 +160,15 @@ namespace Sequence
 
         #region 边的相关操作
         public int E { get; protected set; }
+
         /// <summary>
-        /// 
+        /// 两个顶点是否存在边
         /// </summary>
-        /// <param name="firVIndex"></param>
-        /// <param name="secVIndex"></param>
+        /// <param name="firVIndex">第一个顶点</param>
+        /// <param name="secVIndex">第二个顶点</param>
+        /// <param name="isDirected">是否为有向图</param>
         /// <returns></returns>
-        public abstract bool Exist(int firVIndex, int secVIndex);
+        public abstract bool Exist(int firVIndex, int secVIndex,bool isDirected=true);
 
         public abstract void Insert(TE e, int firVIndex, 
             int secVindex, TW weight=default(TW));
@@ -228,11 +231,11 @@ namespace Sequence
 
         private void Bfs(int startIndex, ref int clock)
         {
-            var queue = new Queue<int>();
+            Queue<Int32> queue = QueueListImpl<Int32>.QueueFacotry();
             Status(startIndex, VStatus.Discovered);
             queue.Enqueue(startIndex);
             DTime(startIndex, ++clock);
-            while (queue.Count != 0)
+            while (queue.Size != 0)
             {
                 int v = queue.Dequeue();
                 for (int u = FirstNbr(v); u > -1; u = NextNbr(v, u))
@@ -304,21 +307,27 @@ namespace Sequence
 
         #region 拓扑排序
 
-        public Stack<TV> TopoSort(int s)
+        /// <summary>
+        /// 拓扑排序
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public Stack<TV> TopoSort(int s,Action<TV> action)
         {
             Reset();
             int clock = 0;
             int v = s;
-            Stack<TV> stack=new Stack<TV>();
+            Stack<TV> stack = StackVectorImpl<TV>.StackFactory();
             do
             {
                 if (VStatus.Undiscovered==Status(v))
                 {
                     if (!TopoSort(v,ref clock,stack))
                     {
-                        while (stack.Count!=0)
+                        while (stack.Size!=0)
                         {
-                            stack.Pop();
+                            action(stack.Pop());
                         }
                         break;
                     }
@@ -343,6 +352,7 @@ namespace Sequence
                             return false;
                         }
                         break;
+                    //Find DAG
                     case VStatus.Discovered:
                         Status(v,u,EStatus.Backward);
                         return false;
@@ -357,6 +367,167 @@ namespace Sequence
             s.Push(Vertex(v));
             return true;
         }
+        #endregion
+
+        #region 优先级搜索
+
+        public void Pfs(Action<Graph<TV, TE, TW>,int,int> prioUpdater, int startIndex = 0)
+        {
+            Reset();
+            int v = startIndex;
+            do
+            {
+                if (VStatus.Undiscovered == Status(v))
+                    pfs(prioUpdater,v);
+            } while (startIndex!=(v=(++v%N)));
+        }
+
+        private void pfs(Action<Graph<TV, TE, TW>,int,int> prioUpdater, int startIndex)
+        {
+            Priority(startIndex, 0);
+            Status(startIndex, VStatus.Visited);
+            Parent(startIndex, -1);
+            while (true)
+            {
+                for (int w = 0; -1<w; w=NextNbr(startIndex,w))
+                {
+                    prioUpdater(this, startIndex, w);
+                    int shortest;
+                    for (shortest = Int32.MaxValue , w=0;w<N; w++)
+                    {
+                        if(Status(w)==VStatus.Undiscovered)
+                            if (shortest > Priority(w))
+                            {
+                                shortest = Priority(w);
+                                startIndex = w;
+                            }
+                        if(VStatus.Visited==Status(startIndex))break;
+                        Status(startIndex,VStatus.Visited);
+                        Status(Parent(startIndex),startIndex,EStatus.Tree);
+                        
+                    }
+                }
+            }
+        }
+        
+        #endregion
+
+        #region minimun spanning tree
+
+        #region Prim算法 针对是无向图
+
+        public void Prime(int s)
+        {
+            Reset();
+            int  v= s;
+            do
+            {
+                if (Status(v) == VStatus.Undiscovered)
+                {
+                    prime(v);
+                }
+            } while (s!=(++v%N));
+
+        }
+
+        private void prime(int index)
+        {
+            IVector<int> vertexSet = Vector<int>.VectorFactory();
+            vertexSet.Insert(index);
+            IVector<int> vertexCutSet = CaluCutSet(index);
+            Status(index,VStatus.Visited);
+            while (true)
+            {
+                Tuple<int, int> edge = MimimumEdge(vertexSet, vertexCutSet);
+                if(edge==null) break;
+                vertexSet.Insert(edge.Item2);
+                vertexCutSet.Remove(vertexCutSet.Find(edge.Item2));
+                Status(edge.Item2, VStatus.Visited);
+                if (Exist(edge.Item1, edge.Item2))
+                {
+                    Status(edge.Item1,edge.Item2,EStatus.Tree);
+                }
+                else
+                {
+                    Status(edge.Item2, edge.Item1, EStatus.Tree);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取顶点的补集
+        /// </summary>
+        /// <param name="index">起始的位置</param>
+        /// <returns>返回</returns>
+        private IVector<int> CaluCutSet(int index)
+        {
+            IVector<int> cutSet=Vector<int>.VectorFactory();
+            for (int i = 0; i < N; i++)
+            {
+                if (i != index && Status(i) != VStatus.Visited)
+                {
+                    cutSet.Insert(i);
+                }
+            }
+            return cutSet;
+        }
+
+        /// <summary>
+        /// 两个集合之间的权重最小的边
+        /// </summary>
+        /// <param name="vertexSet">集合</param>
+        /// <param name="vertexCutSet">另一个集合</param>
+        /// <returns></returns>
+        private Tuple<int, int> MimimumEdge(IVector<int> vertexSet, IVector<int> vertexCutSet)
+        {
+            int set = -1;
+            int cutSet = -1;
+            //if 
+            for (int i = 0; i < vertexSet.Size; i++)
+            {
+                for (int j = 0; j < vertexCutSet.Size; j++)
+                {
+                    if (Exist(i, j, false))
+                    {
+                        set = i;
+                        cutSet = j;
+                    }
+                }
+            }
+            if (set == -1 || cutSet == -1) return null;
+            TW edge = Exist(set, cutSet) ? Weight(set, cutSet) : Weight(cutSet, set);
+            for (int i = 0; i < vertexSet.Size; i++)
+            {
+                for (int j = 0; j < vertexCutSet.Size; j++)
+                {
+                    if (Exist(i, j, false))
+                    {
+                        TW newEdge = Exist(i, j) ? Weight(i, j) : Weight(j, i);
+                        if (newEdge.CompareTo(edge) == -1)
+                        {
+                            edge = newEdge;
+                            set = i;
+                            cutSet = j;
+                        }
+                    }
+                }
+            }
+            return new Tuple<int, int>(set,cutSet);
+        }
+
+        #endregion
+
+
+        #region  Kruskal 算法
+        //todo
+        #endregion
+
+
+        #endregion
+
+
+        #region  Dijkstra算法
+        
         #endregion
         #endregion
     }

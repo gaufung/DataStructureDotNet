@@ -184,10 +184,21 @@ namespace Sequence.GraphList
             _list[index].Priority = priority;
         }
 
-        public override bool Exist(int firVIndex, int secVIndex)
+        public override bool Exist(int firVIndex, int secVIndex, bool isDirected = true)
         {
-            var edges = _list[firVIndex].Edges;
-            return edges.Any(item => item.Destination == secVIndex);
+            if (isDirected)
+            {
+                var edges = _list[firVIndex].Edges;
+                return edges.Any(item => item.Destination == secVIndex);
+            }
+            else
+            {
+                var edge1=_list[firVIndex].Edges;
+                var edge2 = _list[secVIndex].Edges;
+                return edge1.Any(item => item.Destination == secVIndex)
+                       || edge2.Any(item => item.Destination == firVIndex);
+            }
+          
         }
 
         public override void Insert(TE e, int firVIndex, int secVindex, TW weight=default(TW))

@@ -150,9 +150,12 @@ namespace Sequence.GraphMatrix
             _v[index].Priority = priority;
         }
 
-        public override bool Exist(int firVIndex, int secVIndex)
+        public override bool Exist(int firVIndex, int secVIndex, bool isDirected=true)
         {
-            return  _e[firVIndex][secVIndex] != null;
+            if (isDirected)
+                return _e[firVIndex][secVIndex] != null;
+            else
+                return _e[firVIndex][secVIndex] != null || _e[secVIndex][firVIndex] != null;
         }
 
         public override void Insert(TE e, int firVIndex, int secVindex, TW weight=default(TW))

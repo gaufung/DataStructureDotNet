@@ -33,6 +33,12 @@
     <Reference Include="Sequence.List">
       <HintPath>..\List\bin\Debug\Sequence.List.dll</HintPath>
     </Reference>
+    <Reference Include="Sequence.Queue">
+      <HintPath>..\Queue\bin\Debug\Sequence.Queue.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Stack">
+      <HintPath>..\Stack\bin\Debug\Sequence.Stack.dll</HintPath>
+    </Reference>
     <Reference Include="Sequence.Vector">
       <HintPath>..\Vector\bin\Debug\Sequence.Vector.dll</HintPath>
     </Reference>
