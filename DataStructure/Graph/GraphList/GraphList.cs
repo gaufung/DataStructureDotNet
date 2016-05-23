@@ -58,8 +58,14 @@ namespace Sequence.GraphList
         {
             VertexEx<TV, TE, TW> vertex = _list[index];
             IList<EdgeEx<TE, TW>> edge = vertex.Edges;
-            edge.Foreach(item=>_list[item.Destination].InDegree--);
+            edge.Foreach(RemoveSource);
             _list.Remove(index);
+        }
+
+        private void RemoveSource(EdgeEx<TE, TW> item)
+        {
+            _list[item.Destination].InDegree--;
+            E--;
         }
 
         /// <summary>
@@ -99,7 +105,12 @@ namespace Sequence.GraphList
                 }
                 if (edge[i].Destination==index)
                 {
+                    E--;
                     edge.Remove(i);
+                }
+                else
+                {
+                    i++;
                 }
             }
         }
@@ -213,11 +224,12 @@ namespace Sequence.GraphList
         public override TE Remove(int firVIndex, int secVIndex)
         {
             var edges = _list[firVIndex].Edges;
-            TE backup = edges.FirstItme(item => item.Destination == secVIndex).Data;
+            EdgeEx<TE,TW> backup = edges.FirstItme(item => item.Destination == secVIndex);
+            edges.Remove(edges.Find(backup));
             _list[firVIndex].OutDegree--;
             _list[secVIndex].InDegree--;
             E--;
-            return backup;
+            return backup.Data;
         }
 
         public override EStatus Status(int firVIndex, int secVIndex)

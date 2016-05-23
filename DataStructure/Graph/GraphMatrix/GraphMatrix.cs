@@ -50,23 +50,29 @@ namespace Sequence.GraphMatrix
 
         public override TV Remove(int index)
         {
-            //修改结点的进度和初度
+            int toRemoveEdge = 0;
             for (int i = 0; i < N; i++)
             {
                 if (Exist(index,i))
                 {
+                    toRemoveEdge++;
                     _v[i].InDegree--;
                 }
-                if (Exist(i,index))
+            }
+            _e.Remove(index);
+            N--;
+            for (int i = 0; i < N; i++)
+            {
+                if (Exist(i, index))
                 {
+                    toRemoveEdge++;
                     _v[i].OutDegree--;
                 }
                 _e[i].Remove(index);
             }
             TV backup = _v[index].Data;
             _v.Remove(index);
-            _e.Remove(index);
-            N--;
+            E = E - toRemoveEdge;
             return backup;
         }
 
@@ -152,15 +158,17 @@ namespace Sequence.GraphMatrix
 
         public override bool Exist(int firVIndex, int secVIndex, bool isDirected=true)
         {
+            if (secVIndex < 0 || firVIndex < 0) return false;
             if (isDirected)
                 return _e[firVIndex][secVIndex] != null;
-            else
-                return _e[firVIndex][secVIndex] != null || _e[secVIndex][firVIndex] != null;
+            return _e[firVIndex][secVIndex] != null || _e[secVIndex][firVIndex] != null;
         }
 
         public override void Insert(TE e, int firVIndex, int secVindex, TW weight=default(TW))
         {
             _e[firVIndex][secVindex]=new Edge<TE, TW>(e,weight);
+            OutDegree(firVIndex, OutDegree(firVIndex)+1);
+            InDegree(secVindex, InDegree(secVindex) + 1);
             E++;
         }
 
