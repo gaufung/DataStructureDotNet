@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Emit;
 
 namespace Sequence
 {
@@ -226,7 +227,7 @@ namespace Sequence
                 {
                     Bfs(v, ref clock);
                 }
-            } while (startIndex != (++v % N));
+            } while (startIndex != (v=(++v % N)));
         }
 
         private void Bfs(int startIndex, ref int clock)
@@ -275,7 +276,7 @@ namespace Sequence
                 {
                     Dfs(v, ref clock);
                 }
-            } while (startIndex != (++v % N));
+            } while (startIndex != (v = (++v % N)));
         }
 
         private void Dfs(int startIndex, ref int clock)
@@ -284,20 +285,35 @@ namespace Sequence
             DTime(startIndex, ++clock);
             for (int u = FirstNbr(startIndex); u > -1; u = NextNbr(startIndex, u))
             {
-                if (Status(u) == VStatus.Undiscovered)
+                //if (Status(u) == VStatus.Undiscovered)
+                //{
+                //    Status(startIndex,u,EStatus.Tree);
+                //    Parent(u, startIndex);
+                //    Dfs(u,ref clock);
+                //}
+                //if (Status(u) == VStatus.Discovered)
+                //{
+                //    Status(startIndex,u,EStatus.Backward);
+                //}
+                //else//Status(u) == VStatus.Visited
+                //{
+                //    Status(startIndex, u, DTime(startIndex) < DTime(u) ?
+                //        EStatus.Forward : EStatus.Cross);
+                //}
+                switch (Status(u))
                 {
-                    Status(startIndex,u,EStatus.Tree);
-                    Parent(u, startIndex);
-                    Dfs(u,ref clock);
-                }
-                if (Status(u) == VStatus.Discovered)
-                {
-                    Status(startIndex,u,EStatus.Backward);
-                }
-                else//Status(u) == VStatus.Visited
-                {
-                    Status(startIndex, u, DTime(startIndex) < DTime(u) ?
-                        EStatus.Forward : EStatus.Cross);
+                    case VStatus.Undiscovered:
+                        Status(startIndex,u,EStatus.Tree);
+                        Parent(u, startIndex);
+                        Dfs(u,ref clock);
+                        break;
+                    case VStatus.Discovered:
+                        Status(startIndex, u, EStatus.Backward);
+                        break;
+                    default:
+                        Status(startIndex, u, DTime(startIndex) < DTime(u) ?
+                            EStatus.Forward : EStatus.Cross);
+                        break;
                 }
             }
             Status(startIndex, VStatus.Visited);
@@ -313,7 +329,7 @@ namespace Sequence
         /// <param name="s"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public Stack<TV> TopoSort(int s,Action<TV> action)
+        public Stack<TV> TopoSort(int s)
         {
             Reset();
             int clock = 0;
@@ -327,7 +343,7 @@ namespace Sequence
                     {
                         while (stack.Size!=0)
                         {
-                            action(stack.Pop());
+                            stack.Pop();
                         }
                         break;
                     }
@@ -426,7 +442,7 @@ namespace Sequence
                 {
                     prime(v);
                 }
-            } while (s!=(++v%N));
+            } while (s!=(v=(++v%N)));
 
         }
 
@@ -487,10 +503,10 @@ namespace Sequence
             {
                 for (int j = 0; j < vertexCutSet.Size; j++)
                 {
-                    if (Exist(i, j, false))
+                    if (Exist(vertexSet[i], vertexCutSet[j], false))
                     {
-                        set = i;
-                        cutSet = j;
+                        set = vertexSet[i];
+                        cutSet = vertexCutSet[j];
                     }
                 }
             }
@@ -500,14 +516,14 @@ namespace Sequence
             {
                 for (int j = 0; j < vertexCutSet.Size; j++)
                 {
-                    if (Exist(i, j, false))
+                    if (Exist(vertexSet[i], vertexCutSet[j], false))
                     {
-                        TW newEdge = Exist(i, j) ? Weight(i, j) : Weight(j, i);
+                        TW newEdge = Exist(vertexSet[i], vertexCutSet[j]) ? Weight(vertexSet[i], vertexCutSet[j]) : Weight(vertexCutSet[j],vertexSet[i]);
                         if (newEdge.CompareTo(edge) == -1)
                         {
                             edge = newEdge;
-                            set = i;
-                            cutSet = j;
+                            set = vertexSet[i];
+                            cutSet = vertexCutSet[j];
                         }
                     }
                 }

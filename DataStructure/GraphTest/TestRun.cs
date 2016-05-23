@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
 using Sequence;
 using Sequence.GraphList;
@@ -14,10 +16,10 @@ namespace GraphTest
         public TestRun()
         {
             /*Graphmatrix*/
-            //graph = GraphMatrix<char, int, double>.GraphFactory();
+            graph = GraphMatrix<char, int, double>.GraphFactory();
             
             /*GraphList*/
-            graph=GraphList<char, int, double>.GraphFactory();
+           //graph=GraphList<char, int, double>.GraphFactory();
 
             graph.Insert('a');
             graph.Insert('b');
@@ -85,9 +87,33 @@ namespace GraphTest
             Assert.AreEqual(false,graph.Exist(1,3));
         }
 
-        private void InitGraph()
+        [Test]
+        public void GraphBsfTravel()
         {
+            graph.Bfs();
+            Assert.AreEqual(-1,graph.Parent(0));
+            Assert.AreEqual(0,graph.Parent(1));
+            Assert.AreEqual(1,graph.Parent(2));
+            Assert.AreEqual(1,graph.Parent(3));
+        }
 
+        [Test]
+        public void GraphDsfTRavel()
+        {
+            graph.Dfs(1);
+        }
+
+        [Test]
+        public void GraphTopoTravel()
+        {
+            var statck=graph.TopoSort(1);
+            statck.Foreach(item=>Trace.Write(item));
+        }
+
+        [Test]
+        public void GraphPrim()
+        {
+            graph.Prime(0);
         }
     }
 }
