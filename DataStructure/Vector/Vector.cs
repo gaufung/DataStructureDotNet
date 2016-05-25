@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Vector;
 
 namespace Sequence
@@ -7,6 +8,9 @@ namespace Sequence
     /// 向量数组
     /// </summary>
     /// <typeparam name="T">泛型</typeparam>
+    [DebuggerDisplay("Size={Size}")]
+    [DebuggerDisplay("Empty={Empty}")]
+    [DebuggerTypeProxy(typeof(Vector<>.VectorDebugView))]
     public class Vector<T> :IVector<T> where T:IComparable<T>
     {
         private T[] _elem;
@@ -448,5 +452,31 @@ namespace Sequence
             }
             throw new InvalidOperationException("Could Not found");
         }
+
+        #region Debug工具
+
+        internal class VectorDebugView
+        {
+            private readonly Vector<T> _vertor;
+
+            public VectorDebugView(Vector<T> vertor)
+            {
+                _vertor = vertor;
+            }
+            [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+            public T[] Elements
+            {
+                get
+                {
+                    T[] elements=new T[_vertor.Size];
+                    for (int i = 0; i < _vertor.Size; i++)
+                    {
+                        elements[i] = _vertor[i];
+                    }
+                    return elements;
+                }
+            }
+        }
+        #endregion
     }
 }

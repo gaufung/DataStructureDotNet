@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Sequence
 {
+    [DebuggerDisplay("Size={Size}")]
+    [DebuggerDisplay("Empty={Empty}")]
+    [DebuggerDisplay("First={First.Data}")]
+    [DebuggerDisplay("Last={Last.Data}")]
+    [DebuggerTypeProxy(typeof(List<>.ListDebugView))]
     public class List<T> : IList<T> where T : IComparable<T>
     {
         #region 私有字段
@@ -378,5 +384,38 @@ namespace Sequence
             }
             throw new InvalidOperationException("Could not find the first");
         }
+
+        #region Debug工具
+
+        internal class ListDebugView
+        {
+            private readonly IList<T> _list;
+
+            public ListDebugView(List<T> list)
+            {
+                _list = list;
+            }
+
+            [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+            public T[] Element
+            {
+                get
+                {
+                    T[] element = new T[_list.Size];
+                    if (_list.Size == 0) return element;
+                    ListNode<T> node = _list.First;
+                    int count = 0;
+                    while (node!=_list.Last)
+                    {
+                        element[count] = node.Data;
+                        count++;
+                        node = node.Succ;
+                    }
+                    element[count] = _list.Last.Data;
+                    return element;
+                }
+            }
+        }
+        #endregion
     }
 }

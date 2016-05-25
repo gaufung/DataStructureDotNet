@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Sequence
 {
+    [DebuggerDisplay("Empty={Empty}")]
+    [DebuggerDisplay("Size={Size}")]
+    [DebuggerDisplay("Top={Top}")]
     public class StackVectorImpl<T>:Stack<T> where T:IComparable<T>
     {
 

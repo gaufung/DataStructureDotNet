@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Sequence
 {
+    [DebuggerDisplay("Size={Size}")]
+    [DebuggerDisplay("{Empty={Empty}}")]
+    [DebuggerDisplay("Front={Front}")]
     public class QueueListImpl<T>:Queue<T> where T:IComparable<T>
     {
         #region
