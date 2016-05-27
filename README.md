@@ -1,6 +1,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/08j5wmebp10jjckt/branch/master?svg=true)](https://ci.appveyor.com/project/gaufung/ds/branch/master)  
 
 # Data Structure
+
+[![Join the chat at https://gitter.im/gaufung/DS](https://badges.gitter.im/gaufung/DS.svg)](https://gitter.im/gaufung/DS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Data Structure in C#  Language（数据结构 C#）
 
 # Introduction
