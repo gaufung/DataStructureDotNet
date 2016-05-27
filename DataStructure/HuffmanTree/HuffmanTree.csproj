@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CDC5A67-896F-47EE-8A74-1440BF16958C}</ProjectGuid>
+    <ProjectGuid>{6E845826-9B9B-43FA-BE41-281381863535}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BinaryTreeTest</RootNamespace>
-    <AssemblyName>BinaryTreeTest</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.HuffmanTree</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,23 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.5.3.9345, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\package\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.HuffmanTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HuffmanTree\bin\Debug\Sequence.HuffmanTree.dll</HintPath>
-    </Reference>
     <Reference Include="Sequence.Tree">
       <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Vector">
+      <HintPath>..\Vector\bin\Debug\Sequence.Vector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HuffmanTreeTest.cs" />
-    <Compile Include="TestRun.cs" />
+    <Compile Include="HuffChar.cs" />
+    <Compile Include="HuffTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

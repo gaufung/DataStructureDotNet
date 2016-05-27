@@ -8,7 +8,6 @@ namespace BinaryTreeTest
     public class TestRun
     {
         private readonly BinTree<int> _tree;
-
         public TestRun()
         {
             _tree=new BinTree<int>();
