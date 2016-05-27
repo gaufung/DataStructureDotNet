@@ -93,10 +93,10 @@ namespace Sequence
             else
             {
                 _element[pos]=new Entry<TK, TV>(key,value);
+                _size++;
             }
             _element[pos].IsNotNull = true;
             _element[pos].IsAlive = true;
-            _size++;
             Rehash();
             return true;
         }

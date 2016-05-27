@@ -1,4 +1,6 @@
-﻿namespace Sequence
+﻿using System;
+
+namespace Sequence
 {
     internal static class MathHelper
     {
@@ -10,6 +12,14 @@
                     return currentValue;
                 currentValue++;
             }
+        }
+
+
+        public static int RandomLevel(int maxLevel)
+        {
+            Random rand = new Random();
+            int lvl = (int)(Math.Log(1.0 - rand.NextDouble()) / Math.Log(1.0 - 1/Math.E));
+            return Math.Min(lvl, maxLevel);
         }
 
         private static bool IsPrime(int n)

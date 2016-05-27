@@ -22,7 +22,9 @@ List | .Net Framework中的List<T>泛型
 Stack | .Net Framework中的Stack<T>泛型
 Queue | .Net Framework中的Queue<T>泛型
 Binary Tree | 二叉树实现
-Graph | 图
+Graph | 图 
+Dictionary | .Net Framework中Dictionary<TK,TV>泛型  
+SkipList | 跳转列表
 
 ## Algorithm
 - [x] 栈

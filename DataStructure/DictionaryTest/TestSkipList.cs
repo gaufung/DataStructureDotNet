@@ -1,16 +1,20 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using NUnit.Framework;
 using Sequence;
 
 namespace DictionaryTest
 {
     [TestFixture]
-    public class RunTest
+    public class TestSkipList
     {
         private Dictionary<int, string> dic;
 
-        public  RunTest()
+        public TestSkipList()
         {
-           dic=new HashDictionary<int, string>();
+            dic=new HashDictionary<int, string>();
         }
 
         [Test]
@@ -18,41 +22,27 @@ namespace DictionaryTest
         {
             dic[1] = "string";
             dic[102] = "gaofeng";
-            Assert.AreEqual("string",dic[1]);
+            Assert.AreEqual("string", dic[1]);
             Assert.AreEqual("gaofeng", dic[102]);
         }
-
         [Test]
         public void TestRemove()
         {
             dic[1] = "gau";
             dic[102] = "fung";
             dic.Remove(1);
-            Assert.AreEqual("fung",dic[102]);
-            Assert.AreEqual(false,dic.Contains(1));
+            Assert.AreEqual("fung", dic[102]);
+            Assert.AreEqual(false, dic.Contains(1));
         }
-
-        [Test]
-        public void TestRehash()
-        {
-            for (int i = 0; i < 50; i++)
-            {
-                dic[i] = i.ToString();
-            }
-            dic[51] = "gau";
-        }
-
         [Test]
         public void TestSize()
         {
             dic[1] = "gaufung";
-            Assert.AreEqual(dic.Size,1);
+            Assert.AreEqual(dic.Size, 1);
             dic[1] = "fung";
-            Assert.AreEqual(dic.Size,1);
+            Assert.AreEqual(dic.Size, 1);
             dic[3] = "fund";
-            Assert.AreEqual(dic.Size,2);
+            Assert.AreEqual(dic.Size, 2);
         }
     }
-
-   
 }
