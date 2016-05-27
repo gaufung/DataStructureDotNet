@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.HuffmanTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BinTreeUtil\bin\Debug\Sequence.HuffmanTree.dll</HintPath>
-    </Reference>
     <Reference Include="Sequence.Tree">
       <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
     </Reference>
