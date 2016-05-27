@@ -3,4 +3,5 @@
   &lt;Assembly Path="D:\WorkSpace\CSharp\DS\DataStructure\List\bin\Debug\Sequence.List.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\WorkSpace\CSharp\DS\DataStructure\Tree\bin\Debug\Sequence.Tree.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\WorkSpace\CSharp\DS\DataStructure\BinTreeUtil\bin\Debug\Sequence.HuffmanTree.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
