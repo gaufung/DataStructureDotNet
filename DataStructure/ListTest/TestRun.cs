@@ -14,16 +14,16 @@ namespace ListTest
             _list = List<int>.ListFactory();
         }
 
-        [Test]
-        public void TestSize()
-        {
-            Assert.AreEqual(_list.Size,0);
-            Assert.AreEqual(_list.Empty,true);
-            _list.InsertAsFirst(4);
-            _list.InsertAsLast(5);
-            Assert.AreEqual(_list.Empty,false);
-            Assert.AreEqual(_list.Size,2);
-        }
+        //[Test]
+        //public void TestSize()
+        //{
+        //    Assert.AreEqual(_list.Size,0);
+        //    Assert.AreEqual(_list.Empty,true);
+        //    _list.InsertAsFirst(4);
+        //    _list.InsertAsLast(5);
+        //    Assert.AreEqual(_list.Empty,false);
+        //    Assert.AreEqual(_list.Size,2);
+        //}
         [Test]
         public void TestFristAndLast()
         {
