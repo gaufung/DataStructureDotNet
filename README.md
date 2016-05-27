@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/08j5wmebp10jjckt?svg=true)](https://ci.appveyor.com/project/gaufung/ds) 
+
 # Data Structure
 Data Structure in C#  Language（数据结构 C#）
 
