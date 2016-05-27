@@ -19,7 +19,7 @@ namespace StackQueueTest
         [Test]
         public void TestStack()
         {
-            _stack = StackFactory<int>.Generate();
+            _stack = StackVectorImpl<int>.StackFactory();
             _stack.Push(1);
             _stack.Push(2);
             Assert.AreEqual(_stack.Top,2);
