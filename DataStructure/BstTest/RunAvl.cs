@@ -23,13 +23,13 @@ namespace BstTest
             _bst.Insert(8);
         }
 
-        [Test]
-        public void TestSearch()
-        {
-            Assert.AreEqual(4,_bst.Root.Data);
-            Assert.AreEqual(2,_bst.Root.LChild.Data);
-            Assert.AreEqual(8,_bst.Root.RChild.Data);
-        }
+        //[Test]
+        //public void TestSearch()
+        //{
+        //    Assert.AreEqual(4,_bst.Root.Data);
+        //    Assert.AreEqual(2,_bst.Root.LChild.Data);
+        //    Assert.AreEqual(8,_bst.Root.RChild.Data);
+        //}
         [Test]
         public void TestInsert()
         {

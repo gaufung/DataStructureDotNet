@@ -42,16 +42,16 @@ namespace DictionaryTest
             dic[51] = "gau";
         }
 
-        [Test]
-        public void TestSize()
-        {
-            dic[1] = "gaufung";
-            Assert.AreEqual(dic.Size,1);
-            dic[1] = "fung";
-            Assert.AreEqual(dic.Size,1);
-            dic[3] = "fund";
-            Assert.AreEqual(dic.Size,2);
-        }
+        //[Test]
+        //public void TestSize()
+        //{
+        //    dic[1] = "gaufung";
+        //    Assert.AreEqual(dic.Size,1);
+        //    dic[1] = "fung";
+        //    Assert.AreEqual(dic.Size,1);
+        //    dic[3] = "fund";
+        //    Assert.AreEqual(dic.Size,2);
+        //}
     }
 
    

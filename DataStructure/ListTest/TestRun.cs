@@ -42,24 +42,24 @@ namespace ListTest
             Assert.AreEqual(_list.Last.Data,4);
             Assert.AreEqual(_list.First.Data,6);
         }
-        [Test]
-        public void TestDisOrder()
-        {
-            _list.InsertAsLast(5);
-            _list.InsertAsLast(4);
-            _list.InsertAsLast(2);
-            Assert.AreEqual(_list.DisOrder(),3);
-        }
+        //[Test]
+        //public void TestDisOrder()
+        //{
+        //    _list.InsertAsLast(5);
+        //    _list.InsertAsLast(4);
+        //    _list.InsertAsLast(2);
+        //    Assert.AreEqual(_list.DisOrder(),3);
+        //}
 
-        [Test]
-        public void TestFind()
-        {
-            _list.InsertAsLast(5);
-            _list.InsertAsLast(4);
-            _list.InsertAsLast(2);
-            Assert.AreEqual(_list.Find(4).Data,4);
-            Assert.AreEqual(_list.Find(6),null);
-        }
+        //[Test]
+        //public void TestFind()
+        //{
+        //    _list.InsertAsLast(5);
+        //    _list.InsertAsLast(4);
+        //    _list.InsertAsLast(2);
+        //    Assert.AreEqual(_list.Find(4).Data,4);
+        //    Assert.AreEqual(_list.Find(6),null);
+        //}
         [Test]
         public void TestSearch()
         {
@@ -113,21 +113,21 @@ namespace ListTest
         //    Console.Write(value+"\t");
         //}
 
-        [Test]
-        public void TestPred()
-        {
-            _list.InsertAsLast(1);
-            _list.InsertAsLast(2);
-            _list.InsertAsLast(14);
-            _list.InsertAsLast(6); 
-            _list.InsertAsLast(7);
-            _list.InsertAsLast(4);
-            Assert.AreEqual(_list.Any(item=>item==1),true);
-            Assert.AreEqual(_list.Any(item => item == 3), false);
-            Assert.AreEqual(_list.FirstOrDefault(item=>item==1),1);
-            Assert.AreEqual(_list.FirstOrDefault(item => item == 3), 0);
-            Assert.AreEqual(_list.FirstItme(item=>item==1),1);
-            Assert.AreEqual(_list.FirstItme(item => item == 3), 0);
-        }
+        //[Test]
+        //public void TestPred()
+        //{
+        //    _list.InsertAsLast(1);
+        //    _list.InsertAsLast(2);
+        //    _list.InsertAsLast(14);
+        //    _list.InsertAsLast(6); 
+        //    _list.InsertAsLast(7);
+        //    _list.InsertAsLast(4);
+        //    Assert.AreEqual(_list.Any(item=>item==1),true);
+        //    Assert.AreEqual(_list.Any(item => item == 3), false);
+        //    Assert.AreEqual(_list.FirstOrDefault(item=>item==1),1);
+        //    Assert.AreEqual(_list.FirstOrDefault(item => item == 3), 0);
+        //    Assert.AreEqual(_list.FirstItme(item=>item==1),1);
+        //    Assert.AreEqual(_list.FirstItme(item => item == 3), 0);
+        //}
     }
 }

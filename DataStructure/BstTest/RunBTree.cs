@@ -28,12 +28,12 @@ namespace BstTest
            
             
         }
-        [Test]
-        public void TestSearch()
-        {
-            Assert.AreEqual(null,_bst.Search(3));
-            Assert.AreEqual(_bst.Root.Child[0], _bst.Search(4));
-        }
+        //[Test]
+        //public void TestSearch()
+        //{
+        //    Assert.AreEqual(null,_bst.Search(3));
+        //    Assert.AreEqual(_bst.Root.Child[0], _bst.Search(4));
+        //}
 
         [Test]
         public void TestRemove()

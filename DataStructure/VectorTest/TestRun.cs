@@ -14,20 +14,20 @@ namespace VectorTest
         {
             _vector = Vector<int>.VectorFactory();
         }
-        [Test]
-        public void TestSizeEmpty()
-        {
-            Assert.AreEqual(_vector.Empty,true);
-            Assert.AreEqual(_vector.Size,0);
-        }
+        //[Test]
+        //public void TestSizeEmpty()
+        //{
+        //    Assert.AreEqual(_vector.Empty,true);
+        //    Assert.AreEqual(_vector.Size,0);
+        //}
 
-        [Test]
-        public void TestObjectIndex()
-        {
-            InsertVector();
-            Assert.AreEqual(_vector[0],4);
+        //[Test]
+        //public void TestObjectIndex()
+        //{
+        //    InsertVector();
+        //    Assert.AreEqual(_vector[0],4);
          
-        }
+        //}
 
         [Test]
         public void TestDisOrder()
@@ -90,23 +90,23 @@ namespace VectorTest
         //    _vector.Traverse(Cout);
         //}
 
-        [Test]
-        public void TestPredict()
-        {
-            Assert.AreEqual(_vector.Any(item=>item==1),false);
-            _vector.Insert(1);
-            _vector.Insert(2);
-            _vector.Insert(9);
-            _vector.Insert(7);
-            _vector.Insert(2);
-            _vector.Insert(8);
-            _vector.Foreach(item => Trace.WriteLine(item));
-            Assert.AreEqual(_vector.Any(item => item == 6),false);
-            Assert.AreEqual(_vector.Any(item=>item==1),true);
-            Assert.AreEqual(_vector.FirstOrDefault(item=>item==1),1);
-            Assert.AreEqual(_vector.FirstOrDefault(item => item == 6), 0);
-            Assert.AreEqual(_vector.First(item=>item==6),false);
-        }
+        //[Test]
+        //public void TestPredict()
+        //{
+        //    Assert.AreEqual(_vector.Any(item=>item==1),false);
+        //    _vector.Insert(1);
+        //    _vector.Insert(2);
+        //    _vector.Insert(9);
+        //    _vector.Insert(7);
+        //    _vector.Insert(2);
+        //    _vector.Insert(8);
+        //    _vector.Foreach(item => Trace.WriteLine(item));
+        //    Assert.AreEqual(_vector.Any(item => item == 6),false);
+        //    Assert.AreEqual(_vector.Any(item=>item==1),true);
+        //    Assert.AreEqual(_vector.FirstOrDefault(item=>item==1),1);
+        //    Assert.AreEqual(_vector.FirstOrDefault(item => item == 6), 0);
+        //    Assert.AreEqual(_vector.First(item=>item==6),false);
+        //}
 
     }
 

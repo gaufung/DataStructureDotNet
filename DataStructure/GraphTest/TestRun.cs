@@ -31,49 +31,49 @@ namespace GraphTest
             graph.Insert(1, 1, 3, 1.5);
         }
 
-        [Test]
-        public void TestNE()
-        {
-           Assert.AreEqual(graph.E,4);
-           Assert.AreEqual(graph.N,4);
-        }
+        //[Test]
+        //public void TestNE()
+        //{
+        //   Assert.AreEqual(graph.E,4);
+        //   Assert.AreEqual(graph.N,4);
+        //}
 
-        [Test]
-        public void TestVertex()
-        {
-            Assert.AreEqual(graph.Vertex(0),'a');
-            Assert.AreEqual(graph.Vertex(1), 'b');
-            Assert.AreEqual(graph.Vertex(2), 'c');
-            Assert.AreEqual(graph.Vertex(3), 'd');
-            graph.Vertex(0, 'e');
-            Assert.AreEqual(graph.Vertex(0),'e');
-            Assert.AreEqual(2, graph.InDegree(3));
-            Assert.AreEqual(0, graph.OutDegree(3));
-            Assert.AreEqual(1, graph.InDegree(2));
-            Assert.AreEqual(1, graph.OutDegree(2));
-            Assert.AreEqual(1, graph.InDegree(1));
-            Assert.AreEqual(2, graph.OutDegree(1));
-            Assert.AreEqual(0, graph.InDegree(0));
-            Assert.AreEqual(1, graph.OutDegree(0));
-            ////
-            Assert.AreEqual(1, graph.FirstNbr(0));
-            Assert.AreEqual(-1, graph.NextNbr(0, 1));
-            Assert.AreEqual(3, graph.FirstNbr(1));
-            Assert.AreEqual(2, graph.NextNbr(1, 3));
-            Assert.AreEqual(-1, graph.NextNbr(1, 2));
-            ////
-            Assert.AreEqual(VStatus.Undiscovered, graph.Status(0));
-            Assert.AreEqual(VStatus.Undiscovered, graph.Status(1));
-            Assert.AreEqual(VStatus.Undiscovered, graph.Status(2));
-            Assert.AreEqual(VStatus.Undiscovered, graph.Status(3));
+        //[Test]
+        //public void TestVertex()
+        //{
+        //    Assert.AreEqual(graph.Vertex(0),'a');
+        //    Assert.AreEqual(graph.Vertex(1), 'b');
+        //    Assert.AreEqual(graph.Vertex(2), 'c');
+        //    Assert.AreEqual(graph.Vertex(3), 'd');
+        //    graph.Vertex(0, 'e');
+        //    Assert.AreEqual(graph.Vertex(0),'e');
+        //    Assert.AreEqual(2, graph.InDegree(3));
+        //    Assert.AreEqual(0, graph.OutDegree(3));
+        //    Assert.AreEqual(1, graph.InDegree(2));
+        //    Assert.AreEqual(1, graph.OutDegree(2));
+        //    Assert.AreEqual(1, graph.InDegree(1));
+        //    Assert.AreEqual(2, graph.OutDegree(1));
+        //    Assert.AreEqual(0, graph.InDegree(0));
+        //    Assert.AreEqual(1, graph.OutDegree(0));
+        //    ////
+        //    Assert.AreEqual(1, graph.FirstNbr(0));
+        //    Assert.AreEqual(-1, graph.NextNbr(0, 1));
+        //    Assert.AreEqual(3, graph.FirstNbr(1));
+        //    Assert.AreEqual(2, graph.NextNbr(1, 3));
+        //    Assert.AreEqual(-1, graph.NextNbr(1, 2));
+        //    ////
+        //    Assert.AreEqual(VStatus.Undiscovered, graph.Status(0));
+        //    Assert.AreEqual(VStatus.Undiscovered, graph.Status(1));
+        //    Assert.AreEqual(VStatus.Undiscovered, graph.Status(2));
+        //    Assert.AreEqual(VStatus.Undiscovered, graph.Status(3));
 
 
-            graph.Remove(2);
-            Assert.AreEqual(3,graph.N);
-            Assert.AreEqual(2,graph.E);
-            Assert.AreEqual(1,graph.FirstNbr(0));
-            Assert.AreEqual(2,graph.FirstNbr(1));
-        }
+        //    graph.Remove(2);
+        //    Assert.AreEqual(3,graph.N);
+        //    Assert.AreEqual(2,graph.E);
+        //    Assert.AreEqual(1,graph.FirstNbr(0));
+        //    Assert.AreEqual(2,graph.FirstNbr(1));
+        //}
 
         [Test]
         public void TestEdge()

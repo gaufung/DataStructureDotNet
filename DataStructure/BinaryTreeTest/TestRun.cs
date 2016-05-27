@@ -12,13 +12,13 @@ namespace BinaryTreeTest
         {
             _tree=new BinTree<int>();
         }
-        [Test]
-        public void TestEmptyTree()
-        {
-            Assert.AreEqual(true,_tree.Empty);
-            Assert.AreEqual(0,_tree.Size);
-            Assert.AreEqual(null,_tree.Root);
-        }
+        //[Test]
+        //public void TestEmptyTree()
+        //{
+        //    Assert.AreEqual(true,_tree.Empty);
+        //    Assert.AreEqual(0,_tree.Size);
+        //    Assert.AreEqual(null,_tree.Root);
+        //}
 
         [Test]
         public void TestInsertAsRoot()
