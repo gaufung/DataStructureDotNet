@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\VectorTest\bin\Debug\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.5.3.9345, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Sequence.List">
       <HintPath>..\StackUtil\bin\Debug\Sequence.List.dll</HintPath>
