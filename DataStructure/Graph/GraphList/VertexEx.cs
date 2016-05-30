@@ -8,6 +8,7 @@ namespace Sequence.GraphList
     /// <typeparam name="TV"></typeparam>
     /// <typeparam name="TE"></typeparam>
     /// <typeparam name="TW"></typeparam>
+    [Serializable]
     internal class VertexEx<TV, TE, TW> : Vertex<TV> 
         where TV : IComparable<TV>
         where TE : IComparable<TE>

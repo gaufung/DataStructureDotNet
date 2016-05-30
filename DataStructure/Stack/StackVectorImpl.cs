@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 namespace Sequence
 {
+    [Serializable]
     [DebuggerDisplay("Empty={Empty}")]
     [DebuggerDisplay("Size={Size}")]
     [DebuggerDisplay("Top={Top}")]

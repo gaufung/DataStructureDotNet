@@ -1,8 +1,11 @@
-﻿namespace Sequence
+﻿using System;
+
+namespace Sequence
 {
     /// <summary>
     /// 边状态
     /// </summary>
+    [Serializable]
     public enum EStatus
     {
         /// <summary>

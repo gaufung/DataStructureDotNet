@@ -7,6 +7,7 @@ namespace Sequence.GraphList
     /// </summary>
     /// <typeparam name="TE"></typeparam>
     /// <typeparam name="TW"></typeparam>
+    [Serializable]
     internal class EdgeEx<TE,TW>:
         Edge<TE,TW> where TE:IComparable<TE> 
         where TW:IComparable<TW>

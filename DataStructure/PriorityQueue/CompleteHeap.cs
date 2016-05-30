@@ -1,51 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Sequence
 {
     /// <summary>
-    /// Complete binary Heap 实现二叉堆
+    /// Complete binary Tree 实现二叉堆
     /// </summary>
     /// <typeparam name="T">类型参数</typeparam>
-    public class ComplHeap<T> : IPriorityQueue<T> where T : IComparable<T>
+    [DebuggerDisplay("Max=getMax()")]
+    [DebuggerDisplay("Size=Count")]
+    [Serializable]
+    public class CompleteHeap<T> : IPriorityQueue<T> where T : IComparable<T>
     {
         public void Insert(T e)
         {
-            _list.Insert(Count, e);
+            _vector.Insert(Count, e);
             PercolateUp(Count - 1);
         }
 
         public T GetMax()
         {
-            return _list[0];
+            return _vector[0];
         }
 
         public T DelMax()
         {
-            T backup = _list[0];
-            _list[0] = _list[Count - 1];
-            _list.RemoveAt(Count-1);
+            T backup = _vector[0];
+            _vector[0] = _vector[Count - 1];
+            _vector.Remove(Count-1);
             PercolateDown(Count, 0);
             return backup;
         }
 
         public int Count
         {
-            get { return _list.Count; }
+            get { return _vector.Size; }
         }
 
         #region 私有成员
 
-        private readonly IList<T> _list;
+        private readonly IVector<T> _vector;
 
-        public ComplHeap()
+        public CompleteHeap()
         {
-            _list=new List<T>();
+            _vector=Vector<T>.VectorFactory();
         }
 
-        public ComplHeap(IEnumerable<T> source)
+        public CompleteHeap(T[] source)
         {
-            _list=new List<T>(source);
+            _vector = Vector<T>.VectorFactory(source,source.Length);
             Heapfiy(Count);
         }
         #endregion
@@ -78,7 +81,7 @@ namespace Sequence
             while (ParentValid(i))
             {
                 int j = Parent(i);
-                if(Lt(_list[i],_list[j]))break;
+                if(Lt(_vector[i],_vector[j]))break;
                 Swap(i,j);
                 i=j;
             }
@@ -100,21 +103,22 @@ namespace Sequence
 
         #region 比较操作
 
-        private static bool Lt(T a, T b)
-        {
-            return (a as IComparable<T>).CompareTo(b) < 0;
-        }
-
         private static bool Gt(T a, T b)
         {
-            return (a as IComparable<T>).CompareTo(b) > 0;
+            return a.CompareTo(b) > 0;
         }
 
         private static bool Eq(T a, T b)
         {
-            return (a as IComparable<T>).CompareTo(b) == 0;
+            return a.CompareTo(b) == 0;
+        }
+
+        private static bool Lt(T a, T b)
+        {
+            return a.CompareTo(b) < 0;
         }
         #endregion
+
 
         /// <summary>
         /// 父节点的索引
@@ -200,7 +204,7 @@ namespace Sequence
         /// <returns></returns>
         private int Bigger(int i, int j)
         {
-            return (_list[i] as IComparable<T>).CompareTo(_list[j]) >= 0
+            return _vector[i].CompareTo(_vector[j]) >= 0
                 ? i
                 : j;
         }
@@ -225,9 +229,9 @@ namespace Sequence
 
         private void Swap(int i, int j)
         {
-            T temp = _list[i];
-            _list[i] = _list[j];
-            _list[j] = temp;
+            T temp = _vector[i];
+            _vector[i] = _vector[j];
+            _vector[j] = temp;
         }
         #endregion
      

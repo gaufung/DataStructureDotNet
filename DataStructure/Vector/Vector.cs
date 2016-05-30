@@ -8,6 +8,7 @@ namespace Sequence
     /// 向量数组
     /// </summary>
     /// <typeparam name="T">泛型</typeparam>
+    [Serializable]
     [DebuggerDisplay("Size={Size}")]
     [DebuggerDisplay("Empty={Empty}")]
     [DebuggerTypeProxy(typeof(Vector<>.VectorDebugView))]

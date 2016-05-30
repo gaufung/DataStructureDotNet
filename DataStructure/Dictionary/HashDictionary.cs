@@ -9,6 +9,7 @@ namespace Sequence
     /// <typeparam name="TK">key</typeparam>
     /// <typeparam name="TV">value</typeparam>
     //[DebuggerTypeProxy(typeof(Sequence.HashDictionary<>.HashDictionaryDebugView))]
+    [Serializable]
     public class HashDictionary<TK, TV> : Dictionary<TK, TV> where TK : IComparable<TK>
     {
         private static readonly int DEFAULT_TABLE_SIZE = 101;

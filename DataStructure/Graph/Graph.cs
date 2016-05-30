@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection.Emit;
 
 namespace Sequence
 {
@@ -9,6 +8,7 @@ namespace Sequence
     /// <typeparam name="TV">结点存储的数据</typeparam>
     /// <typeparam name="TE">边存储的数据</typeparam>
     /// <typeparam name="TW">边存储的权重</typeparam>
+    [Serializable]
     public abstract class Graph<TV,TE,TW> where TV:IComparable<TV>
         where TE:IComparable<TE> where TW:IComparable<TW>
     {

@@ -10,7 +10,7 @@ namespace HeapTest
 
         public RunHeap()
         {
-            _heap=new ComplHeap<int>();
+            _heap=new CompleteHeap<int>();
             InitHeap();
         }
 
@@ -40,11 +40,10 @@ namespace HeapTest
         [Test]
         public void TestHeapify()
         {
-            int[] data=new int[]
-            {
+            int[] data={
                 4,8,2,3,9,8,10
             };
-            _heap=new ComplHeap<int>(data);
+            _heap=new CompleteHeap<int>(data);
             Assert.AreEqual(10,_heap.GetMax());
         }
     }

@@ -1,10 +1,14 @@
 ﻿
+using System;
+
 namespace Sequence
 {
     /// <summary>
     /// 列表的节点类
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// 
+    [Serializable]
     public class ListNode<T>
     {
         #region 构造函数

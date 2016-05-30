@@ -7,6 +7,7 @@ namespace Sequence
     /// the abstract defining of statck
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Serializable]
     public abstract class Stack<T> where T:IComparable<T>
     {
         /// <summary>

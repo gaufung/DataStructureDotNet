@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Sequence.BTree
 {
+    [Serializable]
     internal static class BTreeHelper
     {
         /// <summary>
@@ -16,17 +15,6 @@ namespace Sequence.BTree
         /// <returns></returns>
         public static int Search<T>(this List<T> list,T value) where T:IComparable<T>
         {
-            //int lo = 0;
-            //int hi = list.Count;
-            //while (lo < hi)
-            //{
-            //    int mi = (lo + hi) >> 1;
-            //    if (value.Lt(list[mi]))
-            //        hi = mi;
-            //    else
-            //        lo = mi + 1;
-            //}
-            //return --lo;
             int j = list.Count - 1;
             for (; j >= 0; j--)
             {
@@ -58,7 +46,7 @@ namespace Sequence.BTree
         /// <returns></returns>
         public static bool Gt<T>(this T a, T b) where T : IComparable<T>
         {
-            return (a as IComparable<T>).CompareTo(b) > 0;
+            return a .CompareTo(b) > 0;
         }
         /// <summary>
         /// 等于
@@ -69,7 +57,7 @@ namespace Sequence.BTree
         /// <returns></returns>
         public static bool Eq<T>(this T a, T b) where T : IComparable<T>
         {
-            return (a as IComparable<T>).CompareTo(b) ==0;
+            return a.CompareTo(b) ==0;
         }
         /// <summary>
         /// 小于

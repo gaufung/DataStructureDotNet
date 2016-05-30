@@ -7,6 +7,7 @@ namespace Sequence.BTree
     /// 超级节点的定义
     /// </summary>
     /// <typeparam name="T">关键码</typeparam>
+    [Serializable]
     public class BtNode<T> where T : IComparable<T>
     {
         /// <summary>

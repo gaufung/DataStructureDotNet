@@ -6,6 +6,7 @@ namespace Sequence
     /// the abstract class the queue
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Serializable]
     public abstract class Queue<T> where T:IComparable<T>
     {
         /// <summary>

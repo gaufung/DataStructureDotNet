@@ -5,6 +5,7 @@ namespace Sequence.SplayTree
     /// <summary>
     /// splay 树辅助帮助类
     /// </summary>
+    [Serializable]
     internal static class SplayHelper
     {
         /// <summary>

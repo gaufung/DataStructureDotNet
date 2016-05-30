@@ -8,6 +8,7 @@ namespace Sequence
     /// </summary>
     /// <typeparam name="TK">Key</typeparam>
     /// <typeparam name="TV">Value</typeparam>
+    [Serializable]
     [DebuggerDisplay("Size={Size}")]
     public abstract class Dictionary<TK,TV> where TK:IComparable<TK>
     {

@@ -8,6 +8,7 @@ namespace Sequence.GraphMatrix
     /// <typeparam name="TV">顶点包含的数据</typeparam>
     /// <typeparam name="TE">边包含的数据</typeparam>
     /// <typeparam name="TW">权重</typeparam>
+    [Serializable]
     public class GraphMatrix<TV,TE,TW>:Graph<TV,TE,TW>
         where TV : IComparable<TV>
         where TE : IComparable<TE>

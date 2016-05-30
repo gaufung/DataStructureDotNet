@@ -30,7 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sequence.Vector">
+    <Reference Include="Sequence.Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Vector\bin\Debug\Sequence.Vector.dll</HintPath>
     </Reference>
     <Reference Include="System" />

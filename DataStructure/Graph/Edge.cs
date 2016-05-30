@@ -7,6 +7,7 @@ namespace Sequence
     /// </summary>
     /// <typeparam name="TE">边存储的数据</typeparam>
     /// <typeparam name="TW">边的权重</typeparam>
+    [Serializable]
     internal class Edge<TE, TW> : IComparable<Edge<TE, TW>>
         where TE : IComparable<TE>
         where TW : IComparable<TW>

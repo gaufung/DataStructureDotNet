@@ -2,6 +2,7 @@
 
 namespace Sequence
 {
+    [Serializable]
     public class SkipListDictionary<TK,TV>:Dictionary<TK,TV> where TK:IComparable<TK>
     {
         private const int MaxLevel = 6;

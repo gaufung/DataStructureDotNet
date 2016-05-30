@@ -9,11 +9,11 @@ namespace CharSequenceTest
     [TestFixture]
     public class RunCharSequence
     {
-        private ICharSequence _sequece;
+        private IString _sequece;
 
         public RunCharSequence()
         {
-            _sequece=new CharSequence(new char[]
+            _sequece=new Strings(new char[]
             {
                 'g','a','u','f','u','n','g'
             });
@@ -29,7 +29,7 @@ namespace CharSequenceTest
         [Test]
         public void TestEqual()
         {
-            ICharSequence other=new CharSequence(
+            IString other=new Strings(
                 new char[]
                 {
                     'g','a','u','f','u','n','g'
@@ -41,7 +41,7 @@ namespace CharSequenceTest
         [Test]
         public void TestSubstr()
         {
-            ICharSequence other=new CharSequence(
+            IString other=new Strings(
                 new char[]
                 {
                     'g','a','u'
@@ -52,16 +52,24 @@ namespace CharSequenceTest
         [Test]
         public void TestIndexOf()
         {
-            ICharSequence other=new CharSequence(new char[]
+            IString other=new Strings(new char[]
             {
                 'a','u'
             });
             Assert.AreEqual(1,_sequece.IndexOf(other));
-            other=new CharSequence(new char[]
+            other=new Strings(new char[]
             {
                 'f','g'
             });
             Assert.AreEqual(-1,_sequece.IndexOf(other));
+        }
+
+        [Test]
+        public void TestAction()
+        {
+            Assert.AreEqual(false,_sequece.Any(item=>item=='z'));
+            Assert.AreEqual(0,_sequece.First(item=>item=='g'));
+            Assert.AreEqual(-1,_sequece.First(item=>item=='z'));
         }
     }
 }

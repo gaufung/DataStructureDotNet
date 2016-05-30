@@ -6,6 +6,7 @@ namespace Sequence
     /// 二叉树类
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Serializable]
     public class BinTree<T> where T:IComparable<T>
     {
         #region 属性

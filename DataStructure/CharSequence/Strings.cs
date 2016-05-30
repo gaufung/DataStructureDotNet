@@ -1,37 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+using System.Diagnostics;
+using System.Text;
 
 namespace Sequence
 {
     /// <summary>
     /// 串的实现
     /// </summary>
-    public class CharSequence:ICharSequence
+    [Serializable]
+    [DebuggerDisplay("Size={Length}")]
+    [DebuggerDisplay("Content={_vector}")]
+    public class Strings:IString
     {
-        private readonly IList<char> _list;
+        private readonly IVector<char> _vector;
 
-      
-
-        public CharSequence(IEnumerable<char> chars)
+        public Strings(char[] chars)
         {
-            _list=new List<char>(chars);
+            _vector = Vector<Char>.VectorFactory(chars,chars.Length);
         }
         public int Length
         {
-            get { return _list.Count; }
-        }
+            get { return _vector.Size; }
+        } 
 
         public char CharAt(int i)
         {
-            return _list[i];
+            return _vector[i];
         }
 
-        public ICharSequence SubStr(int i, int k)
+        public IString SubStr(int i, int k)
         {
             if (i+k>Length)
             {
-                throw new ArgumentOutOfRangeException("字符串数目超出要求");
+                throw new ArgumentOutOfRangeException("The index is out of range");
             }
             char[] chars=new char[k];
             int counter = 0;
@@ -40,21 +41,21 @@ namespace Sequence
                 chars[counter] = CharAt(i + counter);
                 counter++;
             }
-            return new CharSequence(chars);
+            return new Strings(chars);
         }
 
-        public ICharSequence Prefix(int k)
+        public IString Prefix(int k)
         {
             return SubStr(0,k);
         }
 
-        public ICharSequence Suffix(int k)
+        public IString Suffix(int k)
         {
             int start = Length - k;
             return SubStr(start,k);
         }
 
-        public bool Equals(ICharSequence other)
+        public bool Equals(IString other)
         {
             if (other.Length != Length) return false;
             for (int i = 0; i < Length; i++)
@@ -64,17 +65,15 @@ namespace Sequence
             return true;
         }
 
-        public void Concat(ICharSequence other)
+        public void Concat(IString other)
         {
             for (int i = 0; i < other.Length; i++)
             {
-                _list.Add(other.CharAt(i));
+                _vector.Insert(other.CharAt(i));
             }
         }
 
-       
-
-        public int IndexOf(ICharSequence substr)
+        public int IndexOf(IString substr)
         {
             int res=Match(substr);
             return res >= Length ? -1 : res;
@@ -82,7 +81,7 @@ namespace Sequence
 
         #region KMP算法
 
-        private int Match(ICharSequence pattern)
+        private int Match(IString pattern)
         {
             int[] next = BuildNext(pattern);
             int i = 0;
@@ -105,7 +104,7 @@ namespace Sequence
 
         }
 
-        private int[] BuildNext(ICharSequence pattern)
+        private int[] BuildNext(IString pattern)
         {
             int j = 0;
             int m = pattern.Length;
@@ -127,5 +126,42 @@ namespace Sequence
             return res;
         }
         #endregion
+
+
+        public void Foreach(Action<char> action)
+        {
+            _vector.Foreach(action);
+        }
+
+        public bool Any(Func<char, bool> func)
+        {
+            return _vector.Any(func);
+        }
+
+        public int First(Func<char, bool> func)
+        {
+            int index = -1;
+            for (int i = 0; i < _vector.Size; i++)
+            {
+                if (func(_vector[i]))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb=new StringBuilder();
+            for (int i = 0; i < _vector.Size; i++)
+            {
+                sb.Append(sb[i]);
+            }
+            return sb.ToString();
+        }
+
+
     }
 }

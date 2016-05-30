@@ -2,6 +2,7 @@
 
 namespace Sequence
 {
+    [Serializable]
     internal class SkipNode<TK,TV> where TK:IComparable<TK>
     {
         public TK Key { get; set; }

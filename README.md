@@ -28,7 +28,8 @@ Queue | .Net Framework中的Queue<T>泛型
 Binary Tree | 二叉树实现
 Graph | 图 
 Dictionary | .Net Framework中Dictionary<TK,TV>泛型  
-SkipList | 跳转列表
+SkipList | 跳转列表  
+Strings | .net framework中的string(部分功能)
 
 ## Algorithm
 - [x] 栈

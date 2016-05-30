@@ -5,6 +5,7 @@ namespace Sequence
     /// 二叉搜索树的基类(Binary Search Tree)
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Serializable]
     public class Bst<T> : BinTree<T> where T :IComparable<T>
     {
         /// <summary>

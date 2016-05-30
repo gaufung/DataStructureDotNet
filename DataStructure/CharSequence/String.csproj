@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B3D352B6-6726-47D2-8C5C-C700E04C6AF2}</ProjectGuid>
+    <ProjectGuid>{F1A7ECBE-2725-4FC4-9A38-5AF9B0BBBA42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CharSequenceTest</RootNamespace>
-    <AssemblyName>CharSequenceTest</AssemblyName>
+    <RootNamespace>Sequence</RootNamespace>
+    <AssemblyName>Sequence.String</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,17 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\package\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.CharSequence">
-      <HintPath>..\CharSequence\bin\Debug\Sequence.CharSequence.dll</HintPath>
+    <Reference Include="Sequence.Vector">
+      <HintPath>..\Vector\bin\Debug\Sequence.Vector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RunCharSequence.cs" />
+    <Compile Include="Strings.cs" />
+    <Compile Include="IString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

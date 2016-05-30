@@ -9,6 +9,7 @@ namespace Sequence.SplayTree
     /// </remarks>
     /// </summary>
     /// <typeparam name="T">类型参数</typeparam>
+    [Serializable]
     public class SplayTree<T>:Bst<T> where T :IComparable<T>
     {
 

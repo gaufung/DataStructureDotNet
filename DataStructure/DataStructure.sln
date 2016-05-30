@@ -75,6 +75,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch10", "Ch10", "{E56CD17B-867B-4E5C-940E-D9A81FE34CCB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriorityQueue", "PriorityQueue\PriorityQueue.csproj", "{42B9D1EA-E8ED-4810-BE1A-2B73F91F813C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{65EDB28C-BA99-475E-AC93-44F792C2FEC8} = {65EDB28C-BA99-475E-AC93-44F792C2FEC8}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriorityQueueTest", "HeapTest\PriorityQueueTest.csproj", "{B6EDCC5C-5B1A-440D-8CA6-E0D7A9BEEE7B}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -83,9 +86,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriorityQueueTest", "HeapTe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ch11", "Ch11", "{8E1D8214-6322-4F36-B408-76DF430236D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharSequence", "CharSequence\CharSequence.csproj", "{F1A7ECBE-2725-4FC4-9A38-5AF9B0BBBA42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "String", "CharSequence\String.csproj", "{F1A7ECBE-2725-4FC4-9A38-5AF9B0BBBA42}"
+	ProjectSection(ProjectDependencies) = postProject
+		{65EDB28C-BA99-475E-AC93-44F792C2FEC8} = {65EDB28C-BA99-475E-AC93-44F792C2FEC8}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharSequenceTest", "CharSequenceTest\CharSequenceTest.csproj", "{B3D352B6-6726-47D2-8C5C-C700E04C6AF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringTest", "CharSequenceTest\StringTest.csproj", "{B3D352B6-6726-47D2-8C5C-C700E04C6AF2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F1A7ECBE-2725-4FC4-9A38-5AF9B0BBBA42} = {F1A7ECBE-2725-4FC4-9A38-5AF9B0BBBA42}
 	EndProjectSection

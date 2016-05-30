@@ -6,6 +6,7 @@ namespace Sequence.BTree
     /// B树 Not Complete
     /// </summary>
     /// <typeparam name="T">类型参数，继承IComparable&lt;T&gt;接口</typeparam>
+    [Serializable]
     public class BTree<T> where T: IComparable<T>
     {
         /// <summary>

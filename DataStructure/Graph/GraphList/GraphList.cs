@@ -8,6 +8,7 @@ namespace Sequence.GraphList
     /// <typeparam name="TV"></typeparam>
     /// <typeparam name="TE"></typeparam>
     /// <typeparam name="TW"></typeparam>
+    [Serializable]
     public class GraphList<TV, TE, TW>:Graph<TV,TE,TW>
         where TV : IComparable<TV>
         where TE : IComparable<TE>

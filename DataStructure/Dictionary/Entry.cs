@@ -8,6 +8,7 @@ namespace Sequence
     /// </summary>
     /// <typeparam name="TK">the key type</typeparam>
     /// <typeparam name="TV">the value type</typeparam>
+    [Serializable]
     internal class Entry<TK, TV> where TK : IComparable<TK>
     {
         

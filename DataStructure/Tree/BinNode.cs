@@ -6,6 +6,7 @@ namespace Sequence
     /// 二叉树的节点类
     /// </summary>
     /// <typeparam name="T">The type of data</typeparam>
+    [Serializable]
     public class BinNode<T> :IComparable<BinNode<T>> where T : IComparable<T>
     {
         #region 属性

@@ -2,6 +2,7 @@
 
 namespace Sequence
 {
+    [Serializable]
     internal static class MathHelper
     {
         public static int NextPrime(int currentValue)

@@ -2,6 +2,7 @@
 
 namespace Sequence
 {
+    [Serializable]
     public class HuffChar : IComparable<HuffChar>
     {
         public Char Ch { get; set; }

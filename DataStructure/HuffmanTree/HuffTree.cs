@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Sequence
 {
+    [Serializable]
     public class HuffTree
     {
         /// <summary>
