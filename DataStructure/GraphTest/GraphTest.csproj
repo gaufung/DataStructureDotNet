@@ -37,8 +37,23 @@
     <Reference Include="Sequence.Graph">
       <HintPath>..\Graph\bin\Debug\Sequence.Graph.dll</HintPath>
     </Reference>
+    <Reference Include="Sequence.List, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Graph\bin\Debug\Sequence.List.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.PriorityQueue">
+      <HintPath>..\Graph\bin\Debug\Sequence.PriorityQueue.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Queue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Graph\bin\Debug\Sequence.Queue.dll</HintPath>
+    </Reference>
     <Reference Include="Sequence.Stack">
       <HintPath>..\Graph\bin\Debug\Sequence.Stack.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Graph\bin\Debug\Sequence.Vector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using NUnit.Framework;
 using Sequence;
-using Sequence.GraphList;
 using Sequence.GraphMatrix;
 
 namespace GraphTest
@@ -114,6 +112,18 @@ namespace GraphTest
         public void GraphPrim()
         {
             graph.Prime(0);
+        }
+
+        [Test]
+        public void GraphKruskal()
+        {
+            graph.Kruskal();
+        }
+
+        [Test]
+        public void TestDijkstra()
+        {
+            graph.Dijkstra(double.MaxValue, 0);
         }
     }
 }

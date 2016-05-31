@@ -44,8 +44,9 @@ Strings | .net framework中的string(部分功能)
     - 深度优先搜索 
     - 拓扑排序 
     - 最小支撑树
+        - Prim算法
+        - Kruskal算法
     - 优先级搜索
-- [ ] 图   
     - 最短路径
 - [x] 查找平衡树
   	- Avl树(Avl Tree)

@@ -285,21 +285,6 @@ namespace Sequence
             DTime(startIndex, ++clock);
             for (int u = FirstNbr(startIndex); u > -1; u = NextNbr(startIndex, u))
             {
-                //if (Status(u) == VStatus.Undiscovered)
-                //{
-                //    Status(startIndex,u,EStatus.Tree);
-                //    Parent(u, startIndex);
-                //    Dfs(u,ref clock);
-                //}
-                //if (Status(u) == VStatus.Discovered)
-                //{
-                //    Status(startIndex,u,EStatus.Backward);
-                //}
-                //else//Status(u) == VStatus.Visited
-                //{
-                //    Status(startIndex, u, DTime(startIndex) < DTime(u) ?
-                //        EStatus.Forward : EStatus.Cross);
-                //}
                 switch (Status(u))
                 {
                     case VStatus.Undiscovered:
@@ -535,15 +520,188 @@ namespace Sequence
 
 
         #region  Kruskal 算法
-        //todo
         #endregion
 
+        /// <summary>
+        /// Krukal 最小支撑树
+        /// <remarks>
+        /// 要求
+        /// <list type="Dot">
+        /// 无向图
+        /// </list>
+        /// <list type="Dot">
+        /// 单连通
+        /// </list>
+        /// </remarks>
+        /// </summary>
+        public void Kruskal()
+        {
+            Reset();
+            IPriorityQueue<KruskalEdge> edges = BuildEdgeHeap();
+            IVector<IVector<int>> vertexs = BuildVertex();
+            while (vertexs.Size!=1)
+            {
+                KruskalEdge edge = edges.DelMax();
+                int from = -1;
+                int to = -1;
+                for (int i = 0; i < vertexs.Size; i++)
+                {
+                    if (vertexs[i].Find(edge.From)!=-1)
+                    {
+                        from = i;
+                    }
+                    if (vertexs[i].Find(edge.To) != -1)
+                    {
+                        to = i;
+                    }
+                }
+                if (from!=to)
+                {
+                    for (int i = 0; i < vertexs[to].Size; i++)
+                    {
+                        vertexs[from].Insert(vertexs[to][i]);
+                    }
+                    vertexs.Remove(to);
+                    if (Exist(edge.From,edge.To))
+                    {
+                        Status(edge.From,edge.To,EStatus.Tree);
+                    }
+                    else
+                    {
+                        Status(edge.To,edge.From,EStatus.Tree);
+                    }
+                }
+            }
+        }
 
+
+        private IPriorityQueue<KruskalEdge> BuildEdgeHeap()
+        {
+            IPriorityQueue<KruskalEdge> edges = new CompleteHeap<KruskalEdge>();
+            for (int i = 0; i < N-1; i++)
+            {
+                for (int j = i+1; j < N; j++)
+                {
+                    if (Exist(i,j,false))
+                    {
+                        edges.Insert(new KruskalEdge()
+                        {
+                            From = i,To = j,Weight = Exist(i,j)?Weight(i,j):Weight(j,i)
+                        });
+                    }
+                }
+            }
+            return edges;
+        }
+
+        private IVector<IVector<int>> BuildVertex()
+        {
+            IVector<IVector<int>> vertexs = Vector<IVector<int>>.VectorFactory();
+            for (int i = 0; i < N; i++)
+            {
+                IVector<int> vertex=Vector<int>.VectorFactory();
+                vertex.Insert(i);
+                vertexs.Insert(vertex);
+            }
+            return vertexs;
+        }
+
+        private class KruskalEdge:IComparable<KruskalEdge>
+        {
+            /// <summary>
+            /// 边的权重
+            /// </summary>
+            public TW Weight { get; set; }
+
+            /// <summary>
+            /// 边的开始点
+            /// </summary>
+            public int From { get; set; }
+
+            /// <summary>
+            /// 边的结束点
+            /// </summary>
+            public int To { get; set; }
+
+            private bool _isMin;
+
+            /// <summary>
+            /// 构造函数
+            /// </summary>
+            /// <param name="isMin">是否取权重最小的</param>
+            public KruskalEdge(bool isMin=true)
+            {
+                _isMin = isMin;
+            }
+            public int CompareTo(KruskalEdge other)
+            {
+                return _isMin ? 
+                    -1*Weight.CompareTo(other.Weight) : 
+                    Weight.CompareTo(other.Weight);
+            }
+        }
         #endregion
 
 
         #region  Dijkstra算法
-        
+
+        public TW[] Dijkstra(TW maxWeight,int startIndex=0)
+        {
+            Reset();    
+            TW[] weights=new TW[N];
+            for (int i = 0; i < N; i++)
+            {
+                weights[i] = maxWeight;
+            }
+            weights[startIndex] = default(TW);
+            Status(startIndex, VStatus.Discovered);
+            IPriorityQueue<DijkstraNode> nodes = BuildDijkstraNodes(weights);
+            while (nodes.Count!=0)
+            {
+                DijkstraNode node = nodes.DelMax();
+                Status(node.Index, VStatus.Visited);
+                for (int u = FirstNbr(node.Index); -1 < u; u = NextNbr(node.Index, u))
+                {
+                    if (Status(u)!=VStatus.Visited)
+                    {
+                        Status(u, VStatus.Discovered);
+                        if (Sum(weights[node.Index],Weight(node.Index,u)).CompareTo(weights[u])<0)
+                        {
+                            weights[u] = Sum(weights[node.Index], Weight(node.Index, u));
+                        }
+                    }
+                }
+                nodes = BuildDijkstraNodes(weights);
+            }
+            return weights;
+        }
+        private  TW Sum(TW a,TW b)
+        {
+            return (dynamic)a + (dynamic)b;
+        }
+
+        private IPriorityQueue<DijkstraNode> BuildDijkstraNodes(TW[] weights)
+        {
+            IPriorityQueue<DijkstraNode> nodes = new CompleteHeap<DijkstraNode>();
+            for (int i = 0; i < N; i++)
+            {
+                if (Status(i)==VStatus.Discovered)
+                {
+                   nodes.Insert(new DijkstraNode(){Cost = weights[i],Index=i});
+                }
+            }
+            return nodes;
+        }
+
+        private class DijkstraNode : IComparable<DijkstraNode>
+        {
+            public int Index { get; set; }
+            public TW  Cost { get; set; }
+            public int CompareTo(DijkstraNode other)
+            {
+                return -1*Cost.CompareTo(other.Cost);
+            }
+        }
         #endregion
         #endregion
     }

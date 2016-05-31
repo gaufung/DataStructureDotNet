@@ -52,9 +52,9 @@ namespace Sequence
         /// <returns></returns>
         public ListNode<T> InsertAsPred(T e)
         {
-            var pre = new ListNode<T>(e, null, null) {Pred = this.Pred};
+            var pre = new ListNode<T>(e) {Pred = Pred};
             pre.Pred.Succ = pre;
-            this.Pred = pre;
+            Pred = pre;
             pre.Succ = this;
             return pre;
         }
@@ -65,9 +65,9 @@ namespace Sequence
         /// <returns></returns>
         public ListNode<T> InsertAsSucc(T e)
         {
-            var s = new ListNode<T>(e, null, null) {Succ = this.Succ};
+            var s = new ListNode<T>(e) {Succ = Succ};
             s.Succ.Pred = s;
-            this.Succ = s;
+            Succ = s;
             s.Pred = this;
             return s;
         }

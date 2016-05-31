@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Sequence.List">
       <HintPath>..\List\bin\Debug\Sequence.List.dll</HintPath>
+    </Reference>
+    <Reference Include="Sequence.PriorityQueue">
+      <HintPath>..\PriorityQueue\bin\Debug\Sequence.PriorityQueue.dll</HintPath>
     </Reference>
     <Reference Include="Sequence.Queue">
       <HintPath>..\Queue\bin\Debug\Sequence.Queue.dll</HintPath>
