@@ -33,18 +33,18 @@
     <Reference Include="nunit.framework">
       <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.String">
-      <HintPath>..\CharSequence\bin\Debug\Sequence.String.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Vector">
-      <HintPath>..\CharSequence\bin\Debug\Sequence.Vector.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RunCharSequence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CharSequence\String.csproj">
+      <Project>{f1a7ecbe-2725-4fc4-9a38-5af9b0bbba42}</Project>
+      <Name>String</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

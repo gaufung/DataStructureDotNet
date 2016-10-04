@@ -189,6 +189,39 @@ namespace Sequence
             a.Data = b.Data;
             b.Data = temp;
         }
+        protected BinNode<T> Connect34(BinNode<T> a, BinNode<T> b, BinNode<T> c,
+           BinNode<T> t0, BinNode<T> t1, BinNode<T> t2, BinNode<T> t3)
+        {
+            a.LChild = t0;
+            if (t0 != null)
+            {
+                t0.Parent = a;
+            }
+            a.RChild = t1;
+            if (t1 != null)
+            {
+                t1.Parent = a;
+
+            }
+            UpdateHeight(a);
+            c.LChild = t2;
+            if (t2 != null)
+            {
+                t2.Parent = c;
+            }
+            c.RChild = t3;
+            if (t3 != null)
+            {
+                t3.Parent = c;
+            }
+            UpdateHeight(c);
+            b.LChild = a;
+            a.Parent = b;
+            b.RChild = c;
+            c.Parent = b;
+            UpdateHeight(b);
+            return b;
+        }
         
     }
 }

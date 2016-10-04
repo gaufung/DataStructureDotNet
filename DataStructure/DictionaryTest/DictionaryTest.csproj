@@ -34,10 +34,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.Dictionary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dictionary\bin\Debug\Sequence.Dictionary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -45,6 +41,12 @@
     <Compile Include="RunTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestSkipList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dictionary\Dictionary.csproj">
+      <Project>{e622a273-74b6-42c7-8893-b1ab639acb6d}</Project>
+      <Name>Dictionary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

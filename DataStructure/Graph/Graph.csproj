@@ -31,22 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Sequence.List">
-      <HintPath>..\List\bin\Debug\Sequence.List.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.PriorityQueue">
-      <HintPath>..\PriorityQueue\bin\Debug\Sequence.PriorityQueue.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Queue">
-      <HintPath>..\Queue\bin\Debug\Sequence.Queue.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Stack">
-      <HintPath>..\Stack\bin\Debug\Sequence.Stack.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Vector\bin\Debug\Sequence.Vector.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -62,7 +46,28 @@
     <Compile Include="VStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\List\List.csproj">
+      <Project>{9085c448-d634-4450-9cfa-edad1d0cce03}</Project>
+      <Name>List</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PriorityQueue\PriorityQueue.csproj">
+      <Project>{42b9d1ea-e8ed-4810-be1a-2b73f91f813c}</Project>
+      <Name>PriorityQueue</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Queue\Queue.csproj">
+      <Project>{b45d2bb1-313a-40d7-96eb-e791a42fbce0}</Project>
+      <Name>Queue</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stack\Stack.csproj">
+      <Project>{c265d22b-ff75-450a-be26-b046df8de3bb}</Project>
+      <Name>Stack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vector\Vector.csproj">
+      <Project>{65edb28c-ba99-475e-ac93-44f792c2fec8}</Project>
+      <Name>Vector</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sequence.Tree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -45,11 +41,15 @@
     <Compile Include="BTree\BTree.cs" />
     <Compile Include="BTree\BTreeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RB\RBTree.cs" />
     <Compile Include="SplayTree\SplayHelper.cs" />
     <Compile Include="SplayTree\SplayTree.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RB\" />
+    <ProjectReference Include="..\Tree\BinTree.csproj">
+      <Project>{20260da5-0e6a-4b83-8714-de4519c8f16f}</Project>
+      <Name>BinTree</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

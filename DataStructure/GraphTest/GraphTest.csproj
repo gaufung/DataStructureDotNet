@@ -34,33 +34,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\package\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.Graph">
-      <HintPath>..\Graph\bin\Debug\Sequence.Graph.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.List, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\bin\Debug\Sequence.List.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.PriorityQueue">
-      <HintPath>..\Graph\bin\Debug\Sequence.PriorityQueue.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Queue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\bin\Debug\Sequence.Queue.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Stack">
-      <HintPath>..\Graph\bin\Debug\Sequence.Stack.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\bin\Debug\Sequence.Vector.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Graph\Graph.csproj">
+      <Project>{fd8ff400-7255-4a83-b2bc-b66e3f363704}</Project>
+      <Name>Graph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stack\Stack.csproj">
+      <Project>{c265d22b-ff75-450a-be26-b046df8de3bb}</Project>
+      <Name>Stack</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

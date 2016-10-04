@@ -39,9 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\HuffmanTree\bin\Debug\Sequence.HuffmanTree.dll</HintPath>
     </Reference>
-    <Reference Include="Sequence.Tree">
-      <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -49,6 +46,12 @@
     <Compile Include="HuffmanTreeTest.cs" />
     <Compile Include="TestRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tree\BinTree.csproj">
+      <Project>{20260da5-0e6a-4b83-8714-de4519c8f16f}</Project>
+      <Name>BinTree</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

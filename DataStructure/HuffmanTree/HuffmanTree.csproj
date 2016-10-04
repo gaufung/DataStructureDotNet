@@ -30,13 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sequence.Tree">
-      <HintPath>..\Tree\bin\Debug\Sequence.Tree.dll</HintPath>
-    </Reference>
-    <Reference Include="Sequence.Vector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Vector\bin\Debug\Sequence.Vector.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -44,6 +37,20 @@
     <Compile Include="HuffChar.cs" />
     <Compile Include="HuffTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\List\List.csproj">
+      <Project>{9085c448-d634-4450-9cfa-edad1d0cce03}</Project>
+      <Name>List</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tree\BinTree.csproj">
+      <Project>{20260da5-0e6a-4b83-8714-de4519c8f16f}</Project>
+      <Name>BinTree</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vector\Vector.csproj">
+      <Project>{65edb28c-ba99-475e-ac93-44f792c2fec8}</Project>
+      <Name>Vector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
