@@ -1,17 +1,17 @@
-name: Data Structure Tests
+name: windows Test 3
 
 on: [push]
 
 jobs:
   test:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v1
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.108
+        dotnet-version: '3.0.100-preview8-013656'
     - name: Test 
       run: dotnet test DataStructure
