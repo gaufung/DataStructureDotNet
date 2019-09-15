@@ -1,4 +1,4 @@
-![](https://github.com/gaufung/DataStructureDotNet/workflows/Data%20Structure%20Tests/badge.svg)
+![](https://github.com/gaufung/DataStructureDotNet/workflows/.github/workflows/ds.yml/badge.svg)
 
 # Data Structure
 Data Structure in C#  Language（数据结构 C#）
