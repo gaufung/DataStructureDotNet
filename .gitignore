@@ -12,6 +12,12 @@
 *.so
 *.dylib
 .dll
+*.dll
+*.pdb
+*.cache
+obj/
+bin/
+.vs/
 
 # Fortran module files
 *.mod
