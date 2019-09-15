@@ -1,5 +1,4 @@
-name: Linux Test 2
-
+name: 2.2 Linux
 on: [push]
 
 jobs:
@@ -12,6 +11,6 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.108
+        dotnet-version: '2.2.7'
     - name: Test 
       run: dotnet test DataStructure
