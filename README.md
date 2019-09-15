@@ -1,6 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/08j5wmebp10jjckt/branch/master?svg=true)](https://ci.appveyor.com/project/gaufung/ds/branch/master)  
-
-[![Gitter](https://badges.gitter.im/gaufung/DS.svg)](https://gitter.im/gaufung/DS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  
+![](https://github.com/gaufung/DataStructureDotNet/workflows/Data%20Structure%20Tests/badge.svg)
 
 # Data Structure
 Data Structure in C#  Language（数据结构 C#）
