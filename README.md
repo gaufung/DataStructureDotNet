@@ -1,5 +1,5 @@
-![](https://github.com/gaufung/DataStructureDotNet/workflows/3.0%20Windows/badge.svg) ![](https://github.com/gaufung/DataStructureDotNet/workflows/2.0%20Windows/badge.svg) 
-![](https://github.com/gaufung/DataStructureDotNet/workflows/3.0%20Linux/badge.svg) ![](https://github.com/gaufung/DataStructureDotNet/workflows/2.0%20Linux/badge.svg) 
+![](https://github.com/gaufung/DataStructureDotNet/workflows/3.0%20Windows/badge.svg) ![](https://github.com/gaufung/DataStructureDotNet/workflows/2.2%20Windows/badge.svg) 
+![](https://github.com/gaufung/DataStructureDotNet/workflows/3.0%20Linux/badge.svg) ![](https://github.com/gaufung/DataStructureDotNet/workflows/2.2%20Linux/badge.svg) 
 
 # Data Structure
 Data Structure in C#  Language（数据结构 C#）
