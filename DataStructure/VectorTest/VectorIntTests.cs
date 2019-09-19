@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Sequence;
@@ -83,5 +81,85 @@ namespace VectorTests
             Assert.AreEqual(4, this.vector.Size);
         }
 
+        [Test]
+        public void TestDisorder()
+        {
+            int[] values = new[] { 0, 4, 9, -1, int.MaxValue, int.MinValue, 9 };
+            InsertToVector(values);
+            Assert.AreEqual(9, this.vector.DisOrdered());
+        }
+
+        [Test]
+        public void TestDuplicate()
+        {
+            int[] values = new[] { 10, 9, 9, int.MaxValue, -1, 8 };
+            InsertToVector(values);
+            Assert.AreEqual(1, this.vector.Deduplicate());
+            Assert.AreEqual(int.MaxValue, this.vector[2]);
+        }
+
+        [Test]
+        public void TestUniquey()
+        {
+            int[] values = new[] { -10, 9, 9, 10 };
+            InsertToVector(values);
+            Assert.AreEqual(1, this.vector.Deduplicate());
+            Assert.AreEqual(10, this.vector[2]);
+        }
+
+        [Test]
+        public void TestCompareTo()
+        {
+            IVector<int> smaller = VectorFactory<int>.Create(new[] { 10 }, 1);
+            int[] values = new[] { -10, 9, 9, 10 };
+            InsertToVector(values);
+            Assert.AreEqual(1, this.vector.CompareTo(smaller));
+            IVector<int> equal = VectorFactory<int>.Create(new[] { 1, 2, 3, 4 }, 4);
+            Assert.AreEqual(0, this.vector.CompareTo(equal));
+            IVector<int> bigger = VectorFactory<int>.Create(new[] { 1, 2, 3, 4, 5 }, 5);
+            Assert.AreEqual(-1, this.vector.CompareTo(bigger));
+        }
+
+        [Test]
+        public void TestAny()
+        {
+            int[] values = new[] { 10, 9, 9, int.MaxValue, -1, 8 };
+            InsertToVector(values);
+            Assert.IsTrue(this.vector.Any(i => i % 2 == 0));
+            Assert.IsFalse(this.vector.Any(i => i < -5));
+        }
+
+        [Test]
+        public void TestFirstOrDefault()
+        {
+            int[] values = new[] { 10, 9, 9, int.MaxValue, -1, 6 };
+            InsertToVector(values);
+            Assert.AreEqual(9, this.vector.FirstOrDefault(i => i % 3 == 0));
+            Assert.AreEqual(0, this.vector.FirstOrDefault(i => i == 23));
+        }
+
+        [Test]
+        public void TestFirst()
+        {
+            int[] values = new[] { 10, 9, 9, int.MaxValue, -1, 6 };
+            InsertToVector(values);
+            Assert.AreEqual(9, this.vector.First(i => i % 3 == 0));
+        }
+        
+        [Test]
+        public void TestFirstNotExist()
+        {
+            int[] values = new[] { 10, 9, 9, int.MaxValue, -1, 6 };
+            InsertToVector(values);
+            Assert.Throws<InvalidOperationException>(() => this.vector.First(i => i < -3));
+        }
+
+        [Test]
+        public void TestBinarySearch()
+        {
+            int[] values = new[] { -10, -2, 8, 9, 10, 20, int.MaxValue };
+            InsertToVector(values);
+            Assert.AreEqual(3, this.vector.Search(9));
+        }
     }
 }
