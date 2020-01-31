@@ -2,6 +2,8 @@
 ![](https://github.com/gaufung/DataStructureDotNet/workflows/3.0%20Linux/badge.svg) ![](https://github.com/gaufung/DataStructureDotNet/workflows/2.2%20Linux/badge.svg) 
 
 # Data Structure
+
+[![Join the chat at https://gitter.im/gaufung/DS](https://badges.gitter.im/gaufung/DS.svg)](https://gitter.im/gaufung/DS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Data Structure in C#  Language（数据结构 C#）
 
 # Introduction
